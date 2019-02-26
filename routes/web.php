@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/',function(){
+Route::get('/', function () {
     return view("index");
 });
 
 Route::resource('/home', "FirmsController"); //binding the controller to its resources
-
-Route::get('/login', "UlcController@showLogin");
-Route::post('/login', "UlcController@doLogin");
+Route::get('/login', "AuthController@showLogin");
+Route::post('/login', "AuthController@doLogin");
+Route::get('/dashboard', "AuthController@dashboard");
+Route::get('/logout', "AuthController@logout");

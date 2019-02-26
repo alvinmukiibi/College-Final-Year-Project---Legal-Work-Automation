@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Firms;
+
 class FirmsController extends Controller
 {
     /**
@@ -16,7 +17,6 @@ class FirmsController extends Controller
         $firms = Firms::orderBy('name', 'asc')->paginate(10);
 
         return view('home.firms')->with("firms", $firms);
-        
     }
 
     /**

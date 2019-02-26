@@ -14,40 +14,52 @@
               <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">Alvin Mukiibi</a>
+              <a href="#" class="d-block">{{$user->fname}} {{$user->lname}}</a>
             </div>
           </div>
           <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 
                   <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
-                      <i class="nav-icon fa fa-th"></i>
+                    <a href="/profile" class="nav-link">
+                      <i class="nav-icon fa fa-user"></i>
                       <p>
-                        Link
-                        <span class="right badge badge-danger">count</span>
+                        Profile
+                        
                       </p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                      <a href="/dashboard" class="nav-link">
+                        <i class="nav-icon fa fa-home"></i>
+                        <p>
+                          Dashboard
+                          
+                        </p>
+                      </a>
+                    </li>
+                  @if($user->user_role === "ulc")
                   <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon fa fa-pie-chart"></i>
-                      <p>
-                            Link
-                        <i class="right fa fa-angle-left"></i>
-                      </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="pages/charts/chartjs.html" class="nav-link">
-                          <i class="fa fa-circle-o nav-icon"></i>
-                          <p>Sub Link</p>
-                        </a>
-                      </li>
-                     
-                    </ul>
-                  </li>
-                  <li class="nav-item has-treeview">
+                      <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-pie-chart"></i>
+                        <p>
+                              Law Firms
+                          <i class="right fa fa-angle-left"></i>
+                        </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                          <a href="pages/charts/chartjs.html" class="nav-link">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>Registered Firms <span class="right badge badge-danger">50</span></p>
+                          </a>
+                        </li>
+                       
+                      </ul>
+                    </li>
+                  @endif
+                 
+                  {{-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fa fa-tree"></i>
                       <p>
@@ -64,10 +76,10 @@
                       </li>
                       
                     </ul>
-                  </li>
+                  </li> --}}
                   
                  
-                  <li class="nav-header">Link</li>
+                  {{-- <li class="nav-header">Link</li> --}}
                   </ul>
               </nav>
             </div>

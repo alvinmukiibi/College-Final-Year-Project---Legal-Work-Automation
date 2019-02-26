@@ -14,13 +14,16 @@ Date    :   6th-February-2019
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap/css/bootstrap.min.css')}}"/>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" type="text/css">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" type="text/css">
+    --}}
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{asset('dist/img/favicon.ico')}}" type="image/x-icon">
-
+   
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="{{asset('dist/css/adminlte.min.css')}}"/>
+   
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome/css/font-awesome.min.css')}}"/>
+   
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/iCheck/flat/blue.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/morris/morris.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}"/>

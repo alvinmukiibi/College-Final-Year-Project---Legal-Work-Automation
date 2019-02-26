@@ -6,13 +6,19 @@ Date    :   6th-February-2019
 
  <!doctype html>
  <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-     @include('layouts.partials.head')
+     @include('layouts.partials.headin')
      @yield('body_tag')
-         @include('layouts.compartments.topnavin')
-         @include('layouts.compartments.sidebar')
-         @yield('content')  
-         @include('layouts.partials.foot')
-         @include('layouts.compartments.footer')
+     <div class="wrapper">
+
+            @include('layouts.compartments.topnavin')
+            @include('layouts.compartments.sidebar')
+            @yield('content')  
+            @include('layouts.partials.footin')
+
+    
+        </div>
+         
+         {{-- @include('layouts.compartments.footer') --}}
      </body>
  </html>
  
