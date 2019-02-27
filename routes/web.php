@@ -20,3 +20,6 @@ Route::get('/login', "AuthController@showLogin");
 Route::post('/login', "AuthController@doLogin");
 Route::get('/dashboard', "AuthController@dashboard");
 Route::get('/logout', "AuthController@logout");
+
+Route::get('/register/firm', "FirmsController@showRegister");
+Route::post('/register', "FirmsController@store");

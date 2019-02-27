@@ -15,23 +15,23 @@ class CreateFirmsTable extends Migration
     {
         Schema::create('firms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firm_id','50');
+            $table->text('firm_id');
             $table->text('name');
             $table->string('email','100')->unique();
             $table->string('contact1','100');
-            $table->string('contact2','100');
-            $table->text('password');
+            $table->string('contact2','100')->nullable();
+            $table->text('password')->nullable();
             $table->string('country','100');
             $table->string('area','100');
             $table->string('city','50');
             $table->text('street_address');
-            $table->text('practice_groups');
+            $table->text('practice_groups')->nullable();
             $table->timestamp('date_of_reg');
-            $table->string('avatar','100');
-            $table->text('website');
-            $table->text('description');
-            $table->string('activity_flag','10');
-            $table->string('verification_flag','10');
+            $table->string('avatar','100')->nullable();
+            $table->text('website')->nullable();
+            $table->text('description')->nullable();
+            $table->string('activity_flag','10')->nullable();
+            $table->string('verification_flag','10')->nullable();
             $table->timestamps();
         });
     }

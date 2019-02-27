@@ -12,7 +12,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/telescope": "^1.0",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "webpatser/laravel-countries": "^1.5"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

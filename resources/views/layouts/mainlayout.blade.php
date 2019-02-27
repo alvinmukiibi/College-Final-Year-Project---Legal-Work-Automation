@@ -12,7 +12,10 @@ Date    :   6th-February-2019
 
             @include('layouts.compartments.topnavin')
             @include('layouts.compartments.sidebar')
-            @yield('content')  
+            <div class="content-wrapper">
+                @yield('content')  
+            </div>
+            
             @include('layouts.partials.footin')
 
     

@@ -14,6 +14,9 @@ Date    :   6th-February-2019
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
+{{-- for the select multiple button --}}
+<script src="{{asset('plugins/select2/select2.full.min.js')}}"></script>
+
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{asset('plugins/morris/morris.min.js')}}"></script>
@@ -34,6 +37,12 @@ Date    :   6th-February-2019
 
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
+<script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+    })
+      </script>
 
 </body>
 </html>

@@ -20,15 +20,16 @@ Date    :   6th-February-2019
     <link rel="shortcut icon" href="{{asset('dist/img/favicon.ico')}}" type="image/x-icon">
    
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{asset('dist/css/adminlte.min.css')}}"/>
-   
+    {{-- for the multiple select button --}}
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome/css/font-awesome.min.css')}}"/>
-   
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/iCheck/flat/blue.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/morris/morris.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datepicker/datepicker3.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/daterangepicker/daterangepicker-bs3.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/select2/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('dist/css/adminlte.min.css')}}"/>
+    
 
 </head>
