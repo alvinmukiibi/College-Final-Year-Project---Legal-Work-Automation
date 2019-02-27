@@ -24,9 +24,12 @@ class Firms extends Model
         $this->street_address = $request->input('street_address');
         $this->website = $request->input('website') ? $request->input('website') : null;
         $this->description = $request->input('description') ? $request->input('description') : null;
-
+        $this->activity_flag = "inactive";
+        $this->verification_flag = "not_verified";
+        $this->password = bcrypt($this->firm_id);
+        
         if($this->save()){
-            return true;
+            return $this->firm_id;
         }else{
             return false;
         }
@@ -40,7 +43,7 @@ class Firms extends Model
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        return "WATL" . $randomString;
+        return "WATL" ."_". $randomString;
         
     }
    

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Firms;
 use Webpatser\Countries\Countries;
 use App\Practice_groups;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailVerificationMail;
 
 class FirmsController extends Controller
 {
@@ -39,29 +41,34 @@ class FirmsController extends Controller
      */
     public function store(Request $request)
     {
-        // $firm_data = $this->validate($request, [
-        //     "name" => "required|max:150",
-        //     "email"=>"required|email",
-        //     "work_contact"=>"required",
-        //     "country"=>"required",
-        //     "region"=>"required",
-        //     "city"=>"required",
-        //     "street_address"=>"required",
+        $firm_data = $this->validate($request, [
+            "name" => "required|max:150",
+            "email"=>"required|email",
+            "work_contact"=>"required",
+            "country"=>"required",
+            "region"=>"required",
+            "city"=>"required",
+            "street_address"=>"required",
             
             
-        // ]);
+        ]);
 
         $count = Firms::where('email', $request->input('email'))->count();
        
         if($count > 0){
-            redirect()->action('FirmsController@showRegister')->with("error", "Email Already Exists");
+            return redirect()->route('register.firm')->with("error", "Email Already Exists");
         }
-
         
+        
+        
+        $otp = Firms::registerFirm($request);
+        if($otp){
 
-        // if(Firms::registerFirm($request)){
-        //     return redirect()->back();
-        // }
+            Mail::to($request->input('email'))->send(new EmailVerificationMail($request->input('name'), $otp));
+
+
+            return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
+        }
 
         
 
@@ -120,4 +127,5 @@ class FirmsController extends Controller
        
         return view("ulc.register")->with($data);
     }
+  
 }

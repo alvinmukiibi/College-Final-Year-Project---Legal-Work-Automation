@@ -21,5 +21,6 @@ Route::post('/login', "AuthController@doLogin");
 Route::get('/dashboard', "AuthController@dashboard");
 Route::get('/logout', "AuthController@logout");
 
-Route::get('/register/firm', "FirmsController@showRegister");
+Route::get('/register/firm', "FirmsController@showRegister")->name("register.firm");
 Route::post('/register', "FirmsController@store");
+
