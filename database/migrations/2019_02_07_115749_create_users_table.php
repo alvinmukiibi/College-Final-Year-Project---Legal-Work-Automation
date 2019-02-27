@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('account_status', '20');
             $table->integer('firm_id')->nullable();
             $table->timestamps();
+            $table->rememberToken();
         });
     }
 

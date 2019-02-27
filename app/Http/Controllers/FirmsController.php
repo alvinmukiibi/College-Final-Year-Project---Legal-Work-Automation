@@ -18,7 +18,7 @@ class FirmsController extends Controller
      */
     public function index()
     {
-        $firms = Firms::orderBy('name', 'asc')->paginate(10);
+        $firms = Firms::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->paginate(10);
 
         return view('home.firms')->with("firms", $firms);
     }
@@ -63,11 +63,17 @@ class FirmsController extends Controller
         
         $otp = Firms::registerFirm($request);
         if($otp){
+            try{
+                Mail::to($request->input('email'))->send(new EmailVerificationMail($request->input('name'), $otp));
+                return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
+        
+            }catch(Exception $ex){
+                return redirect()->route('register.firm')->with("error", "Email Verification Link not sent");
+        
 
-            Mail::to($request->input('email'))->send(new EmailVerificationMail($request->input('name'), $otp));
-
-
-            return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
+            }
+            
+            
         }
 
         
@@ -122,7 +128,9 @@ class FirmsController extends Controller
     }
     public function showRegister(){
         $data = [
-            "countries" => Countries::getListForSelect()
+            "countries" => Countries::getListForSelect(),
+            "firms" => Firms::orderBy('created_at', 'desc')->get()
+            
         ];
        
         return view("ulc.register")->with($data);

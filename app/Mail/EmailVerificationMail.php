@@ -12,6 +12,7 @@ class EmailVerificationMail extends Mailable
     use Queueable, SerializesModels;
     public $firm_name;
     public $firm_otp;
+    public $token;
 
     /**
      * Create a new message instance.
@@ -23,6 +24,8 @@ class EmailVerificationMail extends Mailable
         //
         $this->firm_name = $firm_name;
         $this->firm_otp = $firm_otp;
+        $this->token = bcrypt($this->firm_otp);
+        
     }
 
     /**

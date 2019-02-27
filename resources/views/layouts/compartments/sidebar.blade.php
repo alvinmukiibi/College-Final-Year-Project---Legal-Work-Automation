@@ -49,7 +49,7 @@
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
-                          <a href="pages/charts/chartjs.html" class="nav-link">
+                          <a href="/register/firm" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>Registered Firms <span class="right badge badge-danger">50</span></p>
                           </a>

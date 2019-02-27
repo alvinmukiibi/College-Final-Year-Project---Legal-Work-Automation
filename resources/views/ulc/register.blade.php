@@ -114,6 +114,62 @@
                         </div>
 
                     </div>
+                    <div class="col-md-6">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">All Law Firms</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Firm Name</th>
+                                        <th style="width: 5px">Status</th>
+                                        <th style="width: 30px">View</th>
+                                    </tr>
+                                    @foreach ($firms as $firm)
+                                    <tr>
+                                    <td>{{$firm->name}}</td>
+                                            <td>
+                                                
+
+                                                @if ($firm->verification_flag=='not_verified')
+                                                <button class="btn btn-warning"  title="NOT VERIFIED EMAIL"  >NV  <i class="fa fa-circle-o-notch fa-spin"></i> </button>
+                                                @elseif($firm->verification_flag=='verified' && $firm->activity_flag=='inactive')
+                                                <button class="btn btn-danger" title="ACCOUT INACTIVE"  >IN <i class="fa fa-close"></i> </button>
+                                                @else
+                                                <button class="btn btn-success" title="ACCOUNT ACTIVE" >AC <i class="fa fa-check-circle"></i> </button>
+                                                @endif
+                                                
+                                            </td>
+                                            <td>
+                                                    <div class="btn-group">
+                                                            <button type="button" class="btn btn-success">Action</button>
+                                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                                              <span class="caret"></span>
+                                                              <span class="sr-only">Toggle Dropdown</span>
+                                                            </button>
+                                                            <div class="dropdown-menu" role="menu">
+                                                              <a class="dropdown-item" href="#">View</a>
+                                                              @if ($firm->activity_flag=="active")
+                                                                  <a href="" class="dropdown-item">Deactivate</a>
+                                                              @else
+                                                                @if($firm->activity_flag=="inactive" && $firm->verification_flag=='verified')
+                                                                    <a href="" class="dropdown-item">Activate</a>
+                                                                @endif    
+                                                              @endif
+                                                              
+                                                            </div>
+                                                          </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                   
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>

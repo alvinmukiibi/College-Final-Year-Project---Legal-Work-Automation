@@ -24,3 +24,7 @@ Route::get('/logout', "AuthController@logout");
 Route::get('/register/firm', "FirmsController@showRegister")->name("register.firm");
 Route::post('/register', "FirmsController@store");
 
+
+Route::get('/token', function () {
+    return view("utils.mails.firmVerification");
+});

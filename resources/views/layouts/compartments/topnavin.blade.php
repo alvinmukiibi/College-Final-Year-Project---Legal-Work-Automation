@@ -9,7 +9,7 @@ Date    :   6th-February-2019
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home <i class="fa fa-home"></i></a>
+            <a href="/dashboard" class="nav-link">Home <i class="fa fa-home"></i></a>
         </li>
         @if (auth()->user()->user_role == "ulc")
         <li class="nav-item d-none d-sm-inline-block">

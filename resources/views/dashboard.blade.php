@@ -48,7 +48,7 @@
                   <div class="icon">
                     <i class="fa fa-legal"></i>
                   </div>
-                  <a href="/firms" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  <a href="/register/firm" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
