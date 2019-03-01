@@ -8,6 +8,7 @@ use Webpatser\Countries\Countries;
 use App\Practice_groups;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailVerificationMail;
+use Carbon\Carbon;
 
 class FirmsController extends Controller
 {
@@ -64,7 +65,8 @@ class FirmsController extends Controller
         $otp = Firms::registerFirm($request);
         if($otp){
             try{
-                Mail::to($request->input('email'))->send(new EmailVerificationMail($request->input('name'), $otp));
+                $when = Carbon::now()->addMinutes(2);
+                Mail::to($request->input('email'))->later($when, new EmailVerificationMail($request->input('name'), $otp));
                 return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
         
             }catch(Exception $ex){

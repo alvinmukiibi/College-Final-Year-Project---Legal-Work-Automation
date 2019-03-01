@@ -150,15 +150,17 @@
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
                                                                 
-
-                                                            <a class="dropdown-item" href="/view/firm/{{$firm->uuid}}">View</a>
+                                                                
+                                                            <a class="dropdown-item" href=" {{url('/view/firm/'.$firm->uuid)}}">View</a>
+                                                           
 
 
                                                               @if ($firm->activity_flag=="active")
-                                                                  <a href="/firm/deactivate/{{$firm->uuid}}" class="dropdown-item">Deactivate</a>
+                                                             
+                                                                  <a href=" {{url('/firm/deactivate/'.$firm->uuid)}}" class="dropdown-item">Deactivate</a>
                                                               @else
                                                                 @if($firm->activity_flag=="inactive" && $firm->verification_flag=='verified')
-                                                            <a href="/firm/activate/{{$firm->uuid}}" class="dropdown-item">Activate</a>
+                                                            <a href=" {{url('/firm/activate/'.$firm->uuid)}}" class="dropdown-item">Activate</a>
                                                                 @endif    
                                                               @endif
                                                               

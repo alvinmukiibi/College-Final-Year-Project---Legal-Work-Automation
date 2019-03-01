@@ -166,7 +166,7 @@ return [
          * Package Service Providers...
          */
         'Webpatser\Countries\CountriesServiceProvider',
-        Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
+        //Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
 
         /*
          * Application Service Providers...

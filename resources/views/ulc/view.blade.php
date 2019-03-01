@@ -106,10 +106,11 @@
                                           
                                           <hr/>
                                           @if ($lawfirm->activity_flag=="active")
-                                                                  <a href="/firm/deactivate/{{$lawfirm->uuid}}" class="btn btn-danger btn-block">Deactivate</a>
+                                          
+                                                                  <a href="{{url('/firm/deactivate/'.$lawfirm->uuid)}}" class="btn btn-danger btn-block">Deactivate</a>
                                                               @else
                                                                 @if($lawfirm->activity_flag=="inactive" && $lawfirm->verification_flag=='verified')
-                                                                    <a href="/firm/activate/{{$lawfirm->uuid}}" class="btn btn-success btn-block">Activate</a>
+                                                                    <a href="{{url('/firm/activate/'.$lawfirm->uuid)}}" class="btn btn-success btn-block">Activate</a>
                                                                 @endif    
                                                               @endif
                                          

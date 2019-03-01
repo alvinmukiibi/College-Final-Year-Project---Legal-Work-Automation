@@ -10,9 +10,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class EmailVerificationMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $firm_name;
-    public $firm_otp;
-    public $token;
+    protected $firm_name;
+    protected $firm_otp;
+    protected $token;
 
     /**
      * Create a new message instance.
@@ -34,8 +34,14 @@ class EmailVerificationMail extends Mailable
      * @return $this
      */
     public function build()
+    
     {
-        return $this->view("utils.mails.firmVerification");
+        $data  = [
+            'firm_name'=>$this->firm_name,
+            'firm_otp'=>$this->firm_otp,
+            'token'=>$this->token
+        ];
+        return $this->view("utils.mails.firmVerification")->with($data);
 
     }
 }

@@ -5,7 +5,7 @@
       <body>
           <nav class="navbar navbar-expand navbar-dark bg-primary">
               <div class="container">
-                <a href="/" class="navbar-brand">
+              <a href="{{ url('/')}}" class="navbar-brand">
                   L-WAT
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,7 @@
                 <div class="collapse navbar-collapse">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                      <a href="/" class="nav-link">
+                      <a href="{{ url('/')}}" class="nav-link">
                         <i class="fa fa-home" ></i> Home
                       </a>
                     </li>

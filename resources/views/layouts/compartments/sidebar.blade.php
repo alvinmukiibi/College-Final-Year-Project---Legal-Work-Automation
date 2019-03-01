@@ -21,7 +21,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 
                   <li class="nav-item">
-                    <a href="/profile" class="nav-link">
+                  <a href="{{ url('/profile')}}" class="nav-link">
                       <i class="nav-icon fa fa-user"></i>
                       <p>
                         Profile
@@ -30,7 +30,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                      <a href="/dashboard" class="nav-link">
+                  <a href="{{ url('/dashboard')}}" class="nav-link">
                         <i class="nav-icon fa fa-home"></i>
                         <p>
                           Dashboard
@@ -49,7 +49,7 @@
                       </a>
                       <ul class="nav nav-treeview">
                         <li class="nav-item">
-                          <a href="/register/firm" class="nav-link">
+                        <a href="{{ url('/register/firm')}}" class="nav-link">
                             <i class="fa fa-circle-o nav-icon"></i>
                             <p>Registered Firms <span class="right badge badge-danger">50</span></p>
                           </a>

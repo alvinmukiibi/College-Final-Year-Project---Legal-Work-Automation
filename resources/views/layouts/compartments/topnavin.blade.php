@@ -9,11 +9,11 @@ Date    :   6th-February-2019
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/dashboard" class="nav-link">Home <i class="fa fa-home"></i></a>
+        <a href="{{ url('/dashboard')}}" class="nav-link">Home <i class="fa fa-home"></i></a>
         </li>
         @if (auth()->user()->user_role == "ulc")
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/register/firm" class="nav-link">Register a Firm <i class="fa fa-plus-circle"></i>   </a>
+        <a href="{{ url('/register/firm')}}" class="nav-link">Register a Firm <i class="fa fa-plus-circle"></i>   </a>
         </li>
         @endif
     </ul>
@@ -24,7 +24,7 @@ Date    :   6th-February-2019
                     </a>
                 </li>
         <li class="nav-item">
-            <a href="/logout" class="nav-link">
+        <a href="{{ url('/logout')}}" class="nav-link">
                 Logout <i class="fa fa-sign-out"></i>
             </a>
         </li>
