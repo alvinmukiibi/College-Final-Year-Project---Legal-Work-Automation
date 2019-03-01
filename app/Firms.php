@@ -27,6 +27,7 @@ class Firms extends Model
         $this->activity_flag = "inactive";
         $this->verification_flag = "not_verified";
         $this->password = bcrypt($this->firm_id);
+        //$this->uuid = uuid();
         
         if($this->save()){
             return $this->firm_id;
@@ -46,5 +47,6 @@ class Firms extends Model
         return "WATL" ."_". $randomString;
         
     }
+    
    
 }

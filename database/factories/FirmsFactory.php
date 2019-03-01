@@ -15,9 +15,10 @@ $factory->define(App\Firms::class, function (Faker $faker) {
             'area' => $faker->country,
             'city' => $faker->city,
             'street_address' => $faker->streetAddress,
-            'practice_groups' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+           // 'practice_groups' => $faker->sentence($nbWords = 6, $variableNbWords = true),
             'avatar' => $faker->imageUrl($width = 640, $height = 480),
             'website' => $faker->url,
+            'uuid' => $faker->uuid,
             'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
             'activity_flag' => $faker->city,
             'verification_flag' => $faker->city

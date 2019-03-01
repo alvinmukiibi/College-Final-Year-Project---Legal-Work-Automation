@@ -135,5 +135,25 @@ class FirmsController extends Controller
        
         return view("ulc.register")->with($data);
     }
+    public function showFirm($firm){
+        
+        return view("ulc.view")->with("firm", Firms::where("uuid", $firm)->get());
+        
+    }
+    public function activate($firm){
+
+       Firms::where('uuid', $firm)->update(['activity_flag'=>'active']);
+
+       return redirect()->route("register.firm");
+
+    }
+    public function deactivate($firm){
+
+        Firms::where('uuid', $firm)->update(['activity_flag'=>'inactive']);
+ 
+        return redirect()->route("register.firm");
+ 
+     }
+    
   
 }

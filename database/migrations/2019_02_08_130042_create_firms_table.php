@@ -25,11 +25,12 @@ class CreateFirmsTable extends Migration
             $table->string('area','100');
             $table->string('city','50');
             $table->text('street_address');
-            $table->text('practice_groups')->nullable();
+            //$table->text('practice_groups')->nullable();
             $table->timestamp('date_of_reg');
             $table->string('avatar','100')->nullable();
             $table->text('website')->nullable();
             $table->text('description')->nullable();
+            $table->text('uuid')->nullable();
             $table->string('activity_flag','10')->nullable();
             $table->string('verification_flag','10')->nullable();
             $table->timestamps();

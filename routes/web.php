@@ -16,15 +16,18 @@ Route::get('/', function () {
 });
 
 Route::resource('/home', "FirmsController"); //binding the controller to its resources
-Route::get('/login', "AuthController@showLogin");
+Route::get('/login', "AuthController@showLogin")->name("login");
 Route::post('/login', "AuthController@doLogin");
-Route::get('/dashboard', "AuthController@dashboard");
 Route::get('/logout', "AuthController@logout");
-
-Route::get('/register/firm', "FirmsController@showRegister")->name("register.firm");
-Route::post('/register', "FirmsController@store");
-
-
-Route::get('/token', function () {
-    return view("utils.mails.firmVerification");
+Route::group(['middleware' => 'auth:web'], function()
+{
+    Route::get('/register/firm', "FirmsController@showRegister")->name("register.firm");
+    Route::post('/register', "FirmsController@store");
+    Route::get('/dashboard', "AuthController@dashboard")->name("dashboard");
+   
+    Route::get('/view/firm/{firm}', "FirmsController@showFirm")->name("show.firm");
+    Route::get('/firm/activate/{firm}', "FirmsController@activate")->name("firm.activate");
+    Route::get('/firm/deactivate/{firm}', "FirmsController@deactivate")->name("firm.deactivate");
 });
+
+

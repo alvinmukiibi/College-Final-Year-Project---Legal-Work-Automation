@@ -9,14 +9,14 @@ use Auth;
 class AuthController extends Controller
 
 {
+   
+
     public function showLogin()
     {
         return view("login");
     }
     public function doLogin(Request $request)
     {
-
-
         //handle login
 
         /* 
@@ -26,11 +26,15 @@ class AuthController extends Controller
         */
         $user_data = $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required|alphaNum|min:8'
+            'password' => 'required|alphaNum|min:8',
         ]);
 
+        
 
         if (Auth::attempt($user_data)) {
+            if(Auth::user()->account_status !== "active"){
+                return redirect()->back()->with('error', 'Account Inactive, See System Adminstrator');
+            }
             return redirect('/dashboard');
         } else {
             return redirect()->back()->with('error', 'Wrong Login Details');
@@ -41,12 +45,12 @@ class AuthController extends Controller
         if (auth()->guest()) {
             return redirect()->route("login");
         }
-        return view('dashboard')->with('user', auth()->user());
+        return view('dashboard')->with('user', auth()->guard('web')->user());
     }
     public function logout()
     {
-        if(Auth::logout()){
+        Auth::logout();
             return redirect()->route("login");
-        }
+        
     }
 }

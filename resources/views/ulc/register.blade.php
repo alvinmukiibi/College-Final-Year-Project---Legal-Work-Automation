@@ -149,12 +149,16 @@
                                                               <span class="sr-only">Toggle Dropdown</span>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
-                                                              <a class="dropdown-item" href="#">View</a>
+                                                                
+
+                                                            <a class="dropdown-item" href="/view/firm/{{$firm->uuid}}">View</a>
+
+
                                                               @if ($firm->activity_flag=="active")
-                                                                  <a href="" class="dropdown-item">Deactivate</a>
+                                                                  <a href="/firm/deactivate/{{$firm->uuid}}" class="dropdown-item">Deactivate</a>
                                                               @else
                                                                 @if($firm->activity_flag=="inactive" && $firm->verification_flag=='verified')
-                                                                    <a href="" class="dropdown-item">Activate</a>
+                                                            <a href="/firm/activate/{{$firm->uuid}}" class="dropdown-item">Activate</a>
                                                                 @endif    
                                                               @endif
                                                               
