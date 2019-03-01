@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Firms;
 use Webpatser\Countries\Countries;
 use App\Practice_groups;
+use App\Jobs\SendVerificationEmailJob;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\EmailVerificationMail;
 use Carbon\Carbon;
 
 class FirmsController extends Controller
@@ -63,24 +63,26 @@ class FirmsController extends Controller
         
         
         $otp = Firms::registerFirm($request);
-        if($otp){
-            try{
-                $when = Carbon::now()->addMinutes(2);
-                Mail::to($request->input('email'))->later($when, new EmailVerificationMail($request->input('name'), $otp));
-                return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
         
-            }catch(Exception $ex){
-                return redirect()->route('register.firm')->with("error", "Email Verification Link not sent");
+        dispatch(new SendVerificationEmailJob($request->input('email'),$request->input('name'),$otp ));
+        // if($otp){
+        //     try{
+                
+        //         Mail::to()->send($when, new EmailVerificationMail($request->input('name'), $otp));
+               return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
+        
+            // }catch(Exception $ex){
+            //     return redirect()->route('register.firm')->with("error", "Email Verification Link not sent");
         
 
-            }
+            // }
             
             
         }
 
         
 
-    }
+    
 
     /**
      * Display the specified resource.

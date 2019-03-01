@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 
 class Firms extends Model
 {
@@ -27,7 +29,7 @@ class Firms extends Model
         $this->activity_flag = "inactive";
         $this->verification_flag = "not_verified";
         $this->password = bcrypt($this->firm_id);
-        //$this->uuid = uuid();
+        $this->uuid = Uuid::uuid1()->toString();
         
         if($this->save()){
             return $this->firm_id;
