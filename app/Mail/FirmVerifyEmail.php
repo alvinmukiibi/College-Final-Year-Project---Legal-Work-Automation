@@ -7,24 +7,22 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EmailVerificationMail extends Mailable
+class FirmVerifyEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $firm_name;
-    protected $firm_otp;
-    protected $token;
-
-    /**
+    public $firm_name;
+    public $firm_otp;
+    public $firm_uuid;
+    /** 
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($firm_name, $firm_otp)
+    public function __construct($firm_name, $firm_otp, $firm_uuid)
     {
-        //
         $this->firm_name = $firm_name;
         $this->firm_otp = $firm_otp;
-        $this->token = bcrypt($this->firm_otp);
+        $this->firm_uuid = $firm_uuid;
         
     }
 
@@ -34,14 +32,7 @@ class EmailVerificationMail extends Mailable
      * @return $this
      */
     public function build()
-    
     {
-        $data  = [
-            'firm_name'=>$this->firm_name,
-            'firm_otp'=>$this->firm_otp,
-            'token'=>$this->token
-        ];
-        return $this->view("utils.mails.firmVerification")->with($data);
-
+        return $this->markdown('utils.mails.emailVerified');
     }
 }

@@ -32,7 +32,8 @@ class Firms extends Model
         $this->uuid = Uuid::uuid1()->toString();
         
         if($this->save()){
-            return $this->firm_id;
+            $data = ["otp"=> $this->firm_id, "uuid"=>$this->uuid];
+            return $data;
         }else{
             return false;
         }

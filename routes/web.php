@@ -24,10 +24,15 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/register/firm', "FirmsController@showRegister")->name("register.firm");
     Route::post('/register', "FirmsController@store");
     Route::get('/dashboard', "AuthController@dashboard")->name("dashboard");
-   
     Route::get('/view/firm/{firm}', "FirmsController@showFirm")->name("show.firm");
     Route::get('/firm/activate/{firm}', "FirmsController@activate")->name("firm.activate");
     Route::get('/firm/deactivate/{firm}', "FirmsController@deactivate")->name("firm.deactivate");
 });
+Route::group(['prefix' => 'api'], function () {
+
+Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
+
+});
+
 
 

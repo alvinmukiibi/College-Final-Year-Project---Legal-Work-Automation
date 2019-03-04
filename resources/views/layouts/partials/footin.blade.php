@@ -13,7 +13,9 @@ Date    :   6th-February-2019
 
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
+<!-- Bootstrap datatables -->
+<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/datatables/dataTables.bootstrap4.min.js')}}"></script>
 {{-- for the select multiple button --}}
 <script src="{{asset('plugins/select2/select2.full.min.js')}}"></script>
 
@@ -40,7 +42,16 @@ Date    :   6th-February-2019
 <script>
     $(function () {
       //Initialize Select2 Elements
-      $('.select2').select2()
+      $('.select2').select2();
+      $("#example1").DataTable();
+      $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+    });
     })
       </script>
 

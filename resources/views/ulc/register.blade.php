@@ -120,7 +120,7 @@
                                 <h3 class="card-title">All Law Firms</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered" id="example2">
                                     <tr>
                                         <th>Firm Name</th>
                                         <th style="width: 5px">Status</th>

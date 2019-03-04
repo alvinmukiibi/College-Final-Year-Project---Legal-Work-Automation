@@ -20,12 +20,12 @@ class SendVerificationEmailJob implements ShouldQueue
      */
     protected $to;
     protected $to_name;
-    protected $otp;
-    public function __construct($to, $to_name, $otp)
+    protected $data;
+    public function __construct($to, $to_name, $data)
     {
         $this->to = $to;
         $this->to_name = $to_name;
-        $this->otp = $otp;
+        $this->data = $data;
 
     }
 
@@ -36,7 +36,7 @@ class SendVerificationEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $email = new EmailVerificationMail($this->to_name, $otp);
+        $email = new EmailVerificationMail($this->to_name, $data['otp'], $data['uuid']);
         Mail::to($this->to)->send($email);
     }
 }
