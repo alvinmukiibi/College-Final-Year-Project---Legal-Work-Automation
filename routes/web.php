@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/view/firm/{firm}', "FirmsController@showFirm")->name("show.firm");
     Route::get('/firm/activate/{firm}', "FirmsController@activate")->name("firm.activate");
     Route::get('/firm/deactivate/{firm}', "FirmsController@deactivate")->name("firm.deactivate");
+    Route::get('/firm/changePassword', "LawFirmController@showChangePasswordForm")->name("firm.changePassword");
+    Route::post('/firm/changePassword', "LawFirmController@doChangePassword");
 });
 Route::group(['prefix' => 'api'], function () {
 

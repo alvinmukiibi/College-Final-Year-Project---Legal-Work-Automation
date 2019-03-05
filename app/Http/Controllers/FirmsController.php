@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Mail\EmailVerificationMail;
 use App\Mail\FirmVerifyEmail;
-
+use App\User;
 class FirmsController extends Controller
 {
     /**
@@ -146,17 +146,45 @@ class FirmsController extends Controller
         return view("ulc.view")->with("firm", Firms::where("uuid", $firm)->get());
         
     }
-    public function activate($firm){
+    public function activate($uuid){
 
-       Firms::where('uuid', $firm)->update(['activity_flag'=>'active']);
+        $lawfirm = new Firms;
+        $lawfirm->uuid = $uuid;
+        $activate = $lawfirm->activate();
+        if($activate){
+            $activateUser = $lawfirm->activateUsers();
+            if($activateUser){
+                return redirect()->back()->with("success", "Successful Activation");
+            }else{
+                return redirect()->back();
+            }
 
-       return redirect()->back();
+            
+        }else{
+
+           return redirect()->back()->with("error", "Failed to activate");
+        }
+        return redirect()->back();
 
     }
-    public function deactivate($firm){
+    public function deactivate($uuid){
 
-        Firms::where('uuid', $firm)->update(['activity_flag'=>'inactive']);
- 
+        $lawfirm = new Firms;
+        $lawfirm->uuid = $uuid;
+        $deactivate = $lawfirm->deactivate();
+        if($deactivate){
+            $deactivateUser = $lawfirm->deactivateUsers();
+            if($deactivateUser){
+                return redirect()->back()->with("success", "Successful Deactivation");
+            }else{
+                return redirect()->back();
+            }
+
+            
+        }else{
+
+           return redirect()->back()->with("error", "Failed to deactivate");
+        }
         return redirect()->back();
  
      }

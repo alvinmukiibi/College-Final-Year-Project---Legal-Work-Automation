@@ -30,31 +30,24 @@
           <h1 class="text-center pb-4 pt-3">
             <span class="text-primary">
               <i class="fa fa-lock"></i>
-              Login
+              Change Password
             </span>
           </h1>
-          <form action="/login" method="POST">
+          <form action="/firm/changePassword" method="POST">
             @csrf
           <div class="form-group">
               
-              <input type="email" required placeholder="Email" class="form-control {{$errors->has('email')?'is-invalid':''}}" name="email"  />
+              <input type="password" required placeholder="Password" class="form-control {{$errors->has('password')?'is-invalid':''}}" name="password"  />
             </div>
             <div class="form-group">
                 
-              <input type="password" placeholder="Password" class="form-control {{$errors->has('password')?'is-invalid':''}}" name="password" required />
+              <input type="password" placeholder="Confirm Password" class="form-control {{$errors->has('password_confirmation')?'is-invalid':''}}" name="password_confirmation" required />
               </div>
               
               @if(session('error'))
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                       {{session('error')}}
-                </div>
-              
-              @endif
-              @if(session('info'))
-                <div class="alert alert-info alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      {{session('info')}}
                 </div>
               
               @endif
@@ -69,7 +62,7 @@
 
               @endif
 
-              <input type="submit" value="Login" class="btn btn-primary btn-block btn-flat">
+              <button type="submit" class="btn btn-secondary btn-block"> Save <i class="fa fa-save"></i> </button>
 
 
 

@@ -5,12 +5,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class Firms extends Model
 {
     protected $fillable = [
         'name','description'
     ];
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
+    protected $table = "firms";
 
 
     protected function registerFirm($request){
@@ -49,6 +56,54 @@ class Firms extends Model
         }
         return "WATL" ."_". $randomString;
         
+    }
+    public function activate(){
+
+        $activated = DB::table($this->table)->where('uuid', $this->uuid)->update(['activity_flag'=>'active']);
+        if($activated){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    public function deactivate(){
+
+        $deactivated = DB::table($this->table)->where('uuid', $this->uuid)->update(['activity_flag'=>'inactive']);
+        if($deactivated){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    public function activateUsers(){
+
+        $firm_id = DB::table($this->table)->where(["uuid" => $this->uuid])->pluck("firm_id");
+       
+        $user = new User;
+        $user->firm_id = $firm_id;
+        $activated = $user->activateUsers();
+       
+        if($activated){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function deactivateUsers(){
+
+        $firm_id = DB::table($this->table)->where(["uuid" => $this->uuid])->pluck("firm_id");
+       
+        $user = new User;
+        $user->firm_id = $firm_id;
+        $deactivated = $user->deactivateUsers();
+       
+        if($deactivated){
+            return true;
+        }else{
+            return false;
+        }
     }
     
    

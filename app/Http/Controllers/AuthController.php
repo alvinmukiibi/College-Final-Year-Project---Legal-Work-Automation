@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use Auth;
+use App\User;
 
 class AuthController extends Controller
 
@@ -26,7 +27,7 @@ class AuthController extends Controller
         */
         $user_data = $this->validate($request, [
             'email' => 'required|email',
-            'password' => 'required|alphaNum|min:8',
+            'password' => 'required|min:8',
         ]);
 
         
@@ -34,6 +35,20 @@ class AuthController extends Controller
         if (Auth::attempt($user_data)) {
             if(Auth::user()->account_status !== "active"){
                 return redirect()->back()->with('error', 'Account Inactive, See System Adminstrator');
+            }
+
+            if(auth()->guard('web')->user()->firm_id !== NULL){
+
+                $user = new User;
+                $user->user = auth()->guard('web')->user();
+                $requiresChangeOfPassword = $user->checkIfRequiresChangeOfPassword();
+                if($requiresChangeOfPassword){
+                    return redirect('/firm/changePassword');
+
+                }else{
+                    return redirect('/firm/dashboard');
+                }
+               
             }
             return redirect('/dashboard');
         } else {
