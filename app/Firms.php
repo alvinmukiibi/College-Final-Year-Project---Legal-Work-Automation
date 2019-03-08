@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class Firms extends Model
 {
+    protected $guarded = [];
+    
     protected $fillable = [
         'name','description'
     ];

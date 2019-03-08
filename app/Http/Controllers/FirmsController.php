@@ -6,12 +6,10 @@ use Illuminate\Http\Request;
 use App\Firms;
 use Webpatser\Countries\Countries;
 use App\Practice_groups;
-use App\Jobs\SendVerificationEmailJob;
-use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
-use App\Mail\EmailVerificationMail;
-use App\Mail\FirmVerifyEmail;
 use App\User;
+use App\Events\FirmRegistered;
+
 class FirmsController extends Controller
 {
     /**
@@ -65,20 +63,14 @@ class FirmsController extends Controller
         
         
         $data = Firms::registerFirm($request);
-        
-       // dispatch(new SendVerificationEmailJob($request->input('email'),$request->input('name'), $data));
-        if($data){
-            try{
-                //EmailVerificationMail($request->input('name'), $data['otp'], $data['uuid'])
-                Mail::to($firm_data['email'])->send(new FirmVerifyEmail($request->input('name'), $data['otp'], $data['uuid']));
-               return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
-        
-            }catch(Exception $ex){
-                return redirect()->route('register.firm')->with("error", "Email Verification Link not sent");
-        
 
-            }
-        }
+        $firm = ["otp" => $data['otp'], "uuid" => $data['uuid'], "name" => $firm_data['name'], "email" => $firm_data['email']];
+        
+        //event to tell all the app that a firm has been registered
+
+        event(new FirmRegistered($firm));
+
+        return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
             
         }
 
