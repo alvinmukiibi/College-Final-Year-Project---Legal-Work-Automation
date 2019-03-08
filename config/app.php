@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         'Webpatser\Countries\CountriesServiceProvider',
+        Laravel\Passport\PassportServiceProvider::class ,
         //Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
 
         /*
