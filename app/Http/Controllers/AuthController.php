@@ -10,7 +10,7 @@ use App\User;
 class AuthController extends Controller
 
 {
-   
+
 
     public function showLogin()
     {
@@ -20,7 +20,7 @@ class AuthController extends Controller
     {
         //handle login
 
-        /* 
+        /*
             validate the data that comes in the request (i.e. POST request)
             after validating, the array containing the indexes is stored in the variable $user_data which is
             then passed to the attempt() method of the Auth facade to login the user
@@ -30,7 +30,7 @@ class AuthController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        
+
 
         if (Auth::attempt($user_data)) {
             if(Auth::user()->account_status !== "active"){
@@ -46,9 +46,9 @@ class AuthController extends Controller
                     return redirect('/firm/changePassword');
 
                 }else{
-                    return redirect('/firm/dashboard');
+                    return redirect('/dashboard');
                 }
-               
+
             }
             return redirect('/dashboard');
         } else {
@@ -66,6 +66,6 @@ class AuthController extends Controller
     {
         Auth::logout();
             return redirect()->route("login");
-        
+
     }
 }
