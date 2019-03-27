@@ -21,13 +21,13 @@
         </div>
 </section>
 @foreach ($firm as $lawfirm)
-    
+
 
 <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-3">
-  
+
               <!-- Profile Image -->
               <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
@@ -36,11 +36,11 @@
                          src="../../dist/img/user4-128x128.jpg"
                          alt="User profile picture">
                   </div>
-  
+
                 <h3 class="profile-username text-center">{{$lawfirm->name}}</h3>
-  
-                 
-  
+
+
+
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
                      <i class="fa fa-phone"></i><span class="float-right"> {{$lawfirm->contact1}}</span>
@@ -58,13 +58,13 @@
                             <i class="fa fa-globe"></i><span class="float-right">{{$lawfirm->website}}</span>
                      </li>
                   </ul>
-  
+
                   <a href="#" class="btn btn-primary btn-block"><b>Message</b></a>
                 </div>
                 <!-- /.card-body -->
               </div>
               </div>
-           
+
             <div class="col-md-9">
               <div class="card">
                 <div class="card-header p-2">
@@ -82,57 +82,57 @@
                             <button class="btn btn-danger btn-flat btn-block" title="ACCOUT INACTIVE"  ><b>INACTIVE</b> <i class="fa fa-close"></i> </button>
                             @else
                             <button class="btn btn-success btn-flat btn-block" title="ACCOUNT ACTIVE" ><b>ACTIVE</b> <i class="fa fa-check-circle"></i> </button>
-                            @endif  
+                            @endif
                             <br/>
                             <div class="callout callout-success">
                                     <h5>Law Firm Address</h5>
-                  
+
                                     <p>{{$lawfirm->street_address}}</p>
                                   </div>
                                   <div class="callout callout-warning">
                                         <h5>Law Firm Description</h5>
-                      
+
                                         <p>{{$lawfirm->description}}</p>
                                       </div>
                                       <div class="callout callout-info">
                                             <h5>Date Registered</h5>
-                          
+
                                       <p>{{
                                           date("d/m/y", strtotime($lawfirm->created_at))
-                                      
+
                                       }}</p>
                                           </div>
 
-                                          
+
                                           <hr/>
                                           @if ($lawfirm->activity_flag=="active")
-                                          
+
                                                                   <a href="{{url('/firm/deactivate/'.$lawfirm->uuid)}}" class="btn btn-danger btn-block">Deactivate</a>
                                                               @else
                                                                 @if($lawfirm->activity_flag=="inactive" && $lawfirm->verification_flag=='verified')
                                                                     <a href="{{url('/firm/activate/'.$lawfirm->uuid)}}" class="btn btn-success btn-block">Activate</a>
-                                                                @endif    
+                                                                @endif
                                                               @endif
-                                         
+
                            </div>
-                           
-                    
+
+
                     <div class="tab-pane" id="timeline">
                       Message between Regulatory Authority and Law Firm System Administrator appear here
                    </div>
-                  
-                   
+
+
                   </div>
-                 
+
                 </div>
               </div>
-             
+
             </div>
-           
+
           </div>
-         
+
         </div>
       </section>
-    
+
       @endforeach
 @endsection

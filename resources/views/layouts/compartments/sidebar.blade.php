@@ -21,13 +21,16 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                   <li class="nav-item">
-                  <a href="{{ url('/profile')}}" class="nav-link">
-                      <i class="nav-icon fa fa-user"></i>
-                      <p>
-                        My Profile
+                      @if (auth()->user()->user_role=="administrator")
+                      <a href="{{ url('/admin/profile')}}" class="nav-link">
+                        <i class="nav-icon fa fa-user"></i>
+                        <p>
+                          My Profile
 
-                      </p>
-                    </a>
+                        </p>
+                      </a>
+                      @endif
+
                   </li>
                   <li class="nav-item">
                   <a href="{{ url('/dashboard')}}" class="nav-link">
@@ -69,7 +72,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/firm/manage/departments')}}" class="nav-link">
+                        <a href="{{ url('/admin/departments')}}" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                               Departments

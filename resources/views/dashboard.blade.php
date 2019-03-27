@@ -35,8 +35,15 @@
                   <div class="icon">
                     <i class="fa fa-user"></i>
                   </div>
-                <a href="{{ url('/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
+                  @if (auth()->user()->user_role=="administrator")
+                <a href="{{ url('admin/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
+
+                @else
+                <a href="{{ url('profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
+                @endif
+            </div>
               </div>
               @if (auth()->user()->user_role === "ulc")
               <div class="col-lg-3 col-6">
@@ -77,7 +84,7 @@
                   <div class="icon">
                     <i class="fa fa-legal"></i>
                   </div>
-                <a href="{{ url('/register/firm')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/admin/departments')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <div class="col-lg-3 col-6">

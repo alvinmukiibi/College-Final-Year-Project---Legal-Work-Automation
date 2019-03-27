@@ -6,18 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use App\User;
+use App\Department;
 use Illuminate\Support\Facades\DB;
 
 class Firms extends Model
 {
     protected $guarded = [];
-    
+
     protected $fillable = [
         'name','description'
     ];
 
     public function user(){
         return $this->hasMany(User::class);
+    }
+    public function departments(){
+        return $this->hasMany(Department::class);
     }
     protected $table = "firms";
 
@@ -39,17 +43,17 @@ class Firms extends Model
         $this->verification_flag = "not_verified";
         $this->password = bcrypt($this->firm_id);
         $this->uuid = Uuid::uuid1()->toString();
-        
+
         if($this->save()){
             $data = ["otp"=> $this->firm_id, "uuid"=>$this->uuid];
             return $data;
         }else{
             return false;
         }
-            
+
     }
     protected function generateLawfirmUniqueNumber($length = 8){
-      
+
         $characters = '0123456789ABCDEF';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -57,7 +61,7 @@ class Firms extends Model
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return "WATL" ."_". $randomString;
-        
+
     }
     public function activate(){
 
@@ -67,7 +71,7 @@ class Firms extends Model
         }else{
             return false;
         }
-        
+
     }
     public function deactivate(){
 
@@ -77,16 +81,16 @@ class Firms extends Model
         }else{
             return false;
         }
-        
+
     }
     public function activateUsers(){
 
         $firm_id = DB::table($this->table)->where(["uuid" => $this->uuid])->pluck("firm_id");
-       
+
         $user = new User;
         $user->firm_id = $firm_id;
         $activated = $user->activateUsers();
-       
+
         if($activated){
             return true;
         }else{
@@ -96,17 +100,17 @@ class Firms extends Model
     public function deactivateUsers(){
 
         $firm_id = DB::table($this->table)->where(["uuid" => $this->uuid])->pluck("firm_id");
-       
+
         $user = new User;
         $user->firm_id = $firm_id;
         $deactivated = $user->deactivateUsers();
-       
+
         if($deactivated){
             return true;
         }else{
             return false;
         }
     }
-    
-   
+
+
 }

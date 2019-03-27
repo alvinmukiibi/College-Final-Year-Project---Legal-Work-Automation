@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $table = "users";
-    
+
     protected $fillable = [
          'email', 'password',
     ];
@@ -47,7 +47,7 @@ class User extends Authenticatable
             return false;
         }
 
-        
+
     }
     public function deactivateUsers(){
 
@@ -59,11 +59,11 @@ class User extends Authenticatable
             return false;
         }
 
-        
+
     }
     public function checkIfRequiresChangeOfPassword(){
         $user = $this->user;
-        
+
         if(Hash::check($user->firm_id, $user->password)){
             return true;
         }else{
@@ -81,5 +81,17 @@ class User extends Authenticatable
         else{
             return false;
         }
+    }
+    public function saveAdminProfile(){
+        $user = $this->userData;
+
+        $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact']]);
+        if($save){
+            return true;
+        }else{
+            return false;
+        }
+
+
     }
 }

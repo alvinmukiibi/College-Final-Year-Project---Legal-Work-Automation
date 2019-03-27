@@ -50,33 +50,33 @@ class FirmsController extends Controller
             "region"=>"required",
             "city"=>"required",
             "street_address"=>"required",
-            
-            
+
+
         ]);
 
         $count = Firms::where('email', $request->input('email'))->count();
-       
+
         if($count > 0){
             return redirect()->route('register.firm')->with("error", "Email Already Exists");
         }
-        
-        
-        
+
+
+
         $data = Firms::registerFirm($request);
 
         $firm = ["otp" => $data['otp'], "uuid" => $data['uuid'], "name" => $firm_data['name'], "email" => $firm_data['email']];
-        
+
         //event to tell all the app that a firm has been registered
 
         event(new FirmRegistered($firm));
 
         return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
-            
+
         }
 
-        
 
-    
+
+
 
     /**
      * Display the specified resource.
@@ -128,15 +128,15 @@ class FirmsController extends Controller
         $data = [
             "countries" => Countries::getListForSelect(),
             "firms" => Firms::orderBy('created_at', 'desc')->get()
-            
+
         ];
-       
+
         return view("ulc.register")->with($data);
     }
     public function showFirm($firm){
-        
+
         return view("ulc.view")->with("firm", Firms::where("uuid", $firm)->get());
-        
+
     }
     public function activate($uuid){
 
@@ -151,7 +151,7 @@ class FirmsController extends Controller
                 return redirect()->back();
             }
 
-            
+
         }else{
 
            return redirect()->back()->with("error", "Failed to activate");
@@ -172,14 +172,14 @@ class FirmsController extends Controller
                 return redirect()->back();
             }
 
-            
+
         }else{
 
            return redirect()->back()->with("error", "Failed to deactivate");
         }
         return redirect()->back();
- 
+
      }
-    
-  
+
+
 }
