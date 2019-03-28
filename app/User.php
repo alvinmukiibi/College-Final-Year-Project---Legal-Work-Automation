@@ -58,7 +58,6 @@ class User extends Authenticatable
         $deactivate = DB::table($this->table)->where(['firm_id'=> $this->firm_id])->update(["account_status"=>"inactive"]);
 
         if($deactivate){
-            return true;
         }else{
             return false;
         }
@@ -67,13 +66,22 @@ class User extends Authenticatable
     }
     public function checkIfRequiresChangeOfPassword(){
         $user = $this->user;
+        //get users otp
+        $otpFromDB =  $this->getOtp($user->identification_token);
 
-        if(Hash::check($user->firm_id, $user->password)){
+        if(Hash::check($otpFromDB, $user->password)){
             return true;
         }else{
             return false;
         }
 
+
+    }
+    public function getOtp($token){
+        $otp = DB::table('otps')->where(['user_id'=>$token])->pluck('otp');
+        foreach($otp as $value){
+            return $value;
+        }
 
     }
     public function changePassword(){
@@ -111,8 +119,7 @@ class User extends Authenticatable
     }
     public function addStaff(){
         $staff = $this->data;
-
-        $add = DB::table($this->table)->insert(['fname'=> $staff['firstName']  , 'lname'=> $staff['lastName'], 'email'=> $staff['email'] , 'contact'=> $staff['phone'], 'gender'=>$staff['gender'], 'department'=>$staff['department'], 'user_role'=> $staff['role'], 'account_status'=> $this->account_status, 'verification_status'=>$this->verification_status, 'firm_id'=>$this->firm_id, 'password'=>Hash::make($this->password)]);
+        $add = DB::table($this->table)->insert(['fname'=> $staff['firstName']  , 'lname'=> $staff['lastName'], 'email'=> $staff['email'] , 'contact'=> $staff['phone'], 'gender'=>$staff['gender'], 'department'=>$staff['department'], 'user_role'=> $staff['role'], 'account_status'=> $this->account_status, 'verification_status'=>$this->verification_status, 'firm_id'=>$this->firm_id, 'password'=>Hash::make($this->password),'identification_token' => $this->id_token]);
 
         if($add){
             return true;
@@ -147,6 +154,28 @@ class User extends Authenticatable
     public function deactivateStaff(){
         $deactivate = DB::table($this->table)->where(['id'=>$this->id])->update(['account_status'=>'inactive']);
         if($deactivate){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function verifyEmail(){
+
+        $verified = DB::table($this->table)->where(['identification_token'=>$this->identifier])->update(["verification_status"=>'verified']);
+
+        if($verified)
+        {
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    public function persistOtp(){
+        // $user = $this->data;
+
+        $persisted = DB::table('otps')->insert(['user_id'=>$this->id_token, 'otp'=>$this->password, 'status'=>'valid']);
+        if($persisted){
             return true;
         }else{
             return false;

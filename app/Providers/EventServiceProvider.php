@@ -7,7 +7,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Events\FirmRegistered;
+use App\Events\UserRegistered;
 use App\Listeners\SendVerificationMail;
+use App\Listeners\SendUserVerificationMail;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -21,7 +23,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         FirmRegistered::class => [
             SendVerificationMail::class
-        ]
+        ],
+        UserRegistered::class => [
+            SendUserVerificationMail::class
+        ],
     ];
 
     /**

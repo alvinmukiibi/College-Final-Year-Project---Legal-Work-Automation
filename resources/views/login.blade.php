@@ -36,27 +36,27 @@
           <form action="/login" method="POST">
             @csrf
           <div class="form-group">
-              
+
               <input type="email" required placeholder="Email" class="form-control {{$errors->has('email')?'is-invalid':''}}" name="email"  />
             </div>
             <div class="form-group">
-                
+
               <input type="password" placeholder="Password" class="form-control {{$errors->has('password')?'is-invalid':''}}" name="password" required />
               </div>
-              
+
               @if(session('error'))
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                       {{session('error')}}
                 </div>
-              
+
               @endif
               @if(session('info'))
                 <div class="alert alert-info alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                       {{session('info')}}
                 </div>
-              
+
               @endif
               @if($errors->any())
                 @foreach ($errors->all() as $error)
@@ -64,7 +64,7 @@
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         {{$error}}
                   </div>
-                    
+
                 @endforeach
 
               @endif
@@ -78,7 +78,7 @@
 
 
         </div>
-        
+
       </div>
 
     </div>
@@ -88,6 +88,6 @@
 
 
 </div>
-              
-            @include('layouts.partials.footin')    
+
+            @include('layouts.partials.footin')
 

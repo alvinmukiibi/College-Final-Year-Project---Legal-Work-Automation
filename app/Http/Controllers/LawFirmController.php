@@ -86,62 +86,41 @@ class LawFirmController extends Controller
     }
     public function verifyEmail(Request $request){
 
-        
+
             $token = $request->segment(4);
-       
+
         if(Firms::where('uuid', $token)->update(["verification_flag" => "verified"])){
 
-            $values = Firms::select('firm_id','email','password')->where(['uuid'=>$token,'verification_flag'=>'verified'])->get();
+            $values = Firms::select('firm_id','email','password','uuid')->where(['uuid'=>$token,'verification_flag'=>'verified'])->get();
 
             foreach($values as $value){
                 $newUser = new User;
                 $newUser->firm_id = $value->firm_id;
                 $newUser->email = $value->email;
                 $newUser->password = $value->password;
+                $newUser->identification_token = $value->uuid;
                 $newUser->user_role = "administrator";
                 $newUser->account_status = "inactive";
                 $newUser->save();
 
             }
 
-            
+
             return redirect()->intended("login");
-            
+
 
 
         }
-        
+
 
 
         return redirect()->intended("login");
        // return response()->json(["error" => false, "message" => "Email Verified successfully"]);
         // return response(["error" => false, "message" => "Email Verified successfully"], 200)->header("Content-Type","application/json");
-        
+
             // return response()->json(["error" => true, "message" => "Bad Request"]);
-       
-    }
-    public function showChangePasswordForm(){
-        if(auth()->guard('web')->check()){
-            return view("changePassword");
-        }else{
-            return redirect()->intended("login")->with("errors", "Please Login Again");
-        }
-
 
     }
-    public function doChangePassword(Request $request){
-        $data = $this->validate($request, [
-            "password" => "required|min:8|alpha_num|confirmed",
-        ]);
 
-       $user = new User;
-       $user->newPassword = Hash::make($data['password']);
-       $user->user_id = auth()->guard('web')->id();
-       $passwordChanged = $user->changePassword();
-       if($passwordChanged){
-           return redirect()->intended("login")->with("info", "Success!! Please login with new password");
-       }else{
-        return redirect()->intended("login")->with("error", "Password Changing Unsuccessful");
-       }
-    }
+
 }

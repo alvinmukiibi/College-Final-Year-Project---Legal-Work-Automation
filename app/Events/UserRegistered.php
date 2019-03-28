@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 
 use Illuminate\Foundation\Events\Dispatchable;
 
-class FirmRegistered
+class UserRegistered
 {
     use Dispatchable, SerializesModels;
 
@@ -16,11 +16,9 @@ class FirmRegistered
      *
      * @return void
      */
-    public $firm;
-    public function __construct($firm)
+    public $data;
+    public function __construct($data)
     {
-        $this->firm = $firm;
+        $this->data = $data;
     }
 }
-
-

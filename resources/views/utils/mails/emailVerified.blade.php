@@ -1,5 +1,5 @@
 @component('mail::message')
-# Hello {{$firm_name}}<br/> 
+# Hello {{$firm_name}}<br/>
 
 Thank you for registering with <i><b>Legal Work Automation Tool</b></i><br/>
 Verify Your Email Address, Please.

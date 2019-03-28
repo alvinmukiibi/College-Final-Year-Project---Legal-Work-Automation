@@ -33,23 +33,23 @@
               Change Password
             </span>
           </h1>
-          <form action="/firm/changePassword" method="POST">
+        <form action="{{url('/changePassword')}}" method="POST">
             @csrf
           <div class="form-group">
-              
+
               <input type="password" required placeholder="Password" class="form-control {{$errors->has('password')?'is-invalid':''}}" name="password"  />
             </div>
             <div class="form-group">
-                
+
               <input type="password" placeholder="Confirm Password" class="form-control {{$errors->has('password_confirmation')?'is-invalid':''}}" name="password_confirmation" required />
               </div>
-              
+
               @if(session('error'))
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                       {{session('error')}}
                 </div>
-              
+
               @endif
               @if($errors->any())
                 @foreach ($errors->all() as $error)
@@ -57,7 +57,7 @@
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         {{$error}}
                   </div>
-                    
+
                 @endforeach
 
               @endif
@@ -71,7 +71,7 @@
 
 
         </div>
-        
+
       </div>
 
     </div>
@@ -81,6 +81,6 @@
 
 
 </div>
-              
-            @include('layouts.partials.footin')    
+
+            @include('layouts.partials.footin')
 

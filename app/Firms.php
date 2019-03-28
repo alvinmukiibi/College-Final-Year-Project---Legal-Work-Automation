@@ -27,7 +27,7 @@ class Firms extends Model
 
 
     protected function registerFirm($request){
-
+        $otp = $this->generateOtp();
         $this->firm_id = $this->generateLawfirmUniqueNumber();
         $this->name = $request->input('name');
         $this->email = $request->input('email');
@@ -41,11 +41,11 @@ class Firms extends Model
         $this->description = $request->input('description') ? $request->input('description') : null;
         $this->activity_flag = "inactive";
         $this->verification_flag = "not_verified";
-        $this->password = bcrypt($this->firm_id);
+        $this->password = bcrypt($otp);
         $this->uuid = Uuid::uuid1()->toString();
 
         if($this->save()){
-            $data = ["otp"=> $this->firm_id, "uuid"=>$this->uuid];
+            $data = ["otp"=> $otp, "uuid"=>$this->uuid];
             return $data;
         }else{
             return false;
@@ -61,6 +61,17 @@ class Firms extends Model
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return "WATL" ."_". $randomString;
+
+    }
+    public function generateOtp($length = 10){
+
+        $characters = '0123456789ABCDEF';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
 
     }
     public function activate(){

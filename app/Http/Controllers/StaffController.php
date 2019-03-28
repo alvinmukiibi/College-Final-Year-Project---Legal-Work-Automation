@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Department;
 use App\Role;
+use Ramsey\Uuid\Uuid;
+use App\Events\UserRegistered;
 class StaffController extends Controller
 {
     public function showStaff(Request $request){
@@ -30,19 +32,36 @@ class StaffController extends Controller
 
         ]);
         $user = new User;
-        //generate OTP for this user
+        //generate OTP and persist it for this user
         $users_otp = $user->generateOtp();
 
-        //send confirmation email with otp embedded
 
+         //
         $user->data = $data;
         $user->account_status = 'inactive';
         $user->verification_status = 'unverified';
         $user->firm_id = auth()->user()->firm_id;
         $user->password = $users_otp;
+        $user->id_token = Uuid::uuid1()->toString();
+
+        //persist user otp
+        $persistOtp = $user->persistOtp();
+        if(!$persistOtp){
+            return  redirect()->intended('/admin/manage/staff')->with("error", "Failed to generate OTP for the user");
+        }
+
+        //send confirmation email with otp embedded
+        $email_data = [
+            "name" => $data['firstName'],
+            "email" => $data['email'],
+            "otp" => $users_otp,
+            "token" => $user->id_token,
+        ];
+        event(new UserRegistered($email_data));
 
         //register the user
         $added = $user->addStaff();
+
 
         if($added){
             return redirect()->intended('/admin/manage/staff')->with("success", "User Added Succesfully");
@@ -73,5 +92,20 @@ class StaffController extends Controller
         }else{
             return redirect()->back()->with("error", "Failed to deactivate");
         }
+    }
+    public function verifyEmail(Request $request){
+        $identifier = $request->segment(4);
+
+        $user = new User;
+        $user->identifier = $identifier;
+        $verified = $user->verifyEmail();
+
+        if($verified){
+            return redirect()->intended("login")->with("info", "Your email has been verified");
+        }else{
+            return redirect()->intended("login")->with("error", "Email verification failed");
+        }
+
+
     }
 }

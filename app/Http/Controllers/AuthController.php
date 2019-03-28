@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Auth;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 
@@ -41,9 +42,10 @@ class AuthController extends Controller
 
                 $user = new User;
                 $user->user = auth()->guard('web')->user();
+
                 $requiresChangeOfPassword = $user->checkIfRequiresChangeOfPassword();
                 if($requiresChangeOfPassword){
-                    return redirect('/firm/changePassword');
+                    return redirect('/changePassword');
 
                 }else{
                     return redirect('/dashboard');
@@ -67,5 +69,29 @@ class AuthController extends Controller
         Auth::logout();
             return redirect()->route("login");
 
+    }
+    public function showChangePasswordForm(){
+        if(auth()->guard('web')->check()){
+            return view("changePassword");
+        }else{
+            return redirect()->intended("login")->with("errors", "Please Login Again");
+        }
+
+
+    }
+    public function doChangePassword(Request $request){
+        $data = $this->validate($request, [
+            "password" => "required|min:8|alpha_num|confirmed",
+        ]);
+
+       $user = new User;
+       $user->newPassword = Hash::make($data['password']);
+       $user->user_id = auth()->guard('web')->id();
+       $passwordChanged = $user->changePassword();
+       if($passwordChanged){
+           return redirect()->intended("login")->with("info", "Success!! Please login with new password");
+       }else{
+        return redirect()->intended("login")->with("error", "Password Changing Unsuccessful");
+       }
     }
 }

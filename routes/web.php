@@ -27,8 +27,10 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/view/firm/{firm}', "FirmsController@showFirm")->name("show.firm");
     Route::get('/firm/activate/{firm}', "FirmsController@activate")->name("firm.activate");
     Route::get('/firm/deactivate/{firm}', "FirmsController@deactivate")->name("firm.deactivate");
-    Route::get('/firm/changePassword', "LawFirmController@showChangePasswordForm")->name("firm.changePassword");
-    Route::post('/firm/changePassword', "LawFirmController@doChangePassword");
+
+    // Change Password from default routes
+    Route::get('/changePassword', "AuthController@showChangePasswordForm")->name("firm.changePassword");
+    Route::post('/changePassword', "AuthController@doChangePassword");
 
     // Profile Routes
     Route::get('/admin/profile', "UserController@showProfile");
@@ -46,4 +48,5 @@ Route::group(['middleware' => 'auth:web'], function()
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
+    Route::get('/user/verifyEmail/{token}', "StaffController@verifyEmail");
 });

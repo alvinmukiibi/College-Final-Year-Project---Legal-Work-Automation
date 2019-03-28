@@ -66,9 +66,19 @@ class FirmsController extends Controller
 
         $firm = ["otp" => $data['otp'], "uuid" => $data['uuid'], "name" => $firm_data['name'], "email" => $firm_data['email']];
 
+
         //event to tell all the app that a firm has been registered
 
         event(new FirmRegistered($firm));
+        $user = new User;
+        $user->id_token = $data['uuid'];
+        $user->password = $data['otp'];
+
+        $persistOtp = $user->persistOtp();
+
+        if(!$persistOtp){
+            return redirect()->route('register.firm')->with("error", "Failed to generate OTP for the user");
+        }
 
         return redirect()->route('register.firm')->with("success", "Firm Added Successfully");
 
