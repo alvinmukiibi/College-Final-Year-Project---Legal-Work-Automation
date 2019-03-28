@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Firms;
+use App\Department;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 
@@ -36,6 +37,9 @@ class User extends Authenticatable
 
     public function firm(){
         return $this->belongsTo(Firms::class);
+    }
+    public function department(){
+        return $this->belongsTo(Department::class);
     }
     public function activateUsers(){
 
@@ -122,13 +126,30 @@ class User extends Authenticatable
 
     public function getAllStaffExceptMe()
     {
-        $staff = DB::table($this->table)->where('id','!=', auth()->user()->id)->where('firm_id', auth()->user()->firm_id)->get();
+
+        $staff = DB::table($this->table)->join('departments', 'users.department','=', 'departments.id')->where('users.id','!=', auth()->user()->id)->where('users.firm_id', auth()->user()->firm_id)->select('users.*','departments.name','departments.description')->get();
         $count = $staff->count();
         if($count > 0){
-            return $staff;
+           return $staff;
         }else{
             return [];
         }
 
+    }
+    public function activateStaff(){
+        $activate = DB::table($this->table)->where(['id'=>$this->id])->update(['account_status'=>'active']);
+        if($activate){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function deactivateStaff(){
+        $deactivate = DB::table($this->table)->where(['id'=>$this->id])->update(['account_status'=>'inactive']);
+        if($deactivate){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

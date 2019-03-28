@@ -19,7 +19,15 @@
           </div>
           <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                                <a href="{{ url('/dashboard')}}" class="nav-link">
+                                      <i class="nav-icon fa fa-home"></i>
+                                      <p>
+                                        Dashboard
 
+                                      </p>
+                                    </a>
+                                  </li>
                   <li class="nav-item">
                       @if (auth()->user()->user_role=="administrator")
                       <a href="{{ url('/admin/profile')}}" class="nav-link">
@@ -32,15 +40,7 @@
                       @endif
 
                   </li>
-                  <li class="nav-item">
-                  <a href="{{ url('/dashboard')}}" class="nav-link">
-                        <i class="nav-icon fa fa-home"></i>
-                        <p>
-                          Dashboard
 
-                        </p>
-                      </a>
-                    </li>
                   @if(auth()->user()->user_role === "ulc")
                   <li class="nav-item has-treeview">
                       <a href="#" class="nav-link">
@@ -80,7 +80,7 @@
                           </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('/firm/manage/staff')}}" class="nav-link">
+                            <a href="{{ url('/admin/manage/staff')}}" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i>
                                 <p>
                                   Staff
@@ -142,7 +142,7 @@
                                 </ul>
                               </li>
                               <li class="nav-item">
-                                <a href="{{ url('/firm/manage/staff')}}" class="nav-link">
+                                <a href="{{ url('/admin/admin/staff')}}" class="nav-link">
                                     <i class="nav-icon fa fa-calendar"></i>
                                     <p>
                                       My Calendar

@@ -4,6 +4,7 @@ namespace App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Firms;
+use App\User;
 class Department extends Model
 {
     protected $table = "departments";
@@ -13,6 +14,9 @@ class Department extends Model
     ];
     public function firm(){
         return $this->belongsTo(Firms::class);
+    }
+    public function staff(){
+        return $this->hasMany(User::class);
     }
     public function addDepartment(){
         $dept = $this->dept;

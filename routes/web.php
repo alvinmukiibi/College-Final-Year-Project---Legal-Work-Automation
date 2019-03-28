@@ -30,18 +30,20 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/firm/changePassword', "LawFirmController@showChangePasswordForm")->name("firm.changePassword");
     Route::post('/firm/changePassword', "LawFirmController@doChangePassword");
 
+    // Profile Routes
     Route::get('/admin/profile', "UserController@showProfile");
     Route::post('/admin/saveProfile', "UserController@saveAdminProfile");
+    // Department Management Routes
     Route::get('/admin/departments', "DepartmentsController@showDepartments");
     Route::get('/admin/departments/{department}', "DepartmentsController@getDepartment");
     Route::post('/admin/addDepartment', "DepartmentsController@addDepartment");
     Route::post('/admin/editDepartment', "DepartmentsController@editDepartment");
-
+    // Staff Management Routes
     Route::get('/admin/manage/staff', "StaffController@showStaff");
     Route::post('/admin/add/staff', "StaffController@addStaff");
+    Route::get('/admin/activate/staff/{staff}', "StaffController@activateStaff");
+    Route::get('/admin/deactivate/staff/{staff}', "StaffController@deactivateStaff");
 });
 Route::group(['prefix' => 'api'], function () {
-
-Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
-
+    Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
 });

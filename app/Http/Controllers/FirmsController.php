@@ -125,8 +125,9 @@ class FirmsController extends Controller
         //
     }
     public function showRegister(){
+        $countries = new Countries;
         $data = [
-            "countries" => Countries::getListForSelect(),
+            "countries" => $countries->getListForSelect(),
             "firms" => Firms::orderBy('created_at', 'desc')->get()
 
         ];

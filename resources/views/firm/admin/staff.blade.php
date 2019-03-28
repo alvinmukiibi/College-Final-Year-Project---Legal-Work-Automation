@@ -2,7 +2,7 @@
 
 @section('body_tag')
 <body>
-    
+
 @endsection
 
 @section('content')
@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addStaff">
+                    <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#addStaff">
                            Add <i class="fa fa-plus"></i>
                           </button>
             </div>
@@ -37,6 +37,7 @@
                         <h3 class="card-title">Staff</h3>
                     </div>
                 <div class="card-body">
+
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -56,17 +57,29 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->contact}}</td>
                                     <td>{{$user->user_role}}</td>
-                                    <td>{{$user->department}}</td>
+                                    <td>{{$user->name}}</td>
+
                                     <td>
-                                        <button class="btn btn-success">A</button>
+                                        @if ($user->account_status=='inactive')
+                                        <button class="btn btn-danger btn-sm" title="Inactive">I</button>
+                                        @else
+
+                                        <button class="btn btn-success btn-sm" title="Active">A</button>
+                                        @endif
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger">Deactivate</button>
+                                        @if ($user->account_status=='inactive')
+                                        <a href={{url('/admin/activate/staff', ['id'=>$user->id])}}  class="btn btn-outline-success">Activate</a>
+                                        @else
+
+                                        <a href={{url('/admin/deactivate/staff', ['id'=>$user->id])}} class="btn btn-outline-danger">Deactivate</a>
+                                        @endif
+
                                     </td>
-    
+
                                 </tr>
                             @endforeach
-                           
+
                         </tbody>
                     </table>
                 </div>
@@ -79,7 +92,7 @@
                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                   <div class="modal-content">
                         <form action="{{url('/admin/add/staff')}}" method="post">
-                           
+
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalScrollableTitle">Staff Management</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -94,7 +107,7 @@
                                         </h3>
                                     </div>
                                     <div class="card-body">
-                                   
+
                                         <div class="form-group row">
                                             <label for="firstName" class="col-sm-4 col-form-label">First Name</label>
                                             <div class="col-sm-8">
@@ -131,8 +144,11 @@
                                             <label for="role" class="col-sm-4 col-form-label ">User Role </label>
                                                 <div class="col-sm-8">
                                                     <select name="role" class="form-control">
-                                                        <option value="Associate">Associate</option>
-                                                        <option value="Partner">Partner</option>
+                                                        @foreach ($roles as $role)
+                                                        <option value="{{$role->name}}">{{$role->name}}</option>
+
+                                                        @endforeach
+
                                                     </select>
                                                 </div>
                                         </div>
@@ -140,22 +156,25 @@
                                                 <label for="department" class="col-sm-4 col-form-label ">Department</label>
                                                     <div class="col-sm-8">
                                                         <select name="department" class="form-control">
-                                                            <option value="1">Litigation</option>
-                                                            <option value="2">Banking & Finance</option>
+                                                        @foreach ($departments as $department)
+                                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                                        @endforeach
+
+
                                                         </select>
                                                     </div>
                                             </div>
-                
-                                        
-                                        
+
+
+
                                     </div>
-                                    
-                
+
+
                                 </div>
-                
+
                     </div>
                     <div class="modal-footer">
-                           
+
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Add </button>
                       @csrf
@@ -164,7 +183,7 @@
                   </div>
                 </div>
               </div>
-   
+
             </div>
 
 
@@ -173,29 +192,29 @@
 
 
 
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </section>
-    
+
 @endsection

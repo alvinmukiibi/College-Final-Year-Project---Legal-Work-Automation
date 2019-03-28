@@ -47,7 +47,7 @@
                                         <input type="hidden" name="id" value={{session('department')->id}}>
                                 </div>
                                 <div class="card-footer">
-                                        <button type="submit" class="btn btn-success btn-flat"> <i class="fa fa-save"></i > Update</button>
+                                        <button type="submit" class="btn btn-outline-success btn-flat"> <i class="fa fa-save"></i > Update</button>
                                       </div>
                                     </form>
                             @else
@@ -68,7 +68,7 @@
                                         </div>
                                 </div>
                                 <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-flat pull-right"> <i class="fa fa-save"></i > Save</button>
+                                        <button type="submit" class="btn btn-outline-primary btn-flat pull-right"> <i class="fa fa-save"></i > Save</button>
                                       </div>
                                     </form>
 
