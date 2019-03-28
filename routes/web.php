@@ -29,6 +29,12 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/firm/deactivate/{firm}', "FirmsController@deactivate")->name("firm.deactivate");
     Route::get('/firm/changePassword', "LawFirmController@showChangePasswordForm")->name("firm.changePassword");
     Route::post('/firm/changePassword', "LawFirmController@doChangePassword");
+
+
+
+
+    Route::get('/admin/manage/staff', "StaffController@showStaff");
+    Route::post('/admin/add/staff', "StaffController@addStaff");
 });
 Route::group(['prefix' => 'api'], function () {
 

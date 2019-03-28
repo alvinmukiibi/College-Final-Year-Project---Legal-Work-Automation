@@ -25,9 +25,10 @@ class CreateUsersTable extends Migration
             $table->string('profile_pic', '50')->nullable();
             $table->timestamp('date_of_reg');
             $table->enum('gender', ['Male','Female'])->nullable();
-            $table->string('department', '100')->nullable();
+            $table->unsignedInteger('department')->nullable();
             $table->string('user_role', '50');
             $table->string('account_status', '20');
+            $table->string('verification_status', '20')->nullable();
             $table->integer('firm_id')->nullable();
             $table->timestamps();
             $table->rememberToken();
