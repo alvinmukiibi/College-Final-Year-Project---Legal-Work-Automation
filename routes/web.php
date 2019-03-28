@@ -36,6 +36,9 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/admin/departments/{department}', "DepartmentsController@getDepartment");
     Route::post('/admin/addDepartment', "DepartmentsController@addDepartment");
     Route::post('/admin/editDepartment', "DepartmentsController@editDepartment");
+
+    Route::get('/admin/manage/staff', "StaffController@showStaff");
+    Route::post('/admin/add/staff', "StaffController@addStaff");
 });
 Route::group(['prefix' => 'api'], function () {
 

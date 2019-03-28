@@ -91,7 +91,44 @@ class User extends Authenticatable
         }else{
             return false;
         }
+    }
 
+
+    public function generateOtp($length = 10){
+
+        $characters = '0123456789ABCDEF';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+
+    }
+    public function addStaff(){
+        $staff = $this->data;
+
+        $add = DB::table($this->table)->insert(['fname'=> $staff['firstName']  , 'lname'=> $staff['lastName'], 'email'=> $staff['email'] , 'contact'=> $staff['phone'], 'gender'=>$staff['gender'], 'department'=>$staff['department'], 'user_role'=> $staff['role'], 'account_status'=> $this->account_status, 'verification_status'=>$this->verification_status, 'firm_id'=>$this->firm_id, 'password'=>Hash::make($this->password)]);
+
+        if($add){
+            return true;
+        }else{
+            return false;
+        }
+
+
+    }
+
+
+    public function getAllStaffExceptMe()
+    {
+        $staff = DB::table($this->table)->where('id','!=', auth()->user()->id)->where('firm_id', auth()->user()->firm_id)->get();
+        $count = $staff->count();
+        if($count > 0){
+            return $staff;
+        }else{
+            return [];
+        }
 
     }
 }
