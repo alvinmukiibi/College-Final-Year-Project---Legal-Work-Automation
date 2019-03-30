@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth:web'], function()
 
     // Profile Routes
     Route::get('/admin/profile', "UserController@showProfile");
-    Route::post('/admin/saveProfile', "UserController@saveAdminProfile");
+    Route::post('/admin/saveProfile', "UserController@saveUserProfile");
     // Department Management Routes
     Route::get('/admin/departments', "DepartmentsController@showDepartments");
     Route::get('/admin/departments/{department}', "DepartmentsController@getDepartment");
@@ -45,6 +45,10 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/admin/add/staff', "StaffController@addStaff");
     Route::get('/admin/activate/staff/{staff}', "StaffController@activateStaff");
     Route::get('/admin/deactivate/staff/{staff}', "StaffController@deactivateStaff");
+
+    // Associate role routes
+    Route::get('/associate/profile', "UserController@showProfile");
+
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

@@ -1,7 +1,7 @@
-{{-- 
+{{--
 What    :   The foot tags containing JavaScript Tags
 Author  :   Alvin Mukiibi
-Date    :   6th-February-2019 
+Date    :   6th-February-2019
 --}}
 
 <!-- jQuery -->
@@ -40,19 +40,23 @@ Date    :   6th-February-2019
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <script>
-    $(function () {
-      //Initialize Select2 Elements
-      $('.select2').select2();
-      $("#example1").DataTable();
-      $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-    });
-    })
+    // $(function () {
+    //   //Initialize Select2 Elements
+    //   $('.select2').select2();
+    //   $("#example1").DataTable();
+    //   $('#example2').DataTable({
+    //       "paging": true,
+    //       "lengthChange": false,
+    //       "searching": false,
+    //       "ordering": true,
+    //       "info": true,
+    //       "autoWidth": false
+    // });
+    // })
+    $(document).ready(function()
+    {
+        $('#example').DataTable();
+    } );
       </script>
 
 </body>

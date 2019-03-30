@@ -4,7 +4,7 @@
                                                 <button type="button" class="close" data-dismiss="alert"
                                                         aria-hidden="true">&times;
                                                 </button>
-                                                {{$error}}
+                                                <i class="fa fa-ban"> {{$error}}
                                             </div>
 
                                         @endforeach
@@ -15,7 +15,7 @@
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                                                 &times;
                                             </button>
-                                            {{session('error')}}
+                                            <i class="fa fa-ban"> {{session('error')}}
                                         </div>
 
                                     @endif
@@ -24,6 +24,6 @@
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                                             &times;
                                         </button>
-                                        {{session('success')}}
+                                        <i class="fa fa-check"> {{session('success')}}
                                     </div>
                                     @endif

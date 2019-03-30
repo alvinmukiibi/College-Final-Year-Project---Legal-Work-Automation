@@ -1,4 +1,4 @@
-{{-- 
+{{--
 What    :   The head tags containing Stylesheet Tags for admin side
 Author  :   Alvin Mukiibi
 Date    :   6th-February-2019
@@ -18,7 +18,7 @@ Date    :   6th-February-2019
     --}}
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{asset('dist/img/favicon.ico')}}" type="image/x-icon">
-   
+
     <!-- Styles -->
     {{-- for the multiple select button --}}
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome/css/font-awesome.min.css')}}"/>
@@ -31,6 +31,6 @@ Date    :   6th-February-2019
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/select2/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datatables/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('dist/css/adminlte.min.css')}}"/>
-    
+
 
 </head>

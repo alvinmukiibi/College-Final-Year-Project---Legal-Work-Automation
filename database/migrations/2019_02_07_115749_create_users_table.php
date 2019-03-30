@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('password')->nullable();
             $table->string('contact', '20')->nullable();
             $table->string('date_of_birth', '15')->nullable();
-            $table->string('profile_pic', '50')->nullable();
+            $table->text('profile_pic')->nullable();
             $table->timestamp('date_of_reg');
             $table->enum('gender', ['Male','Female'])->nullable();
             $table->unsignedInteger('department')->nullable();
@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('account_status', '20');
             $table->string('verification_status', '20')->nullable();
             $table->text('identification_token')->nullable();
-            $table->integer('firm_id')->nullable();
+            $table->text('firm_id')->nullable();
             $table->timestamps();
             $table->rememberToken();
         });

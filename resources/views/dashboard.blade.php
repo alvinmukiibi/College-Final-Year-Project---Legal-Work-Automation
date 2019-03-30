@@ -39,6 +39,9 @@
                 <a href="{{ url('admin/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
 
+                @elseif(auth()->user()->user_role=="Associate")
+                <a href="{{ url('associate/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
                 @else
                 <a href="{{ url('profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
@@ -62,7 +65,7 @@
               @endif
               @if (auth()->user()->user_role === "administrator")
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
+                <div class="small-box bg-secondary">
                   <div class="inner">
                     <h3>Site Profile</h3>
 
@@ -88,7 +91,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
+                <div class="small-box text-white" style="background-color:#452b17">
                   <div class="inner">
                     <h3>Staff</h3>
 
@@ -100,8 +103,10 @@
                 <a href="{{ url('/admin/manage/staff')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+              @endif
+              @if (auth()->user()->firm_id !== null)
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-secondary">
+                <div class="small-box bg-danger">
                   <div class="inner">
                     <h3>Messages</h3>
 
@@ -127,7 +132,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-6">
-                <div class="small-box text-white" style="background-color:#452b17">
+                <div class="small-box bg-success" >
                   <div class="inner">
                     <h3>Requisitions</h3>
 
@@ -140,6 +145,8 @@
                 </div>
               </div>
               @endif
+
+
 
 
 

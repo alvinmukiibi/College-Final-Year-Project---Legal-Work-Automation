@@ -96,8 +96,14 @@ class User extends Authenticatable
     }
     public function saveAdminProfile(){
         $user = $this->userData;
+        $image = $this->profilePicture;
+        if(!$image){
+            $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact']]);
+        }else{
+            $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact'], "profile_pic"=>$image]);
 
-        $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact']]);
+        }
+
         if($save){
             return true;
         }else{
@@ -119,7 +125,7 @@ class User extends Authenticatable
     }
     public function addStaff(){
         $staff = $this->data;
-        $add = DB::table($this->table)->insert(['fname'=> $staff['firstName']  , 'lname'=> $staff['lastName'], 'email'=> $staff['email'] , 'contact'=> $staff['phone'], 'gender'=>$staff['gender'], 'department'=>$staff['department'], 'user_role'=> $staff['role'], 'account_status'=> $this->account_status, 'verification_status'=>$this->verification_status, 'firm_id'=>$this->firm_id, 'password'=>Hash::make($this->password),'identification_token' => $this->id_token]);
+        $add = DB::table($this->table)->insert(['fname'=> $staff['firstName']  , 'lname'=> $staff['lastName'], 'email'=> $staff['email'] , 'contact'=> $staff['phone'], 'gender'=>$staff['gender'], 'department'=>$staff['department'], 'user_role'=> $staff['role'], 'account_status'=> $this->account_status, 'verification_status'=>$this->verification_status, 'firm_id'=>$this->firm_id, 'password'=>Hash::make($this->password),'identification_token' => $this->id_token, 'profile_pic'=>$this->profile_pic]);
 
         if($add){
             return true;

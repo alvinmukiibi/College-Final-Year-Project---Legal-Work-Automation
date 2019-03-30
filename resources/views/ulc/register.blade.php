@@ -120,7 +120,7 @@
                                 <h3 class="card-title">All Law Firms</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered" id="example2">
+                                <table class="table table-bordered table-responsive" id="example2">
                                     <tr>
                                         <th>Firm Name</th>
                                         <th style="width: 5px">Status</th>
@@ -130,7 +130,7 @@
                                     <tr>
                                     <td>{{$firm->name}}</td>
                                             <td>
-                                                
+
 
                                                 @if ($firm->verification_flag=='not_verified')
                                                 <button class="btn btn-warning"  title="NOT VERIFIED EMAIL"  >NV  <i class="fa fa-circle-o-notch fa-spin"></i> </button>
@@ -139,7 +139,7 @@
                                                 @else
                                                 <button class="btn btn-success" title="ACCOUNT ACTIVE" >AC <i class="fa fa-check-circle"></i> </button>
                                                 @endif
-                                                
+
                                             </td>
                                             <td>
                                                     <div class="btn-group">
@@ -149,27 +149,27 @@
                                                               <span class="sr-only">Toggle Dropdown</span>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
-                                                                
-                                                                
+
+
                                                             <a class="dropdown-item" href=" {{url('/view/firm/'.$firm->uuid)}}">View</a>
-                                                           
+
 
 
                                                               @if ($firm->activity_flag=="active")
-                                                             
+
                                                                   <a href=" {{url('/firm/deactivate/'.$firm->uuid)}}" class="dropdown-item">Deactivate</a>
                                                               @else
                                                                 @if($firm->activity_flag=="inactive" && $firm->verification_flag=='verified')
                                                             <a href=" {{url('/firm/activate/'.$firm->uuid)}}" class="dropdown-item">Activate</a>
-                                                                @endif    
+                                                                @endif
                                                               @endif
-                                                              
+
                                                             </div>
                                                           </div>
                                             </td>
                                         </tr>
                                     @endforeach
-                                   
+
                                 </table>
                             </div>
 
