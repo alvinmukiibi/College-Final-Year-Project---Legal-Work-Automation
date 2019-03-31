@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Firms;
+use App\Firm;
 use Webpatser\Countries\Countries;
 use App\Practice_groups;
 use Carbon\Carbon;
@@ -19,7 +19,7 @@ class FirmsController extends Controller
      */
     public function index()
     {
-        $firms = Firms::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->paginate(10);
+        $firms = Firm::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->paginate(10);
 
         return view('home.firms')->with("firms", $firms);
     }
@@ -54,7 +54,7 @@ class FirmsController extends Controller
 
         ]);
 
-        $count = Firms::where('email', $request->input('email'))->count();
+        $count = Firm::where('email', $request->input('email'))->count();
 
         if($count > 0){
             return redirect()->route('register.firm')->with("error", "Email Already Exists");
@@ -62,7 +62,7 @@ class FirmsController extends Controller
 
 
 
-        $data = Firms::registerFirm($request);
+        $data = Firm::registerFirm($request);
 
         $firm = ["otp" => $data['otp'], "uuid" => $data['uuid'], "name" => $firm_data['name'], "email" => $firm_data['email']];
 
@@ -96,7 +96,7 @@ class FirmsController extends Controller
      */
     public function show($id)
     {
-        $firm = Firms::find($id);
+        $firm = Firm::find($id);
 
         return view('home.view')->with("firm", $firm);
     }
@@ -138,7 +138,7 @@ class FirmsController extends Controller
         $countries = new Countries;
         $data = [
             "countries" => $countries->getListForSelect(),
-            "firms" => Firms::orderBy('created_at', 'desc')->get()
+            "firms" => Firm::orderBy('created_at', 'desc')->get()
 
         ];
 
@@ -146,12 +146,12 @@ class FirmsController extends Controller
     }
     public function showFirm($firm){
 
-        return view("ulc.view")->with("firm", Firms::where("uuid", $firm)->get());
+        return view("ulc.view")->with("firm", Firm::where("uuid", $firm)->get());
 
     }
     public function activate($uuid){
 
-        $lawfirm = new Firms;
+        $lawfirm = new Firm;
         $lawfirm->uuid = $uuid;
         $activate = $lawfirm->activate();
         if($activate){
@@ -172,7 +172,7 @@ class FirmsController extends Controller
     }
     public function deactivate($uuid){
 
-        $lawfirm = new Firms;
+        $lawfirm = new Firm;
         $lawfirm->uuid = $uuid;
         $deactivate = $lawfirm->deactivate();
         if($deactivate){

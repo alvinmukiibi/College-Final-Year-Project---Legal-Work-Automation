@@ -1,7 +1,7 @@
 @extends('layouts.mainlayout')
 
 @section('body_tag')
-<body>
+<body class="hold-transition sidebar-mini">
 
 @endsection
 

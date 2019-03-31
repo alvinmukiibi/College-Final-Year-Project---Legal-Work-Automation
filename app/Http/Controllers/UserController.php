@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Department;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function __construct(){
@@ -28,6 +29,7 @@ class UserController extends Controller
             "lastName"=>"required|max:150",
             "contact"=>"required|max:15",
             "profilePicture"=>"mimes:jpeg,jpg,gif,png,webp|dimensions:min_width=100,min_height=100"
+
         ]);
         $image_name = false;
         if($request->hasFile('profilePicture')){  //if user uploaded a profile picture
@@ -44,15 +46,26 @@ class UserController extends Controller
             }
         }
 
+        //if password is being changed
+        $password = auth()->user()->password;
+        if($request->has('password') && $request->input('password') !== null)
+        {
+            $validate = $this->validate($request,[
+                "password"=> "min:8|confirmed|alpha_num"
+            ]);
+            $password = Hash::make($validate["password"]);
+
+        }
 
        $user = new User;
        $user->profilePicture = $image_name ? $image_name : false;
+       $user->password = $password;
        $user->userData = $data;
-       $save = $user->saveAdminProfile();
+       $save = $user->saveUserProfile();
        if($save){
             return redirect()->back()->with("success", "Profile Saved Successfully");
        }else{
-        return redirect()->back()->with("error", "Failed to Save");
+        return redirect()->back()->with("error", "Nothing was changed");
        }
 
     }

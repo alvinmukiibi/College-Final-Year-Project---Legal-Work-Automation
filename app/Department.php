@@ -3,7 +3,7 @@
 namespace App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use App\Firms;
+use App\Firm;
 use App\User;
 class Department extends Model
 {
@@ -13,7 +13,7 @@ class Department extends Model
          'name', 'description','created_at','firm_id','update_at',
     ];
     public function firm(){
-        return $this->belongsTo(Firms::class);
+        return $this->belongsTo(Firm::class);
     }
     public function staff(){
         return $this->hasMany(User::class);

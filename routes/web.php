@@ -49,6 +49,10 @@ Route::group(['middleware' => 'auth:web'], function()
     // Associate role routes
     Route::get('/associate/profile', "UserController@showProfile");
 
+    // Meeting management routes
+    Route::get('/user/manage/meetings', "MeetingsController@showMeetings");
+    Route::post('/user/schedule/meeting', "MeetingsController@scheduleMeeting");
+
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

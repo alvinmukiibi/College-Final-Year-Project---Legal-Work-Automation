@@ -23,6 +23,7 @@ Date    :   6th-February-2019
     {{-- for the multiple select button --}}
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome/css/font-awesome.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/iCheck/flat/blue.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/iCheck/all.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/morris/morris.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datepicker/datepicker3.css')}}"/>
@@ -31,6 +32,7 @@ Date    :   6th-February-2019
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/select2/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datatables/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('dist/css/adminlte.min.css')}}"/>
+
 
 
 </head>

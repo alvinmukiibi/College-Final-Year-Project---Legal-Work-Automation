@@ -9,7 +9,7 @@ use App\User;
 use App\Department;
 use Illuminate\Support\Facades\DB;
 
-class Firms extends Model
+class Firm extends Model
 {
     protected $guarded = [];
 

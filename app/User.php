@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Firms;
+use App\Firm;
 use App\Department;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
@@ -36,7 +36,7 @@ class User extends Authenticatable
     ];
 
     public function firm(){
-        return $this->belongsTo(Firms::class);
+        return $this->belongsTo(Firm::class);
     }
     public function dept(){
         return $this->belongsTo(Department::class);
@@ -94,13 +94,13 @@ class User extends Authenticatable
             return false;
         }
     }
-    public function saveAdminProfile(){
+    public function saveUserProfile(){
         $user = $this->userData;
         $image = $this->profilePicture;
         if(!$image){
-            $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact']]);
+            $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact'],"password"=>$this->password]);
         }else{
-            $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact'], "profile_pic"=>$image]);
+            $save = DB::table($this->table)->where(['id'=> auth()->user()->id])->update(["fname"=> $user['firstName'], "lname"=>$user['lastName'], "contact"=>$user['contact'], "profile_pic"=>$image, "password"=>$this->password]);
 
         }
 
@@ -186,6 +186,9 @@ class User extends Authenticatable
         }else{
             return false;
         }
+    }
+    public function fetchAllStaff(){
+
     }
 
 }
