@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Department;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 class UserController extends Controller
 {
@@ -16,6 +17,7 @@ class UserController extends Controller
         if($user->user_role=="administrator"){
             return view("firm.admin.profile")->with('user', $user);
         }else if($user->user_role=="Associate"){
+            $user->dept = Department::find($user->department);
             return view("firm.associate.profile")->with('user', $user);
         }
 

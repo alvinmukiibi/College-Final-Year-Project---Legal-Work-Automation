@@ -1,4 +1,4 @@
-{{-- 
+{{--
 What    :   Top navigation bar for user session i.e. after login
 Author  :   Alvin Mukiibi
 Date    :   6th-February-2019
@@ -15,6 +15,16 @@ Date    :   6th-February-2019
         <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ url('/register/firm')}}" class="nav-link">Register a Firm <i class="fa fa-plus-circle"></i>   </a>
         </li>
+        @elseif (auth()->user()->user_role == "Associate")
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ url('/register/firm')}}" class="nav-link">New Intake <i class="fa fa-plus-circle"></i>   </a>
+            </li>
+
+
+
+
+
+
         @endif
     </ul>
     <ul class="navbar-nav ml-auto">

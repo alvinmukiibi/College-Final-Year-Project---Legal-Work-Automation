@@ -1,4 +1,4 @@
-{{-- 
+{{--
 What    :   The Main Layout file that will be extended by all pages
 Author  :   Alvin Mukiibi
 Date    :   6th-February-2019
@@ -13,15 +13,14 @@ Date    :   6th-February-2019
             @include('layouts.compartments.topnavin')
             @include('layouts.compartments.sidebar')
             <div class="content-wrapper">
-                @yield('content')  
+                @yield('content')
             </div>
-            
-            @include('layouts.partials.footin')
 
-    
+
+
+
         </div>
-         
+        @include('layouts.partials.footin')
          {{-- @include('layouts.compartments.footer') --}}
      </body>
  </html>
- 

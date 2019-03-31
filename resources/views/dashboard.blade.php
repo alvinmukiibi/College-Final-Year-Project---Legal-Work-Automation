@@ -146,9 +146,157 @@
               </div>
               @endif
 
+              @if (auth()->user()->user_role == 'Associate')
 
 
+              <section class="col-lg-7 connectedSortable">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-clipboard mr-1">
 
+                                </i>
+                                Daily To Do List
+                            </h3>
+
+                        </div>
+                        <div class="card-body">
+                            <ul class="todo-list">
+                                <li>
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <input type="checkbox" name="" >
+                                    <span class="text">Deliver a service letter</span>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <input type="checkbox" name="" >
+                                    <span class="text">Go to court</span>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <input type="checkbox" name="" >
+                                    <span class="text">Go to court</span>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="handle">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                                    <input type="checkbox" name="" >
+                                    <span class="text">Go to court</span>
+                                    <div class="tools">
+                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <form action="#" method="post">
+                              <div class="input-group">
+                                <input type="text" name="message"  class="form-control">
+                                <span class="input-group-append">
+                                  <button type="button" class="btn btn-outline-primary"> <i class="fa fa-plus"></i> Add Todo</button>
+                                </span>
+                              </div>
+                            </form>
+                          </div>
+                    </div>
+
+
+              </section>
+              <section class="col-lg-5 connectedSortable">
+                <div class="card ">
+                    <div class="card-header bg-danger">
+                        <h3 class="card-title">
+                            My Cases
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="info-box">
+                                        <span class="info-box-icon bg-info elevation-1"><i class="fa fa-shopping-cart"></i></span>
+                                        <div class="info-box-content">
+                                                <span class="info-box-text">Open Cases</span>
+                                                <span class="info-box-number">
+                                                    10
+                                                </span>
+                                            </div>
+                                    </div>
+
+                            </div>
+                            <div class="col-6">
+                                    <div class="info-box">
+                                            <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-gear"></i></span>
+                                            <div class="info-box-content">
+                                                    <span class="info-box-text">All Cases</span>
+                                                    <span class="info-box-number">
+                                                        10
+                                                    </span>
+                                                </div>
+                                        </div>
+
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="card collapsed-card bg-success-gradient">
+                        <div class="card-header no-border">
+                            <h3 class="card-title">
+                                <i class="fa fa-calendar"></i> My Calendar
+                            </h3>
+                            <div class="card-tools">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                      <i class="fa fa-bars"></i></button>
+                                    <div class="dropdown-menu float-right" role="menu">
+                                      <a href="#" class="dropdown-item">Add new event</a>
+                                      <a href="#" class="dropdown-item">Clear events</a>
+                                      <div class="dropdown-divider"></div>
+                                      <a href="#" class="dropdown-item">View calendar</a>
+                                    </div>
+                                  </div>
+                                  <button type="button" class="btn btn-success btn-sm" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                  </button>
+                                  <button type="button" class="btn btn-success btn-sm" data-widget="remove">
+                                    <i class="fa fa-times"></i>
+                                  </button>
+                            </div>
+                        </div>
+                        <div class="card-body  p-0">
+                            <div id="calendar" style="width:100%"></div>
+                        </div>
+                    </div>
+              </section>
+
+
+              @endif
 
 
 

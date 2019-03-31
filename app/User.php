@@ -38,7 +38,7 @@ class User extends Authenticatable
     public function firm(){
         return $this->belongsTo(Firms::class);
     }
-    public function department(){
+    public function dept(){
         return $this->belongsTo(Department::class);
     }
     public function activateUsers(){
@@ -187,4 +187,5 @@ class User extends Authenticatable
             return false;
         }
     }
+
 }

@@ -34,6 +34,7 @@
                         </div>
                     <h3 class="profile-username text-center">{{$user->fname }} {{$user->lname}}</h3>
                     <p class="text-muted text-center">Associate</p>
+                    <p class="text-center">{{$user->dept->name}}</p>
                         <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
                                  <i class="fa fa-envelope"></i><span class="float-right"> {{$user->email}}</span>
@@ -41,6 +42,7 @@
                                 <li class="list-group-item">
                                         <i class="fa fa-phone"></i><span class="float-right"> {{$user->contact}}</span>
                                        </li>
+
                             </ul>
                             <button class="btn btn-primary btn-block"> <i class="fa fa-pencil"></i>Edit Profile  </button>
 
