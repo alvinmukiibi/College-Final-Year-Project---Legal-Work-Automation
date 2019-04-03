@@ -63,7 +63,7 @@
                   @endif
                   @if (auth()->user()->user_role === "administrator")
                   <li class="nav-item">
-                    <a href="{{ url('/firm/manage/website')}}" class="nav-link">
+                    <a href="{{ url('admin/manage/website')}}" class="nav-link">
                         <i class="nav-icon fa fa-globe"></i>
                         <p>
                           Website Profile
@@ -72,7 +72,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/admin/departments')}}" class="nav-link">
+                        <a href="{{ url('admin/departments')}}" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                               Departments
