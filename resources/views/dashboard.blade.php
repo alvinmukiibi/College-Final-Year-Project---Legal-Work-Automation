@@ -1,7 +1,8 @@
 @extends('layouts.mainlayout')
 
 @section('body_tag')
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" id="body" >
+
 
 @endsection
 
@@ -160,68 +161,36 @@
                             </h3>
 
                         </div>
-                        <div class="card-body">
-                            <ul class="todo-list">
-                                <li>
-                                    <span class="handle">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </span>
-                                    <input type="checkbox" name="" >
-                                    <span class="text">Deliver a service letter</span>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
+                        <div class="card-body" >
 
-                                <li>
-                                    <span class="handle">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </span>
-                                    <input type="checkbox" name="" >
-                                    <span class="text">Go to court</span>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="handle">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </span>
-                                    <input type="checkbox" name="" >
-                                    <span class="text">Go to court</span>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="handle">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </span>
-                                    <input type="checkbox" name="" >
-                                    <span class="text">Go to court</span>
-                                    <div class="tools">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </li>
+                            <ul class="todo-list">
+                                {{-- <li>
+                                        <span class="handle">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+                                        <input type="checkbox" name="" >
+                                    <span class="text">b</span>
+                                        <div class="tools">
+                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-trash-o"></i>
+                                        </div>
+                                    </li> --}}
                             </ul>
                         </div>
                         <div class="card-footer">
-                            <form action="#" method="post">
+
+
                               <div class="input-group">
-                                <input type="text" name="message"  class="form-control">
+
+                              <input type="text"  id="todo" maxlength="100" required class="form-control {{$errors->has('todo')?'is-invalid':''}}">
+                              <input type="hidden" id="owner" value={{auth()->user()->id}}>
+                              <input type="hidden" id="firm_id" value={{auth()->user()->firm_id}}>
                                 <span class="input-group-append">
-                                  <button type="button" class="btn btn-outline-primary"> <i class="fa fa-plus"></i> Add Todo</button>
+                                  <button type="submit" id="addTodo" class="btn btn-outline-primary"> <i class="fa fa-plus"></i> Add Todo</button>
                                 </span>
                               </div>
-                            </form>
+
                           </div>
                     </div>
 
@@ -302,7 +271,57 @@
 
            </div>
          </div>
+         <script>
+            const addTodo = document.querySelector('#addTodo');
+            addTodo.addEventListener('click', (event) => {
+                event.preventDefault();
+                     jQuery.ajaxSetup({
+                         headers: {
+                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 
+                         }
+                     });
+                     jQuery.ajax({
+                         url: "{{ url('api/user/add/todo') }}",
+                         method: "POST",
+                         data: {
+                            'todo': jQuery('#todo').val(),
+                            'owner': jQuery('#owner').val(),
+                            'firm_id': jQuery('#firm_id').val()
+                         },
+                         success: res => {
+                            jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div></li>');
+
+                         }
+                     });
+            });
+
+
+            window.addEventListener('load', () => {
+                jQuery.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ url('api/user/todos/getTodos/')  }}",
+                    method: "POST",
+                    data: {
+                        owner: jQuery('#owner').val()
+                    },
+                    success: res => {
+                        res.map(obj => {
+                            jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div></li>');
+                        })
+                    }
+                });
+
+
+
+
+
+            });
+        </script>
       </section>
 
 

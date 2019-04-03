@@ -48,11 +48,12 @@ class AuthController extends Controller
                     return redirect('/changePassword');
 
                 }else{
+
                     return redirect('/dashboard');
                 }
 
             }
-            return redirect('/dashboard');
+           // return redirect('/dashboard');
         } else {
             return redirect()->back()->with('error', 'Wrong Login Details');
         }

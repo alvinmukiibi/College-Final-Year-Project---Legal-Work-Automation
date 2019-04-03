@@ -53,8 +53,11 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/user/manage/meetings', "MeetingsController@showMeetings");
     Route::post('/user/schedule/meeting', "MeetingsController@scheduleMeeting");
 
+
+
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
     Route::get('/user/verifyEmail/{token}', "StaffController@verifyEmail");
+    Route::get('/user/todos/getTodos/{id}', "TodosController@getTodos");
 });

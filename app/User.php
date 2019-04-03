@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Firm;
 use App\Department;
+use App\Todo;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 
@@ -40,6 +41,9 @@ class User extends Authenticatable
     }
     public function dept(){
         return $this->belongsTo(Department::class);
+    }
+    public function todos(){
+        return $this->hasMany(Todo::class);
     }
     public function activateUsers(){
 

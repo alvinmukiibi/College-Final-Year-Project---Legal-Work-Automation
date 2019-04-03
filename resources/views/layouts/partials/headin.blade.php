@@ -8,7 +8,7 @@ Date    :   6th-February-2019
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- CSRF Token for requests that alter the database, it prevents against Cross-site Request Forgery --}}
-    <meta name="csrf-token" content="<?php echo csrf_token(); ?>" id="token">
+    <meta name="csrf-token" content="<?= csrf_token(); ?>" id="token">
     <title>{{config('app.name')}}</title>
     {{-- Bootstrap --}}
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap/css/bootstrap.min.css')}}"/>

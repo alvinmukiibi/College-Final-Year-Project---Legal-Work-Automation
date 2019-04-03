@@ -73,7 +73,9 @@ Date    :   6th-February-2019
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
       checkboxClass: 'icheckbox_flat-green',
       radioClass   : 'iradio_flat-green'
-    })
+    });
+
+
 
 
       </script>
