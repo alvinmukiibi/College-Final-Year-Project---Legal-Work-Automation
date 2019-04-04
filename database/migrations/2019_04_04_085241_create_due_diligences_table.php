@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartmentsTable extends Migration
+class CreateDueDiligencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('due_diligences', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', '150');
-            $table->text('description')->nullable();
-            $table->string('firm_id','50');
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +26,6 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('due_diligences');
     }
 }

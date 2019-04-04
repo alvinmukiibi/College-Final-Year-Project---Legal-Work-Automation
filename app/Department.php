@@ -10,7 +10,7 @@ class Department extends Model
     protected $table = "departments";
 
     protected $fillable = [
-         'name', 'description','created_at','firm_id','update_at',
+         'name', 'description','created_at','firm_id',
     ];
     public function firm(){
         return $this->belongsTo(Firm::class);

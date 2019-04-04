@@ -13,6 +13,8 @@ class Firm extends Model
 {
     protected $guarded = [];
 
+    protected $table = "firms";
+
     protected $fillable = [
         'name','description'
     ];
@@ -23,7 +25,7 @@ class Firm extends Model
     public function departments(){
         return $this->hasMany(Department::class);
     }
-    protected $table = "firms";
+
 
 
     protected function registerFirm($request){

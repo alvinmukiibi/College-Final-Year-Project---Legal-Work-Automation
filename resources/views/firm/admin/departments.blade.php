@@ -88,7 +88,7 @@
                             </h3>
                         </div>
                         <div class="card-body p-0">
-                            <table class="table table-striped table-responsive">
+                            <table class="table table-striped">
                                 <tr>
 
                                     <th style="width: 180px">Name</th>

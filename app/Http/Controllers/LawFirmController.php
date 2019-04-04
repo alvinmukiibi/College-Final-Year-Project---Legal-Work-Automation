@@ -101,6 +101,7 @@ class LawFirmController extends Controller
                 $newUser->identification_token = $value->uuid;
                 $newUser->user_role = "administrator";
                 $newUser->account_status = "inactive";
+                $newUser->profile_pic = "default_user.jpg";
                 $newUser->save();
 
             }

@@ -90,6 +90,14 @@
                           </a>
                         </li>
                         <li class="nav-item">
+                                <a href="{{ url('/admin/manage/roles')}}" class="nav-link">
+                                    <i class="nav-icon fa fa-delicious"></i>
+                                    <p>
+                                      User Roles
+                                    </p>
+                                  </a>
+                                </li>
+                        <li class="nav-item">
                             <a href="{{ url('/admin/manage/staff')}}" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i>
                                 <p>

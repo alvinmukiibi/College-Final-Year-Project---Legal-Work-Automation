@@ -79,18 +79,32 @@
                 </div>
               </div>
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-warning">
-                  <div class="inner">
-                    <h3>Departments</h3>
-
-                    <p>Manage Firm Departments</p>
+                    <div class="small-box bg-warning text-white">
+                      <div class="inner">
+                        <h3>Departments</h3>
+    
+                        <p>Manage Firm Departments</p>
+                      </div>
+                      <div class="icon">
+                        <i class="fa fa-legal"></i>
+                      </div>
+                    <a href="{{ url('/admin/departments')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
                   </div>
-                  <div class="icon">
-                    <i class="fa fa-legal"></i>
+              <div class="col-lg-3 col-6">
+                    <div class="small-box text-white" style="background-color:#fb7a24">
+                      <div class="inner">
+                        <h3>User Roles</h3>
+    
+                        <p>Manage User Roles</p>
+                      </div>
+                      <div class="icon">
+                        <i class="fa fa-delicious"></i>
+                      </div>
+                    <a href="{{ url('/admin/manage/roles')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
                   </div>
-                <a href="{{ url('/admin/departments')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-              </div>
+             
               <div class="col-lg-3 col-6">
                 <div class="small-box text-white" style="background-color:#452b17">
                   <div class="inner">
