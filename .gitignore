@@ -1,9 +1,7 @@
 /node_modules
 /storage/*.key
 /vendor
-/public/plugins
 .env
-/public/uploads
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
