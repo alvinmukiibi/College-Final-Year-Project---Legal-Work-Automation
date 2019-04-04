@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/user/download/attachment/{attachment}', "MessageController@downloadAttachment");
     Route::post('/user/delete/conversation', "MessageController@deleteConversation");
 
+    // Website management routes
+    Route::get('/admin/manage/website', "WebsiteController@showWebsite");
 
 });
 Route::group(['prefix' => 'api'], function () {

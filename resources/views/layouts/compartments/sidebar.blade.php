@@ -73,7 +73,7 @@
                   @endif
                   @if (auth()->user()->user_role === "administrator")
                   <li class="nav-item">
-                    <a href="{{ url('/firm/manage/website')}}" class="nav-link">
+                    <a href="{{ url('/admin/manage/website')}}" class="nav-link">
                         <i class="nav-icon fa fa-globe"></i>
                         <p>
                           Website Profile

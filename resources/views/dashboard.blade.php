@@ -75,7 +75,7 @@
                   <div class="icon">
                     <i class="fa fa-globe fa-spin"></i>
                   </div>
-                <a href="{{ url('/register/firm')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/admin/manage/website')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <div class="col-lg-3 col-6">
