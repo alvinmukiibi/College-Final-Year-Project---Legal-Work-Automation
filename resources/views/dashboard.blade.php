@@ -116,7 +116,7 @@
                   <div class="icon">
                     <i class="fa fa-envelope"></i>
                   </div>
-                <a href="{{ url('/register/firm')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/user/manage/mailbox')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <div class="col-lg-3 col-6">
@@ -151,14 +151,24 @@
 
 
               <section class="col-lg-7 connectedSortable">
-                    <div class="card">
+                    <div class="card collapsed-card">
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-clipboard mr-1">
 
                                 </i>
                                 Daily To Do List
+
                             </h3>
+                            <div class="card-tools">
+
+                                <button type="button" class="btn btn-tool" data-widget="collapse">
+                                  <i class="fa fa-minus"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                </button>
+                              </div>
 
                         </div>
                         <div class="card-body" >

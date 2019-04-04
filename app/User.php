@@ -37,7 +37,7 @@ class User extends Authenticatable
     ];
 
     public function firm(){
-        return $this->belongsTo(Firm::class);
+        return $this->belongsTo(Firm::class, 'firm_id');
     }
     public function dept(){
         return $this->belongsTo(Department::class);

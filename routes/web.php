@@ -53,11 +53,17 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/user/manage/meetings', "MeetingsController@showMeetings");
     Route::post('/user/schedule/meeting', "MeetingsController@scheduleMeeting");
 
+    // Messages management routes
+    Route::get('/user/manage/mailbox', "MessageController@showMailbox");
+    Route::post('/user/send/message', "MessageController@sendMessage");
+    Route::get('/user/make/chat/{msg}/{user}', "MessageController@showChat");
+    Route::get('/user/download/attachment/{attachment}', "MessageController@downloadAttachment");
+    Route::post('/user/delete/conversation', "MessageController@deleteConversation");
 
 
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
     Route::get('/user/verifyEmail/{token}', "StaffController@verifyEmail");
-    Route::get('/user/todos/getTodos/{id}', "TodosController@getTodos");
+    Route::get('/user/todos/getTodos/{id}/', "TodosController@getTodos");
 });

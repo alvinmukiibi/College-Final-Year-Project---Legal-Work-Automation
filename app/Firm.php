@@ -18,7 +18,7 @@ class Firm extends Model
     ];
 
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'firm_id', 'firm_id');
     }
     public function departments(){
         return $this->hasMany(Department::class);

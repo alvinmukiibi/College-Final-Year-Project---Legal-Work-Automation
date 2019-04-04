@@ -145,24 +145,14 @@
                       </p>
                     </a>
                     <ul class="nav nav-treeview">
+
                       <li class="nav-item">
-                      <a href="{{ url('/firm/view/messages')}}" class="nav-link">
-                          <i class="fa fa-pencil nav-icon"></i>
-                          <p>Compose Message </p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="{{ url('/firm/view/messages')}}" class="nav-link">
+                        <a href="{{ url('/user/manage/mailbox')}}" class="nav-link">
                             <i class="fa fa-inbox nav-icon"></i>
-                            <p>Inbox <span class="right badge badge-danger">5</span></p>
+                            <p>My Mailbox</p>
                           </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/firm/view/messages')}}" class="nav-link">
-                                <i class="fa fa-send-o nav-icon"></i>
-                                <p>Sent</p>
-                              </a>
-                            </li>
+
 
                     </ul>
                   </li>
