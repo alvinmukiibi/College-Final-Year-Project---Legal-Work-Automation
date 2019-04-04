@@ -149,7 +149,7 @@
                       <li class="nav-item">
                         <a href="{{ url('/user/manage/mailbox')}}" class="nav-link">
                             <i class="fa fa-inbox nav-icon"></i>
-                            <p>My Mailbox</p>
+                            <p>My Mailbox </p>
                           </a>
                         </li>
 

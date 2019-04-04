@@ -18,7 +18,7 @@ class CreateTodosTable extends Migration
             $table->text('tagline', '100');
             $table->unSignedInteger('user_id');
             $table->text('firm_id');
-            $table->timestamps();
+            $table->timestamp('date')->useCurrent();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

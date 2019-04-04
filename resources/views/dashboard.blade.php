@@ -109,9 +109,9 @@
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
                   <div class="inner">
-                    <h3>Messages</h3>
+                    <h3>Unread <span id="noOfUnread"></span></h3>
 
-                    <p>My Messages</p>
+                    <p>My Messages   </p>
                   </div>
                   <div class="icon">
                     <i class="fa fa-envelope"></i>
@@ -145,9 +145,7 @@
                 <a href="{{ url('/register/firm')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              @endif
 
-              @if (auth()->user()->user_role == 'Associate')
 
 
               <section class="col-lg-7 connectedSortable">
@@ -174,18 +172,7 @@
                         <div class="card-body" >
 
                             <ul class="todo-list">
-                                {{-- <li>
-                                        <span class="handle">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </span>
-                                        <input type="checkbox" name="" >
-                                    <span class="text">b</span>
-                                        <div class="tools">
-                                            <i class="fa fa-edit"></i>
-                                            <i class="fa fa-trash-o"></i>
-                                        </div>
-                                    </li> --}}
+
                             </ul>
                         </div>
                         <div class="card-footer">
@@ -207,6 +194,9 @@
 
               </section>
               <section class="col-lg-5 connectedSortable">
+
+
+                    @if (auth()->user()->user_role == 'Associate')
                 <div class="card ">
                     <div class="card-header bg-danger">
                         <h3 class="card-title">
@@ -242,7 +232,7 @@
                         </div>
                     </div>
                 </div>
-
+                @endif
 
                     <div class="card collapsed-card bg-success-gradient">
                         <div class="card-header no-border">
@@ -323,6 +313,21 @@
                         res.map(obj => {
                             jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div></li>');
                         })
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ url('api/user/count/unread/')  }}",
+                    method: "POST",
+                    data: {
+                        user: {{ auth()->user()->id }}
+                    },
+                    success: res => {
+                        if(res.noOfUnread > 0){
+                            jQuery('#noOfUnread').html(res.noOfUnread);
+                        }else{
+                            jQuery('#noOfUnread').html(0);
+                        }
+
                     }
                 });
 

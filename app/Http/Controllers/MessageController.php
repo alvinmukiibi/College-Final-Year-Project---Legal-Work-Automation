@@ -79,7 +79,13 @@ class MessageController extends Controller
 
         $message = new Message;
         $message->id = $request->segment(4);
+        $message->markAsRead();
+
+
         $messages = $message->getMessages();
+
+        // make incoming messages as read
+
 
         $user = User::find($request->segment(5));
 
@@ -99,6 +105,14 @@ class MessageController extends Controller
        $message->id = $request->input('conv');
 
        $message->deleteConversation();
+
+    }
+    public function getUnreadMessages(Request $request){
+
+        $message = new Message;
+        $message->id = $request->input('user');
+        $count = $message->countUnread();
+        return response()->json(['noOfUnread' => $count]);
 
     }
 }

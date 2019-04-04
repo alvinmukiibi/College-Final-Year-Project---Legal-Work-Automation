@@ -74,6 +74,16 @@ class Message extends Model
 
 
     }
+    public function countUnread(){
+        $unread = DB::table('replies')->where(['recipient_id' => $this->id, 'status' => 'unread'])->get();
+
+        return $unread->count();
+    }
+    public function markAsRead(){
+        $mark = DB::table('replies')->where(['message_id' => $this->id, 'status' => 'unread', 'recipient_id' => auth()->user()->id])->update(['status' => 'read']);
+
+        return $mark;
+    }
 
     public function getMessages(){
 

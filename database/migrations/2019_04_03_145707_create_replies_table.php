@@ -19,6 +19,7 @@ class CreateRepliesTable extends Migration
             $table->text('message');
             $table->string('attachment','100')->nullable();
             $table->unsignedInteger('recipient_id');
+            $table->string('status', '10')->default('unread');
             $table->timestamp('date')->useCurrent();
         });
     }
