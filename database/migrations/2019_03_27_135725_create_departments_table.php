@@ -18,7 +18,7 @@ class CreateDepartmentsTable extends Migration
             $table->string('name', '150');
             $table->text('description')->nullable();
             $table->string('firm_id','50');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

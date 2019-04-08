@@ -16,9 +16,9 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fname','50');
-            $table->string('mname','50');
             $table->string('lname','50');
             $table->string('nationality','100');
+            $table->string('address','100')->nullable();
             $table->string('district_of_residence','100');
             $table->string('city_of_residence','100');
             $table->string('mobile_contact','20');
@@ -26,7 +26,7 @@ class CreateClientsTable extends Migration
             $table->string('email','100');
             $table->text('password')->nullable();
             $table->string('organization','50');
-            $table->timestamp('date_of_reg');
+            $table->timestamp('date_of_reg')->useCurrent();
             $table->string('date_of_birth','50');
             $table->string('marital_status','50');
             $table->string('nin','100');
@@ -36,7 +36,7 @@ class CreateClientsTable extends Migration
 
 
 
-           
+
         });
     }
 

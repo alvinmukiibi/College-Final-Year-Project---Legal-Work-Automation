@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Firms;
+use App\Firm;
 use App\User;
 
 class LawFirmController extends Controller
@@ -89,9 +89,9 @@ class LawFirmController extends Controller
 
             $token = $request->segment(4);
 
-        if(Firms::where('uuid', $token)->update(["verification_flag" => "verified"])){
+        if(Firm::where('uuid', $token)->update(["verification_flag" => "verified"])){
 
-            $values = Firms::select('firm_id','email','password','uuid')->where(['uuid'=>$token,'verification_flag'=>'verified'])->get();
+            $values = Firm::select('firm_id','email','password','uuid')->where(['uuid'=>$token,'verification_flag'=>'verified'])->get();
 
             foreach($values as $value){
                 $newUser = new User;
@@ -101,6 +101,7 @@ class LawFirmController extends Controller
                 $newUser->identification_token = $value->uuid;
                 $newUser->user_role = "administrator";
                 $newUser->account_status = "inactive";
+                $newUser->profile_pic = "default_user.jpg";
                 $newUser->save();
 
             }

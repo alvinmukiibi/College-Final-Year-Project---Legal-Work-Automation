@@ -25,3 +25,11 @@ Route::group(['middleware' => ['guest:api']], function () {
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('user', "Api\OauthController@details");
 });
+
+//Daily Todo management routes
+Route::post('user/add/todo', 'TodosController@addTodo');
+Route::post('user/todos/getTodos', 'TodosController@getTodos');
+
+
+// Unread Messages Routes
+Route::post('/user/count/unread', "MessageController@getUnreadMessages");

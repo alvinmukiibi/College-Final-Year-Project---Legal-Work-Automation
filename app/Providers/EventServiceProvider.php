@@ -8,8 +8,10 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Events\FirmRegistered;
 use App\Events\UserRegistered;
+use App\Events\MeetingScheduled;
 use App\Listeners\SendVerificationMail;
 use App\Listeners\SendUserVerificationMail;
+use App\Listeners\SendNewMeetingNotification;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -27,6 +29,10 @@ class EventServiceProvider extends ServiceProvider
         UserRegistered::class => [
             SendUserVerificationMail::class
         ],
+        MeetingScheduled::class => [
+            SendNewMeetingNotification::class
+        ]
+
     ];
 
     /**

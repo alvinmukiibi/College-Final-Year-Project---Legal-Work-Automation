@@ -16,22 +16,10 @@ use Faker\Generator as Faker;
 $factory->define(App\User::class, function (Faker $faker) {
     static $password;
     return [
-        'fname' => $faker->firstNameMale,
-        'mname' => $faker->lastName,
-        'lname' => $faker->lastName,
-        'email' => $faker->unique()->safeEmail,
+        'email' => 'ulc@gmail.com',
         'password' => $password?:$password = bcrypt('123456789'),
-        'contact' => $faker->e164PhoneNumber,
-        'date_of_birth' => $faker->dateTimeThisCentury->format('Y-m-d'),
-        'profile_pic' => $faker->word,
-        'gender' => "Male",
-        'department' => null,
+        'profile_pic' => 'default_user.jpg',
         'user_role' => "ulc",
         'account_status' => "active",
-        'firm_id' => null,
-        
-
-
-       
     ];
 });

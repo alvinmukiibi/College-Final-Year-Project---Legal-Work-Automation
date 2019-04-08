@@ -1,7 +1,7 @@
 @extends('layouts.mainlayout')
 
 @section('body_tag')
-<body>
+<body class="hold-transition sidebar-mini">
 
 @endsection
 
@@ -38,7 +38,7 @@
                     </div>
                 <div class="card-body">
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="example">
                         <thead>
                             <tr>
                                 <th>Name</th>

@@ -1,12 +1,12 @@
-{{-- 
+{{--
 What    :   The foot tags containing JavaScript Tags
 Author  :   Alvin Mukiibi
-Date    :   6th-February-2019 
+Date    :   6th-February-2019
 --}}
 
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{asset('plugins/jquery-ui.min.js')}}"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -20,7 +20,7 @@ Date    :   6th-February-2019
 <script src="{{asset('plugins/select2/select2.full.min.js')}}"></script>
 
 <!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{{asset('plugins/raphael-min.js')}}"></script>
 <script src="{{asset('plugins/morris/morris.min.js')}}"></script>
 
 <script src="{{asset('plugins/sparkline/jquery.sparkline.min.js')}}"></script>
@@ -29,8 +29,10 @@ Date    :   6th-February-2019
 <script src="{{asset('plugins/knob/jquery.knob.js')}}"></script>
 
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="{{asset('plugins/moment.min.js')}}"></script>
 <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+{{-- icheck --}}
+<script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
 <!-- datepicker -->
 <script src="{{asset('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
@@ -39,6 +41,7 @@ Date    :   6th-February-2019
 
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
+<script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <script>
     $(function () {
       //Initialize Select2 Elements
@@ -53,6 +56,28 @@ Date    :   6th-February-2019
           "autoWidth": false
     });
     })
+    // $(document).ready(function()
+    // {
+    //     $('#example').DataTable();
+    // } );
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    });
+
+
+
+
       </script>
 
 </body>

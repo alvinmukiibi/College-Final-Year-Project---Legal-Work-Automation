@@ -9,21 +9,23 @@ use App\User;
 use App\Department;
 use Illuminate\Support\Facades\DB;
 
-class Firms extends Model
+class Firm extends Model
 {
     protected $guarded = [];
+
+    protected $table = "firms";
 
     protected $fillable = [
         'name','description'
     ];
 
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'firm_id', 'firm_id');
     }
     public function departments(){
         return $this->hasMany(Department::class);
     }
-    protected $table = "firms";
+
 
 
     protected function registerFirm($request){

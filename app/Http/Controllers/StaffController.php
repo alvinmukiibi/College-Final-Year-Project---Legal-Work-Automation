@@ -38,6 +38,7 @@ class StaffController extends Controller
 
          //
         $user->data = $data;
+        $user->profile_pic = 'default_user.jpg';
         $user->account_status = 'inactive';
         $user->verification_status = 'unverified';
         $user->firm_id = auth()->user()->firm_id;

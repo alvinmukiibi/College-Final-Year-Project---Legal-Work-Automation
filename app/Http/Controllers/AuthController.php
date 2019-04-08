@@ -48,6 +48,7 @@ class AuthController extends Controller
                     return redirect('/changePassword');
 
                 }else{
+
                     return redirect('/dashboard');
                 }
 

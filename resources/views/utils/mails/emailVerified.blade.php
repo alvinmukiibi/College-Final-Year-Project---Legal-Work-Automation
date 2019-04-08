@@ -4,7 +4,7 @@
 Thank you for registering with <i><b>Legal Work Automation Tool</b></i><br/>
 Verify Your Email Address, Please.
 
-@component('mail::button', ['url' => 'http://wat.alv/api/firm/verifyEmail/'.$firm_uuid, 'color' => 'success'])
+@component('mail::button', ['url' => 'http://127.0.0.1:8000/api/firm/verifyEmail/'.$firm_uuid, 'color' => 'success'])
 VERIFY EMAIL
 @endcomponent
 
