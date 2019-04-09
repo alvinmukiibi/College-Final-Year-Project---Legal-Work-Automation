@@ -33,7 +33,18 @@
                                 alt="User profile picture">
                         </div>
                     <h3 class="profile-username text-center">{{$user->fname }} {{$user->lname}}</h3>
-                    <p class="text-muted text-center">Associate</p>
+                    <p class="text-muted text-center">
+                        @if($user->user_role == 'Associate')
+                            {{ __('Associate') }}
+                        @else
+                            @if ($user->user_role == 'Partner')
+                            {{ __('Partner') }}
+                            @else
+                            {{ __('Finance Comptroller') }}
+                            @endif
+
+                        @endif
+                    </p>
                     <p class="text-center">{{$user->dept->name}}</p>
                         <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">

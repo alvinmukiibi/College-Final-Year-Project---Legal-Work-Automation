@@ -40,11 +40,11 @@
                 <a href="{{ url('admin/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
 
-                @elseif(auth()->user()->user_role=="Associate")
-                <a href="{{ url('associate/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                @elseif(auth()->user()->user_role=="ulc")
+                <a href="{{ url('/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
                 @else
-                <a href="{{ url('profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/user/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
                 @endif
             </div>
@@ -82,7 +82,7 @@
                     <div class="small-box bg-warning text-white">
                       <div class="inner">
                         <h3>Departments</h3>
-    
+
                         <p>Manage Firm Departments</p>
                       </div>
                       <div class="icon">
@@ -95,7 +95,7 @@
                     <div class="small-box text-white" style="background-color:#fb7a24">
                       <div class="inner">
                         <h3>User Roles</h3>
-    
+
                         <p>Manage User Roles</p>
                       </div>
                       <div class="icon">
@@ -104,7 +104,7 @@
                     <a href="{{ url('/admin/manage/roles')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
-             
+
               <div class="col-lg-3 col-6">
                 <div class="small-box text-white" style="background-color:#452b17">
                   <div class="inner">

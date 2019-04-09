@@ -29,7 +29,7 @@
                                     </a>
                                   </li>
                   <li class="nav-item">
-                      @if (auth()->user()->user_role=="administrator")
+                      @if (auth()->user()->user_role == "administrator")
                       <a href="{{ url('/admin/profile')}}" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
                         <p>
@@ -37,10 +37,8 @@
 
                         </p>
                       </a>
-                      @endif
-
-                      @if (auth()->user()->user_role=="Associate")
-                      <a href="{{ url('/associate/profile')}}" class="nav-link">
+                     @else
+                      <a href="{{ url('/user/profile')}}" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
                         <p>
                           My Profile
@@ -110,7 +108,7 @@
                   @endif
                   @if (auth()->user()->user_role == "Associate" )
                   <li class="nav-item">
-                    <a href="{{ url('/dashboard')}}" class="nav-link">
+                    <a href="{{ url('/associate/make/intake')}}" class="nav-link">
                           <i class="nav-icon fa fa-meh-o"></i>
                           <p>
                             New Intake
@@ -189,7 +187,7 @@
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/admin/admin/staff')}}" class="nav-link">
+                    <a href="{{ url('/user/manage/calendar')}}" class="nav-link">
                         <i class="nav-icon fa fa-calendar"></i>
                         <p>
                           My Calendar

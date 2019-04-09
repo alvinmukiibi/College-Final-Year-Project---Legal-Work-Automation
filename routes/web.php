@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/admin/deactivate/staff/{staff}', "StaffController@deactivateStaff");
 
     // Associate role routes
-    Route::get('/associate/profile', "UserController@showProfile");
+    Route::get('/user/profile', "UserController@showProfile");
 
     // Meeting management routes
     Route::get('/user/manage/meetings', "MeetingsController@showMeetings");
@@ -62,6 +62,12 @@ Route::group(['middleware' => 'auth:web'], function()
 
     // Website management routes
     Route::get('/admin/manage/website', "WebsiteController@showWebsite");
+
+    // Calendar & Event routes
+    Route::get('/user/manage/calendar', "UserController@showCalendar");
+
+    // Intake routes
+    Route::get('/associate/make/intake', "CasesController@showIntakeForm");
 
 });
 Route::group(['prefix' => 'api'], function () {

@@ -40,7 +40,7 @@ class User extends Authenticatable
         return $this->belongsTo(Firm::class, 'firm_id');
     }
     public function dept(){
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'department');
     }
     public function todos(){
         return $this->hasMany(Todo::class);

@@ -15,15 +15,24 @@ class CreateLegalCasesTable extends Migration
     {
         Schema::create('legal_cases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('case_no');
-            $table->string('category');
-            $table->string('description');
-            $table->string('date');
-            $table->integer('staff_id')->unsigned();
-            $table->string('amount');
-            $table->text('proceedings')->nullable();
-            $table->text('lawyer')->nullable();
-            $table->timestamps();
+            $table->string('case_number'); //e.g 200604
+            $table->unsignedInteger('client');
+            $table->unsignedInteger('staff'); // open, closed, etc
+            $table->string('case_type'); //e.g PER, CORP, etc
+            $table->date('date_taken');
+            $table->string('taken_by'); // e.g. partner, associate etc i.e. the role
+            $table->text('synopsis'); // description of case by client
+            $table->string('case_status'); // open, closed, etc
+            $table->text('firm'); // firm identification number
+            $table->timestamp('created_at')->useCurrent();
+
+
+            //$table->foreign('firm')->references('firm_id')->on('firms');
+            $table->foreign('staff')->references('id')->on('users');
+            $table->foreign('client')->references('id')->on('clients')->onDelete('cascade');
+
+
+
         });
     }
 

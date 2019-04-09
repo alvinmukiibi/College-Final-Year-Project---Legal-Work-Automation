@@ -21,19 +21,11 @@ class Department extends Model
     public function addDepartment(){
         $dept = $this->dept;
         $add = DB::table($this->table)->insert(['name'=>$dept['name'], 'description'=>$dept['description'],'firm_id'=>auth()->user()->firm_id ]);
-        if($add){
-            return true;
-        }else{
-            return false;
-        }
+        return $add;
     }
     public function saveDepartment(){
         $dept = $this->dept;
         $edit = DB::table($this->table)->where(['id'=>$dept['id']])->update(['name'=>$dept['name'], 'description'=>$dept['description']]);
-        if($edit){
-            return true;
-        }else{
-            return false;
-        }
+        return $edit;
     }
 }
