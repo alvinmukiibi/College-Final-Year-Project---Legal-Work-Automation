@@ -17,7 +17,7 @@ class OauthController extends Controller
         if(Auth::attempt(["email" => $request->input('email'), "password" => $request->input('password')]))
         {
             $user = Auth::user();
-            //This uses OAuth to issue an access token to the authenticated user, first arg is the name of the token
+            //This uses OAuth to issue an access toen to the authenticated user, first arg is the name of the token
             //and the second which is optional can be the array of scopes in which that token shall work fro
             if($user->account_status !== "active"){
                 return response()->json(["error" => true, "message" => "Your Account is Inactive, See System Administrator"]);
