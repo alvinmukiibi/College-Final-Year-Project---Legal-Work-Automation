@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth:web'], function()
 
     // Website management routes
     Route::get('/admin/manage/website', "WebsiteController@showWebsite");
-    Route::post('/admin/saveProfile', "WebsiteController@savelawfirmProfile");
+    Route::post('/admin/savelawfirmProfile', "WebsiteController@savelawfirmProfile");
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

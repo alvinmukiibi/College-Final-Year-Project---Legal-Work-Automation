@@ -32,7 +32,7 @@
                         <div class="row">
                         <div class="col-lg-6">
                             <a href="#">
-                            <img style="float:left;height:150px;width:200px;" class="img-fluid rounded mr-3" src="{{asset('img/blog/cat-widget2.jpg')}}" alt="">
+                            <img style="float:left;height:150px;width:200px;" class="img-fluid rounded mr-3" src="{{asset('uploads/firms'.$firm->avatar)}}" alt="">
                             </a>
                         
                         <h2 class="card-title" style="font-size:18pt">{{$firm->name}}</h2>

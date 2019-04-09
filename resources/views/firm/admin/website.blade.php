@@ -19,9 +19,14 @@
                 </ol>
             </div>
         </div>
-    </div>  
+    </div>    
 </section>
-<div class="col-md-9">
+<section class="content">
+    <div class="container-fluid">
+<div class="row">
+            
+            
+<div class="col-md-8">
                     <div class="card">
                       <div class="card-header p-2">
                         <ul class="nav nav-pills">
@@ -31,54 +36,89 @@
 
                         </div><!-- /.card-header -->
 <div class="card-body">
-                            @include('includes.messages')
+                           
 <div class="tab-content">
 <div class="active tab-pane" id="profile">
-                                    <form action="{{url('/admin/saveProfile')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{url('/admin/savelawfirmProfile')}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                     <div class="form-group">
                                             <label for="firstName" class="col-sm-2 control-label">Name</label>
 
                                             <div class="col-sm-12">
-                                            <input type="text" value="{{$user->fname}}" required class="form-control {{$errors->has('firstName')?'is-invalid':''}}" name="firstName"   placeholder="First Name">
+                                            <input type="text" value="{{$firm->name}}" required class="form-control {{$errors->has('firstName')?'is-invalid':''}}" name="name"   placeholder="First Name">
                                             </div>
                                           </div>
-                                          <div class="form-group">
-
-                                                <label for="lastName"  class="col-sm-2 control-label">Last Name</label>
-
-                                                <div class="col-sm-12">
-                                                  <input type="text" value="{{$user->lname}}" required class="form-control {{$errors->has('lastName')?'is-invalid':''}}" name="lastName"  placeholder="Last Name">
-                                                </div>
-                                              </div>
                                               <div class="form-group">
                                                     <label for="email" class="col-sm-2 control-label">Email</label>
 
                                                     <div class="col-sm-12">
-                                                    <input type="text" class="form-control" readonly  value="{{$user->email}}">
+                                                    <input type="text" class="form-control" readonly  value="{{$firm->email}}">
                                                     </div>
                                                   </div>
                                                   <div class="form-group">
                                                         <label for="contact" required class="col-sm-4 control-label">contact1</label>
 
                                                         <div class="col-sm-12">
-                                                          <input type="text" value="{{$user->contact}}" class="form-control {{$errors->has('contact')?'is-invalid':''}}" name="contact"  placeholder="Personal Contact">
+                                                          <input type="text" value="{{$firm->contact1}}" class="form-control {{$errors->has('contact')?'is-invalid':''}}" name="contact1"  placeholder="Personal Contact">
                                                         </div>
                                                       </div>
                                                   <div class="form-group">
                                                         <label for="contact" required class="col-sm-4 control-label">contact2</label>
 
                                                         <div class="col-sm-12">
-                                                          <input type="text" value="{{$user->contact}}" class="form-control {{$errors->has('contact')?'is-invalid':''}}" name="contact"  placeholder="Personal Contact">
+                                                          <input type="text" value="{{$firm->contact2}}" class="form-control {{$errors->has('contact')?'is-invalid':''}}" name="contact2"  placeholder="Personal Contact">
                                                         </div>
                                                       </div> 
                                                       <div class="form-group">
-                                                            <label for="profilePicture" class="col-sm-4 control-label">Profile Picture</label>
+                                                        <label for="contact" required class="col-sm-4 control-label">Country</label>
+
+                                                        <div class="col-sm-12">
+                                                          <input type="text" value="{{$firm->country}}" class="form-control {{$errors->has('country')?'is-invalid':''}}" name="country"  placeholder="Country">
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="contact" required class="col-sm-4 control-label">Area</label>
+
+                                                        <div class="col-sm-12">
+                                                          <input type="text" value="{{$firm->area}}" class="form-control {{$errors->has('area')?'is-invalid':''}}" name="area"  placeholder="Area">
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="contact" required class="col-sm-4 control-label">City</label>
+
+                                                        <div class="col-sm-12">
+                                                          <input type="text" value="{{$firm->city}}" class="form-control {{$errors->has('city')?'is-invalid':''}}" name="city"  placeholder="City of operation">
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="contact" required class="col-sm-4 control-label">Street_address</label>
+
+                                                        <div class="col-sm-12">
+                                                          <input type="text" value="{{$firm->street_address}}" class="form-control {{$errors->has('street_address')?'is-invalid':''}}" name="street_address"  placeholder="Street_address">
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="contact" required class="col-sm-4 control-label">Website</label>
+
+                                                        <div class="col-sm-12">
+                                                          <input type="text" value="{{$firm->website}}" class="form-control {{$errors->has('website')?'is-invalid':''}}" name="website"  placeholder="Website">
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="contact" required class="col-sm-4 control-label">FirmDescription</label>
+
+                                                        <div class="col-sm-12">
+                                                          <input type="text" value="{{$firm->description}}" class="form-control {{$errors->has('description')?'is-invalid':''}}" name="description"  placeholder="FirmDescription">
+                                                        </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                            <label for="avatar" class="col-sm-4 control-label">FirmPicture</label>
 
                                                             <div class="col-sm-12">
-                                                              <input type="file" class="form-control {{$errors->has('profilePicture')?'is-invalid':''}}"  name="profilePicture">
+                                                              <input type="file" class="form-control {{$errors->has('avatar')?'is-invalid':''}}"  name="avatar">
                                                             </div>
                                                           </div>
+                                                      
                                                           <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Save</button>
 
                                                         </form>
@@ -86,5 +126,9 @@
                           </div>
                         </div>
                     </div>
-</div>
+                   
+  </div>
+  </div>
+  </section>
 @endsection
+
