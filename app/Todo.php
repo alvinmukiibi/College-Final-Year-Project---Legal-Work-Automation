@@ -18,12 +18,13 @@ class Todo extends Model
     }
 
     public function addTodo(){
-        $add = DB::table($this->table)->insert(['tagline' => $this->todo, 'user_id' => $this->owner, 'firm_id' => $this->firm_id]);
+        $add = DB::table($this->table)->insert(['tagline' => $this->todo, 'dueBy' => $this->dueBy, 'user_id' => $this->owner, 'firm_id' => $this->firm_id]);
 
         if($add){
             $addedTodo = [
                 "id" => DB::getPdo()->lastInsertId(),
-                "tagline" => $this->todo
+                "tagline" => $this->todo,
+                "dueBy" => $this->dueBy
             ];
             return $addedTodo;
         }else{

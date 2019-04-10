@@ -197,6 +197,7 @@
                               <input type="text"  id="todo" maxlength="100" required class="form-control {{$errors->has('todo')?'is-invalid':''}}">
                               <input type="hidden" id="owner" value={{auth()->user()->id}}>
                               <input type="hidden" id="firm_id" value={{auth()->user()->firm_id}}>
+                              <input type="date"  id="dueBy" class="form-control">
                                 <span class="input-group-append">
                                   <button type="submit" id="addTodo" class="btn btn-outline-primary"> <i class="fa fa-plus"></i> Add Todo</button>
                                 </span>
@@ -301,10 +302,25 @@
                          data: {
                             'todo': jQuery('#todo').val(),
                             'owner': jQuery('#owner').val(),
+                            'dueBy': jQuery('#dueBy').val(),
                             'firm_id': jQuery('#firm_id').val()
                          },
                          success: res => {
-                            jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div></li>');
+                            const date = new Date(); //.format('m-d-Y')-obj.dueBy;
+                            const  today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+                            const date2 = new Date(today);
+                            const date1 = new Date(res.dueBy);
+                            const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            let flag = '';
+                            if(remainingTime >= 5){
+                                flag = 'success';
+                            }else if(remainingTime >= 2 && remainingTime < 5){
+                                flag = 'warning';
+                            }else{
+                                flag = 'danger';
+                            }
+                           return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><small class="pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
 
                          }
                      });
@@ -325,7 +341,22 @@
                     },
                     success: res => {
                         res.map(obj => {
-                            jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div></li>');
+                            const date = new Date(); //.format('m-d-Y')-obj.dueBy;
+                            const  today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+                            const date2 = new Date(today);
+                            const date1 = new Date(obj.dueBy);
+                            const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            let flag = '';
+                            if(remainingTime >= 5){
+                                flag = 'success';
+                            }else if(remainingTime >= 2 && remainingTime < 5){
+                                flag = 'warning';
+                            }else{
+                                flag = 'danger';
+                            }
+
+                            return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><small class=" pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
                         })
                     }
                 });
