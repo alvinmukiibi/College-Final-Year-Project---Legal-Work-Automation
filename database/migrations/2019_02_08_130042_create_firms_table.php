@@ -25,7 +25,7 @@ class CreateFirmsTable extends Migration
             $table->string('area','100');
             $table->string('city','50');
             $table->text('street_address');
-            $table->timestamp('date_of_reg');
+            $table->timestamp('date_of_reg')->useCurrent();
             $table->string('avatar','100')->nullable();
             $table->text('website')->nullable();
             $table->text('description')->nullable();

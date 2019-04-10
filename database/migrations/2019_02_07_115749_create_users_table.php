@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('contact', '20')->nullable();
             $table->string('date_of_birth', '15')->nullable();
             $table->text('profile_pic')->nullable();
-            $table->timestamp('date_of_reg');
+            $table->timestamp('date_of_reg')->useCurrent();
             $table->enum('gender', ['Male','Female'])->nullable();
             $table->unsignedInteger('department')->nullable();
             $table->string('user_role', '50');

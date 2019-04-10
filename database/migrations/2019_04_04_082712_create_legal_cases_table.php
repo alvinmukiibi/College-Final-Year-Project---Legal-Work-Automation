@@ -19,7 +19,7 @@ class CreateLegalCasesTable extends Migration
             $table->unsignedInteger('client');
             $table->unsignedInteger('staff'); // open, closed, etc
             $table->string('case_type'); //e.g PER, CORP, etc
-            $table->date('date_taken');
+            $table->string('date_taken');
             $table->string('taken_by'); // e.g. partner, associate etc i.e. the role
             $table->text('synopsis'); // description of case by client
             $table->string('case_status'); // open, closed, etc

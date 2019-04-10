@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth:web'], function()
 
     // Intake routes
     Route::get('/associate/make/intake', "CasesController@showIntakeForm");
+    Route::post('/associate/register/intake', "CasesController@makeIntake");
 
 });
 Route::group(['prefix' => 'api'], function () {
