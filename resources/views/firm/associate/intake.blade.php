@@ -42,9 +42,12 @@
                                         <div class="form-group col-md-3">
                                                 <label for="caseType">Case Type</label>
                                                 <select required name="caseType" class="form-control">
-                                                    <option value="1">CCH</option>
-                                                    <option value="2">AVD</option>
+                                                    @foreach ($caseTypes as $type)
 
+
+                                                    <option title="{{ $type->description }}" value={{ $type->id }}>{{ $type->type }} : {{ $type->description }}</option>
+
+                                                    @endforeach
                                                 </select>
 
                                             </div>
@@ -91,8 +94,12 @@
                                                     <div class="form-group col-md-4">
                                                             <label for="maritalStatus">Marital Status</label>
                                                            <select required name="maritalStatus" value="{{ old('maritalStatus') }}" class="form-control {{ $errors->has('maritalStatus')?'is-invalid':'' }}">
-                                                               <option value="1">Single</option>
-                                                               <option value="2">Married</option>
+                                                               <option value="Single">Single</option>
+                                                               <option value="Married">Married</option>
+                                                               <option value="Divorced">Divorced</option>
+                                                               <option value="Widowed">Widowed</option>
+                                                               <option value="Civil Union">Civil Union</option>
+                                                               <option value="Domestic Relationship">Domestic Relationship</option>
                                                            </select>
                                                         </div>
                                             </div>

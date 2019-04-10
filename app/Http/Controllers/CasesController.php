@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Webpatser\Countries\Countries;
 use App\Client;
 use App\LegalCase;
+use App\User;
+use App\Firm;
+use App\CaseType;
 class CasesController extends Controller
 {
     public function showIntakeForm(Request $request){
@@ -13,7 +16,10 @@ class CasesController extends Controller
         $data = [
             "countries" => $countries->getListForSelect()
         ];
-        return view('firm.associate.intake')->with(['countries' => $data['countries']]);
+        $firm = new Firm;
+        $firm->firm_id = auth()->user()->firm_id;
+        $caseTypes = $firm->caseTypes;
+        return view('firm.associate.intake')->with(['countries' => $data['countries'], 'caseTypes' => $caseTypes]);
     }
     public function makeIntake(Request $request){
         $data = $this->validate($request, [
@@ -58,22 +64,28 @@ class CasesController extends Controller
            $case->makeNewIntake();
 
            return redirect()->back()->with('success', 'New Intake Made Successfully');
-
-
-
-
-
-
         }else{
             return redirect()->back()->with('error', 'Client not created, Please Try Again!!');
         }
-
+    }
+    public function viewIntakes(){
 
         $case = new LegalCase;
+        $case->staff = auth()->user()->id;
+        $cases = $case->getLawyerCases();
+        return view('firm.associate.cases')->with(['cases' => $cases]);
+    }
+
+    public function viewCase(Request $request){
+        $case = LegalCase::find($request->input('caseID'));
+        $caseType = CaseType::find($case->case_type);
+        $client = Client::find($case->client);
+        $staff = User::find($case->staff);
 
 
 
 
+        return view('firm.associate.case')->with(['case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff]);
 
 
     }

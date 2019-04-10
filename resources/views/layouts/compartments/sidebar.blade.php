@@ -126,9 +126,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                      <a href="{{ url('/register/firm')}}" class="nav-link">
+                      <a href="{{ url('/associate/view/intakes')}}" class="nav-link">
                           <i class="fa fa-circle-o nav-icon"></i>
-                          <p>All My Cases</p>
+                          <p>My New Intakes</p>
                         </a>
                       </li>
                       <li class="nav-item">

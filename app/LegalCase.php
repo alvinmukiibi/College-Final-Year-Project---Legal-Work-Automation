@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\User;
 class LegalCase extends Model
 {
     protected $table = 'legal_cases';
 
+
+    public function workedOnBy(){
+        return $this->belongsTo(User::class);
+    }
 
     public function makeNewIntake(){
         $data = $this->data;
@@ -24,6 +29,12 @@ class LegalCase extends Model
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return '200'.$randomString;
+
+    }
+    public function getLawyerCases(){
+
+        $cases = DB::table($this->table)->join('clients', 'legal_cases.client', '=', 'clients.id')->join('users', 'users.id', '=', 'legal_cases.staff')->join('case_types', 'case_types.id', '=', 'legal_cases.case_type')->select('clients.*', 'legal_cases.*', 'case_types.*')->where('users.id', auth()->user()->id)->get();
+        return $cases;
 
     }
 }

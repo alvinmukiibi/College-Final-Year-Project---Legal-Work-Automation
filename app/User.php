@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Firm;
 use App\Department;
 use App\Todo;
+use App\LegalCase;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 
@@ -44,6 +45,9 @@ class User extends Authenticatable
     }
     public function todos(){
         return $this->hasMany(Todo::class);
+    }
+    public function cases(){
+        return $this->hasMany(LegalCase::class, 'staff');
     }
     public function activateUsers(){
 

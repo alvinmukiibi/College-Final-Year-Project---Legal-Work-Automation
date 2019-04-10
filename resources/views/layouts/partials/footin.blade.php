@@ -38,6 +38,7 @@ Date    :   6th-February-2019
 <script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <script src="{{asset('plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <script src="{{asset('plugins/fastclick/fastclick.js')}}"></script>
+<script src="{{asset('plugins/popper.min.js')}}"></script>
 
 {{-- FullCalendar --}}
 <script src="{{asset('plugins/fullcalendar/fullcalendar.min.js')}}"></script>
@@ -244,7 +245,10 @@ Date    :   6th-February-2019
                 //Remove event from text input
                 $('#new-event').val('')
               })
-            })
+            });
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+              })
           </script>
 
 </body>
