@@ -72,6 +72,11 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/view/intakes', "CasesController@viewIntakes");
     Route::post('/associate/view/case', "CasesController@viewCase");
 
+    // Due Diligence routes
+    Route::get('/associate/make/due_diligence/{case}', "DueDiligenceController@makeDueDiligence");
+    Route::post('/associate/add/duediligence', "DueDiligenceController@addDueDiligence");
+
+
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

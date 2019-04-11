@@ -178,6 +178,30 @@
                                             </button>
                                           </div>
                                 </div>
+                                <div class="card-body">
+                                    <h3>Previous Due Diligences</h3>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Date Carried Out </td>
+                                                <td>Description</td>
+                                                <td>Action</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ url('/associate/make/due_diligence', ['case'=> $case->case_number  ]) }}" class="btn btn-primary btn-flat pull-right"> <i class="fa fa-plus"></i> Add Due Diligence</a>
+                                </div>
                             </div>
                         </div>
                     </div>

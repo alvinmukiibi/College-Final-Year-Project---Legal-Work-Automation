@@ -14,6 +14,7 @@ class LegalCase extends Model
         return $this->belongsTo(User::class);
     }
 
+
     public function makeNewIntake(){
         $data = $this->data;
         $caseNumber = $this->generateUniqueCaseNumber();

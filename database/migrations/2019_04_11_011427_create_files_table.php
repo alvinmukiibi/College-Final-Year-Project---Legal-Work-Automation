@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDueDiligencesTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateDueDiligencesTable extends Migration
      */
     public function up()
     {
-        Schema::create('due_diligences', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description')->nullable();
-            $table->string('date_carried_out');
-            $table->string('case_id');
+            $table->string('name', '50')->nullable();
+            $table->string('description', '50')->nullable();
+            $table->text('location');
+            $table->unsignedInteger('case_id');
+            $table->unsignedInteger('due_diligence_id');
+            $table->string('target_audience', '50')->nullable();
             $table->timestamp('created_at')->useCurrent();
-
-
         });
     }
 
@@ -31,6 +32,6 @@ class CreateDueDiligencesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('due_diligences');
+        Schema::dropIfExists('files');
     }
 }
