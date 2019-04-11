@@ -104,29 +104,63 @@
                                 </div>
                                 <div class="card-body">
                                         @foreach ($diligences as $dd)
-
-
                                         <div id="accordion">
 
                                                 <div class="card card-primary">
                                                   <div class="card-header">
                                                     <h4 class="card-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                      <a data-toggle="collapse" id="accord" data-parent="#accordion" href="{{ __('#dd_' . $dd->id) }}">
                                                         {{ date('d-M-Y', strtotime($dd->date_carried_out)) }}
                                                       </a>
                                                     </h4>
                                                   </div>
-                                                  <div id="collapseOne" class="panel-collapse collapse in">
+                                                  <div id="{{ __('dd_' . $dd->id) }}" class="panel-collapse collapse in">
                                                     <div class="card-body">
                                                         {{ $dd->description }}
-
-
+                                                        <hr/>
                                                         <span id="files">
+                                                            @if ($dd->file1 !== null)
+
+                                                                <strong>File</strong>
+                                                                <p class="text-muted pull-right">
+                                                                    {{ $dd->file1 }}
+                                                                    <a class="btn-sm btn btn-primary" href="{{ url('/associate/download/file', ['file' => $dd->file1]) }}"> <i class="fa fa-download"></i></a>
+
+                                                                </p>
+                                                                <hr>
+                                                            @endif
+                                                            @if ($dd->file2 !== null)
+                                                                <strong>File</strong>
+                                                                <p class="text-muted pull-right">
+                                                                    {{ $dd->file2 }}
+                                                                    <a class="btn-sm btn btn-primary" href="{{ url('/associate/download/file', ['file' => $dd->file2]) }}"> <i class="fa fa-download"></i></a>
+
+                                                                </p>
+                                                                <hr>
+                                                            @endif
+                                                            @if ($dd->file3 !== null)
+                                                                <strong>File</strong>
+                                                                <p class="text-muted pull-right">
+                                                                    {{ $dd->file3 }}
+                                                                    <a class="btn-sm btn btn-primary" href="{{ url('/associate/download/file', ['file' => $dd->file3]) }}"> <i class="fa fa-download"></i></a>
+
+                                                                </p>
+                                                                <hr>
+                                                            @endif
+                                                            @if ($dd->file4 !== null)
+                                                                <strong>File</strong>
+                                                                <p class="text-muted pull-right">
+                                                                    {{ $dd->file4 }}
+                                                                    <a class="btn-sm btn btn-primary" href="{{ url('/associate/download/file', ['file' => $dd->file4]) }}"> <i class="fa fa-download"></i></a>
+
+                                                                </p>
+                                                                <hr>
+                                                            @endif
+
                                                         </span>
                                                     </div>
                                                   </div>
                                                 </div>
-
                                               </div>
                                               @endforeach
                                 </div>
@@ -134,5 +168,6 @@
                         </div>
                     </div>
             </div>
+
     </section>
 @endsection

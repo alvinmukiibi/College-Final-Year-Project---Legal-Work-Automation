@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\DueDiligence;
 class LegalCase extends Model
 {
     protected $table = 'legal_cases';
@@ -12,6 +13,9 @@ class LegalCase extends Model
 
     public function workedOnBy(){
         return $this->belongsTo(User::class);
+    }
+    public function duediligences(){
+        return $this->hasMany(DueDiligence::class, 'case_id');
     }
 
 
@@ -34,8 +38,16 @@ class LegalCase extends Model
     }
     public function getLawyerCases(){
 
-        $cases = DB::table($this->table)->join('clients', 'legal_cases.client', '=', 'clients.id')->join('users', 'users.id', '=', 'legal_cases.staff')->join('case_types', 'case_types.id', '=', 'legal_cases.case_type')->select('clients.*', 'legal_cases.*', 'case_types.*')->where('users.id', auth()->user()->id)->get();
+        $cases = DB::table($this->table)->join('clients', 'legal_cases.client', '=', 'clients.id')->join('users', 'users.id', '=', 'legal_cases.staff')->join('case_types', 'case_types.id', '=', 'legal_cases.case_type')->select('clients.name', 'legal_cases.*', 'case_types.type', 'case_types.description')->where('users.id', auth()->user()->id)->get();
         return $cases;
 
+    }
+    public function makeCase(){
+        $make = DB::table($this->table)->where('case_number', $this->case_number)->update(['case_status' => 'open']);
+        return $make;
+    }
+    public function rejectCase(){
+        $reject = DB::table($this->table)->where('case_number', $this->case_number)->update(['case_status' => 'closed-rejected']);
+        return $reject;
     }
 }

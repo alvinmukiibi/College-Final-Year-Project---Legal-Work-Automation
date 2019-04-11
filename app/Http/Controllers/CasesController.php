@@ -9,6 +9,7 @@ use App\LegalCase;
 use App\User;
 use App\Firm;
 use App\CaseType;
+use App\DueDiligence;
 class CasesController extends Controller
 {
     public function showIntakeForm(Request $request){
@@ -81,12 +82,30 @@ class CasesController extends Controller
         $caseType = CaseType::find($case->case_type);
         $client = Client::find($case->client);
         $staff = User::find($case->staff);
+        $dd = new DueDiligence;
+        $dd->case_id = $case->case_number;
+        $diligences = $dd->getCaseDueDiligences();
+
+        return view('firm.associate.case')->with(['case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences]);
+
+    }
+    public function makeCase(Request $request){
+
+        $case = new LegalCase;
+        $case->case_number = $request->segment(4);
+        $case->makeCase();
+
+        return redirect()->intended('/associate/view/intakes/')->with('success', 'INTAKE '. $case->case_number. ' has been made a case!! Congratulations!!');
 
 
 
+    }
+    public function rejectCase(Request $request){
+        $case = new LegalCase;
+        $case->case_number = $request->segment(4);
+        $case->rejectCase();
 
-        return view('firm.associate.case')->with(['case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff]);
-
+        return redirect()->intended('/associate/view/intakes/')->with('error', 'INTAKE '. $case->case_number. ' has been rejected');
 
     }
 }

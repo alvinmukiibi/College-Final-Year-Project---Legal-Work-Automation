@@ -23,6 +23,7 @@
 
 <section class="content">
     <div class="container-fluid">
+            @include('includes.messages')
         <div class="row">
             <div class="col-12">
                 <div class="card card-primary">
@@ -53,10 +54,20 @@
                                         </td>
                                         <td>{{ $case->name }}</td>
                                         <td>{{ date('d-M-Y', strtotime($case->date_taken)) }}</td>
-                                        <td>{{ $case->case_status }}</td>
+                                        <td>
+                                                @if ($case->case_status == 'intake')
+                                                <button class="btn btn-warning text-white"><b>{{ __('INTAKE') }}</b></button>
+                                                @endif
+                                                @if ($case->case_status == 'open')
+                                                <button class="btn btn-success text-white"><b>{{ __('OPEN') }}</button>
+                                                @endif
+                                                @if ($case->case_status == 'closed-rejected')
+                                                <button class="btn btn-danger text-white"><b>{{ __('REJECTED') }}</button>
+                                                @endif
+                                        </td>
                                         <td>
                                                 <div class="btn-group">
-                                                        <button type="button" class="btn btn-success">Left</button>
+
                                                         <form action="{{ url('/associate/view/case') }}" method="post">
                                                             @csrf
                                                             <input type="hidden" name="caseID" value="{{ $case->id }}">

@@ -71,11 +71,13 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/associate/register/intake', "CasesController@makeIntake");
     Route::get('/associate/view/intakes', "CasesController@viewIntakes");
     Route::post('/associate/view/case', "CasesController@viewCase");
+    Route::get('/associate/make/case/{case}', "CasesController@makeCase");
+    Route::get('/associate/reject/case/{case}', "CasesController@rejectCase");
 
     // Due Diligence routes
     Route::get('/associate/make/due_diligence/{case}', "DueDiligenceController@makeDueDiligence");
     Route::post('/associate/add/duediligence', "DueDiligenceController@addDueDiligence");
-
+    Route::get('/associate/download/file/{file}', "DueDiligenceController@downloadFile");
 
 });
 Route::group(['prefix' => 'api'], function () {

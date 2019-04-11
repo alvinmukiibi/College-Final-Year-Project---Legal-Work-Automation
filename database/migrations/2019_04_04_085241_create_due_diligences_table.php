@@ -17,6 +17,11 @@ class CreateDueDiligencesTable extends Migration
             $table->increments('id');
             $table->text('description')->nullable();
             $table->string('date_carried_out');
+            $table->text('file1')->nullable();
+            $table->text('file2')->nullable();
+            $table->text('file3')->nullable();
+            $table->text('file4')->nullable();
+            $table->text('file5')->nullable();
             $table->string('case_id');
             $table->timestamp('created_at')->useCurrent();
 

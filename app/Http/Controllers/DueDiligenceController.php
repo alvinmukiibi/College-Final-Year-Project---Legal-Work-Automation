@@ -47,45 +47,25 @@ class DueDiligenceController extends Controller
         $due_d->data = $data;
         $due_d->case_id = $request->input('caseID');
 
-        $due_id = $due_d->addDueDiligence();
-
         $this->request = $request;
         $this->fileName = 'file1';
-        $file1 = $this->storeAndGenerateNewName();
+        $due_d->file1 = $this->storeAndGenerateNewName();
         $this->fileName = 'file2';
-        $file2 = $this->storeAndGenerateNewName();
+        $due_d->file2 = $this->storeAndGenerateNewName();
         $this->fileName = 'file3';
-        $file3 = $this->storeAndGenerateNewName();
+        $due_d->file3 = $this->storeAndGenerateNewName();
         $this->fileName = 'file4';
-        $file4 = $this->storeAndGenerateNewName();
+        $due_d->file4 = $this->storeAndGenerateNewName();
 
-        $newFile = new File;
-        $newFile->description = "due_diligence_file";
-        $newFile->case_id = $request->input('caseID');
-        $newFile->due_diligence_id = $due_id;
-
-        if($file1 !== null){
-            $newFile->location = $file1;
-            $newFile->addFile();
-        }
-        if($file2 !== null){
-            $newFile->location = $file2;
-            $newFile->addFile();
-        }
-        if($file3 !== null){
-            $newFile->location = $file3;
-            $newFile->addFile();
-        }
-        if($file4 !== null){
-            $newFile->location = $file4;
-            $newFile->addFile();
-        }
-
+        $due_id = $due_d->addDueDiligence();
 
         return redirect()->back()->with('success', 'Information Successfully Saved!!');
 
+    }
+    public function downloadFile(Request $request){
+        $file = storage_path().DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR. 'files' . DIRECTORY_SEPARATOR. $request->segment(4);
 
-
+        return response()->download($file);
 
     }
 }
