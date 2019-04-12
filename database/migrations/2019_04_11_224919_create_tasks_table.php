@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProceedingsTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateProceedingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('proceedings', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description')->nullable();
-            $table->string('date_of_proceeding');
-            $table->string('court_of_proceeding', '100');
-            $table->text('outcome_of_proceeding')->nullable();
-            $table->string('date_of_next_proceeding')->nullable();
+            $table->text('task');
+            $table->string('status')->default('pending');
             $table->unsignedInteger('case_id');
+            $table->timestamp('due_date')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
-
             $table->foreign('case_id')->references('id')->on('legal_cases');
         });
     }
@@ -34,6 +31,6 @@ class CreateProceedingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proceedings');
+        Schema::dropIfExists('tasks');
     }
 }

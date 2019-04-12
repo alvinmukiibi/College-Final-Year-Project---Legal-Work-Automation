@@ -22,6 +22,7 @@
     </div>
     <section class="content">
             <div class="container-fluid">
+                    @include('includes.messages')
                     <div class="row">
 
                         <div class="col-12">
@@ -52,11 +53,122 @@
                     <div class="row">
 
                         <div class="col-4 connectedSortable">
+                                <div class="card card-danger collapsed-card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                Documents
+                                            </h3>
+                                            <div class="card-tools">
+
+                                                    <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                      <i class="fa fa-minus"></i>
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                                    </button>
+                                                  </div>
+                                        </div>
+                                        <div class="card-body table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date of Upload</th>
+                                                        <th>Name</th>
+                                                        <th>Uploaded By</th>
+                                                        <th>Download</th>
+                                                    </tr>
+                                                    <tbody>
+                                                        @foreach ($docs as $doc)
+                                                        <tr>
+                                                            <td>{{ date('d-M-Y', strtotime($doc->date_of_upload)) }}</td>
+                                                            <td>{{ $doc->name }}</td>
+                                                            <td>{{ $doc->fname }} {{ $doc->lname }}</td>
+                                                            <td> <a href="{{ url('/associate/download/file', ['file' => $doc->location])  }}"> <i class="fa fa-download"></i> </a> </td>
+                                                        </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </thead>
+                                            </table>
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <form action="{{ url('/associate/add/document') }}" method="post" enctype="multipart/form-data" >
+                                                @csrf
+                                                <div class="form-group row">
+                                                        <label for="docName" class="col-sm-4 col-form-label">Name</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" placeholder="E.g. Client Agreement document.." name="name" required class="form-control {{$errors->has('name')?'is-invalid':''}}">
+                                                        </div>
+                                                    </div>
+                                                <div class="form-group">
+                                                        <div class="input-group">
+                                                          <div class="custom-file">
+                                                            <input required type="file" name="file" class="custom-file-input {{$errors->has('file')?'is-invalid':''}}">
+                                                            <label class="custom-file-label" >Choose file</label>
+
+                                                          </div>
+
+                                                          <div class="input-group-append">
+                                                              <input type="hidden" name="caseID"  value="{{ $case->case_number }}">
+                                                            <button type="submit" class="btn btn-outline-success" >Upload</button>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </form>
+                                        </div>
+
+                                    </div>
+
+                                <div class="card card-info collapsed-card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Due Diligence</h3>
+                                            <div class="card-tools">
+
+                                                    <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                      <i class="fa fa-minus"></i>
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                                    </button>
+                                                  </div>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Date Carried Out </td>
+                                                        <td>Description</td>
+                                                        <td>Action</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($dds as $dd)
+                                                    <tr>
+                                                        <td> {{  date('d-M-Y', strtotime($dd->date_carried_out)) }} </td>
+                                                        <td>
+                                                                <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Due Diligence Description" data-content="{{ $dd->description }}"> <b>{{ __('DESCRIPTION') }}</b> </button>
+
+
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="{{ url('/associate/make/due_diligence', ['case'=> $case->case_number  ]) }}" class="btn btn-primary btn-flat pull-right"> <i class="fa fa-plus"></i> Add Due Diligence</a>
+                                        </div>
+                                    </div>
+
                             <div class="card card-primary collapsed-card">
                                 <div class="card-header">
                                     <h3 class="card-title">Basic Case Info</h3>
                                     <div class="card-tools">
-
                                             <button type="button" class="btn btn-tool" data-widget="collapse">
                                               <i class="fa fa-minus"></i>
                                             </button>
@@ -95,6 +207,71 @@
 
                                 </div>
                             </div>
+
+                            <div class="card card-secondary collapsed-card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            Tasks
+                                        </h3>
+                                        <div class="card-tools">
+
+                                                <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                  <i class="fa fa-minus"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                                </button>
+                                              </div>
+                                    </div>
+                                    <div class="card-body p-0">
+                                            <table class="table table-hover">
+                                                    <tr>
+
+                                                      <th>Task</th>
+
+                                                      <th style="width: 40px">Label</th>
+                                                      <th style="width: 40px">Action</th>
+                                                    </tr>
+                                                    @foreach ($tasks as $task)
+                                                    <tr>
+                                                            <td>{{ $task->task }}</td>
+                                                            <td>
+                                                                @if ($task->status == 'done')
+                                                                <span class="badge bg-success">    {{ __('DONE') }} </span>
+                                                                @else
+                                                                <span class="badge bg-warning">    {{ __('PENDING') }} </span>
+                                                                @endif
+                                                              </td>
+                                                              <td>
+                                                                    @if ($task->status == 'pending')
+
+                                                                    <a title="COMPLETE" class="btn btn-sm btn-primary" href="{{ url('/associate/complete/task', ['task' => $task->id]) }}"> <i class="fa fa-check"></i> </a>
+
+                                                                    @endif
+
+                                                              </td>
+                                                        </tr>
+                                                    @endforeach
+
+                                                </table>
+
+
+                                    </div>
+                                    <div class="card-footer">
+                                            <form action="{{ URL('/associate/add/casetask') }}" method="post">
+                                                    <div class="input-group">
+                                                        @csrf
+                                                        <input type="hidden" name="caseID" value="{{ $case->id }}">
+                                                      <input required type="text" name="task" placeholder="E.g. Make Research ..." class="form-control">
+                                                      <span class="input-group-append">
+                                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Add Task</button>
+                                                      </span>
+                                                    </div>
+                                                  </form>
+                                    </div>
+
+                                </div>
+
                             <div class="card card-success collapsed-card">
                                     <div class="card-header">
                                         <h3 class="card-title">Client Info</h3>
@@ -178,53 +355,52 @@
                                     </div>
                                 </div>
 
-                        </div>
+
+
+                            </div>
                         <div class="col-8 connectedSortable">
-                                <div class="card card-info">
-                                        <div class="card-header">
-                                            <h3 class="card-title">Due Diligence</h3>
-                                            <div class="card-tools">
+                            <div class="card card-warning">
+                                <div class="card-header">
+                                    <h3 class="card-title text-white">Court Proceedings</h3>
+                                    <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-widget="collapse">
+                                              <i class="fa fa-minus"></i>
+                                            </button>
 
-                                                    <button type="button" class="btn btn-tool" data-widget="collapse">
-                                                      <i class="fa fa-minus"></i>
-                                                    </button>
+                                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                            </button>
+                                          </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>Date of Proceeding</th>
+                                            <th>Courts of Law</th>
+                                            <th>Desc</th>
+                                            <th>Outcome</th>
+                                            <th>Date of Next Proceeding</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                                                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                                                    </button>
-                                                  </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <h3>Previous Due Diligences</h3>
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <td>Date Carried Out </td>
-                                                        <td>Description</td>
-                                                        <td>Action</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($dds as $dd)
-                                                    <tr>
-                                                        <td> {{  date('d-M-Y', strtotime($dd->date_carried_out)) }} </td>
-                                                        <td>
-                                                                <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Due Diligence Description" data-content="{{ $dd->description }}"> <b>{{ __('DESCRIPTION') }}</b> </button>
+                                </div>
+                                <div class="card-footer">
+                                    <a class="btn btn-outline-success pull-right" href="{{ url('/associate/view/proceedings', ['case' => $case->case_number]) }}"> <i class="fa fa-plus"></i> Add Proceeding  </a>
+                                </div>
 
-
-                                                        </td>
-                                                        <td></td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                            </div>
 
 
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="{{ url('/associate/make/due_diligence', ['case'=> $case->case_number  ]) }}" class="btn btn-primary btn-flat pull-right"> <i class="fa fa-plus"></i> Add Due Diligence</a>
-                                        </div>
-                                    </div>
-                        </div>
+
+                                </div>
 
                     </div>
             </div>

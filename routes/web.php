@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/make/intake', "CasesController@showIntakeForm");
     Route::post('/associate/register/intake', "CasesController@makeIntake");
     Route::get('/associate/view/intakes', "CasesController@viewIntakes");
-    Route::post('/associate/view/case', "CasesController@viewCase");
+    Route::get('/associate/view/case/{case}', "CasesController@viewCase");
     Route::get('/associate/make/case/{case}', "CasesController@makeCase");
     Route::get('/associate/reject/case/{case}', "CasesController@rejectCase");
 
@@ -78,6 +78,16 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/make/due_diligence/{case}', "DueDiligenceController@makeDueDiligence");
     Route::post('/associate/add/duediligence', "DueDiligenceController@addDueDiligence");
     Route::get('/associate/download/file/{file}', "DueDiligenceController@downloadFile");
+
+    // Case Routes
+    Route::post('/associate/add/document', "CasesController@addDocumentToCase");
+
+    // Case Task Routes
+    Route::post('/associate/add/casetask', "CasesController@addCaseTask");
+    Route::get('/associate/complete/task/{task}', "CasesController@completeTask");
+
+    // Proceeding Routes
+    Route::get('/associate/view/proceedings/{case}', "CasesController@viewProceedings");
 
 });
 Route::group(['prefix' => 'api'], function () {

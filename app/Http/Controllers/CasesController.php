@@ -10,6 +10,8 @@ use App\User;
 use App\Firm;
 use App\CaseType;
 use App\DueDiligence;
+use App\File;
+use App\Task;
 class CasesController extends Controller
 {
     public function showIntakeForm(Request $request){
@@ -78,7 +80,8 @@ class CasesController extends Controller
     }
 
     public function viewCase(Request $request){
-        $case = LegalCase::find($request->input('caseID'));
+        $id = LegalCase::where('case_number', $request->segment(4))->value('id');
+        $case = LegalCase::find($id);
         $caseType = CaseType::find($case->case_type);
         $client = Client::find($case->client);
         $staff = User::find($case->staff);
@@ -86,7 +89,15 @@ class CasesController extends Controller
         $dd->case_id = $case->case_number;
         $diligences = $dd->getCaseDueDiligences();
 
-        return view('firm.associate.case')->with(['case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences]);
+        $doc = new File;
+        $doc->case_id = $request->segment(4);
+        $docs = $doc->getCaseDocuments();
+
+        $legalCase = new LegalCase;
+        $legalCase->id = $id;
+        $tasks = $legalCase->tasks()->orderBy('created_at', 'desc')->get();
+
+        return view('firm.associate.case')->with(['case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
 
     }
     public function makeCase(Request $request){
@@ -95,7 +106,7 @@ class CasesController extends Controller
         $case->case_number = $request->segment(4);
         $case->makeCase();
 
-        return redirect()->intended('/associate/view/intakes/')->with('success', 'INTAKE '. $case->case_number. ' has been made a case!! Congratulations!!');
+        return redirect()->back()->with('success', 'INTAKE '. $case->case_number. ' has been made a case!! Congratulations!!');
 
 
 
@@ -105,7 +116,80 @@ class CasesController extends Controller
         $case->case_number = $request->segment(4);
         $case->rejectCase();
 
-        return redirect()->intended('/associate/view/intakes/')->with('error', 'INTAKE '. $case->case_number. ' has been rejected');
+        return redirect()->back()->with('error', 'INTAKE '. $case->case_number. ' has been rejected');
 
     }
+    public function storeAndGenerateNewName(){
+        $fileName = $this->fileName;
+        $request = $this->request;
+        if($request->hasFile($fileName) && $request->file($fileName)->isValid()){
+            $file = $request->file($fileName);
+            $savedTo = 'public'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR;
+            $originalName = $file->getClientOriginalName();
+            $name = pathinfo($originalName, PATHINFO_FILENAME);
+            $replaced = \str_replace(' ', '_', $name);
+            $newName = $replaced . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs($savedTo, $newName);
+            return $newName;
+    }else{
+        return null;
+    }
+    }
+
+    public function addDocumentToCase(Request $request){
+        $data = $this->validate($request, [
+            'name' => 'required|max:255',
+            'file' => 'required|mimes:pdf,rtf,jpg,jpeg,png,docx,doc,ppt,pptx,xls,xlsx,txt,mp3,webp,mp4,mkv,zip,rar|max:10240'
+        ]);
+
+        $case_id = $request->input('caseID');
+
+        $this->request = $request;
+        $this->fileName = 'file';
+        $newFileName = $this->storeAndGenerateNewName();
+
+        $file = new File;
+        $file->data = $data;
+        $file->case_id = $case_id;
+        $file->location = $newFileName;
+
+        $file->saveFile();
+
+        return redirect()->back()->with('success', 'Document Saved Successfully!!');
+
+
+
+    }
+    public function addCaseTask(Request $request){
+        $data = $this->validate($request, [
+            'task' => 'required|max:255'
+        ]);
+
+        $task = new Task;
+        $task->task = $data['task'];
+        $task->case_id = $request->input('caseID');
+
+        $task->createTask();
+
+        return redirect()->back()->with('success', 'Task Added Successfully!!');
+
+
+    }
+    public function completeTask(Request $request){
+
+        $task = new Task;
+        $task->id = $request->segment(4);
+
+        $task->complete();
+
+        return redirect()->back();
+
+    }
+
+    public function viewProceedings(Request $request){
+
+        return view('firm.associate.proceedings');
+
+    }
+
 }

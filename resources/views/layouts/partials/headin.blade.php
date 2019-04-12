@@ -27,12 +27,12 @@ Date    :   6th-February-2019
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/morris/morris.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datepicker/datepicker3.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/daterangepicker/daterangepicker-bs3.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap-datetimepicker.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/select2/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/datatables/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/fullcalendar/fullcalendar.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('plugins/fullcalendar/fullcalendar.print.css')}}">
+    {{--  <link rel="stylesheet" type="text/css" href="{{asset('plugins/fullcalendar/fullcalendar.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/fullcalendar/fullcalendar.print.css')}}">  --}}
     <link rel="stylesheet" type="text/css" href="{{asset('dist/css/adminlte.min.css')}}"/>
 
 

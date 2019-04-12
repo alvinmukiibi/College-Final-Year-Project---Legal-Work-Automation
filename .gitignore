@@ -1,7 +1,7 @@
 /node_modules
 /storage/*.key
 /vendor
-/public
+
 .env
 .gitignore
 /public/uploads/profiles

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\DueDiligence;
+use App\File;
+use App\Task;
 class LegalCase extends Model
 {
     protected $table = 'legal_cases';
@@ -16,6 +18,12 @@ class LegalCase extends Model
     }
     public function duediligences(){
         return $this->hasMany(DueDiligence::class, 'case_id');
+    }
+    public function documents(){
+        return $this->hasMany(File::class, 'case_id');
+    }
+    public function tasks(){
+        return $this->hasMany(Task::class, 'case_id');
     }
 
 

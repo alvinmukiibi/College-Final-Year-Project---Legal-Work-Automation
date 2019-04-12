@@ -23,7 +23,6 @@
 
 <section class="content">
     <div class="container-fluid">
-            @include('includes.messages')
         <div class="row">
             <div class="col-12">
                 <div class="card card-primary">
@@ -67,11 +66,7 @@
                                         </td>
                                         <td>
                                                 <div class="btn-group">
-
-                                                        <form action="{{ url('/associate/view/case') }}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="caseID" value="{{ $case->id }}">
-                                                            <button type="submit" class="btn btn-primary">View</button>
+                                                            <a href="{{ url('/associate/view/case', ['caseID' => $case->case_number]) }}" class="btn btn-primary">View</a>
                                                         </form>
 
                                                       </div>

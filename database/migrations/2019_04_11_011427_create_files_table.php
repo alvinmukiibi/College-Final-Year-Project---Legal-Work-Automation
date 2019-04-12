@@ -18,8 +18,9 @@ class CreateFilesTable extends Migration
             $table->string('name', '50')->nullable();
             $table->string('description', '50')->nullable();
             $table->text('location');
+            $table->unsignedInteger('uploadedBy');
+            $table->timestamp('date_of_upload')->useCurrent();
             $table->unsignedInteger('case_id');
-            //$table->unsignedInteger('due_diligence_id');
             $table->string('target_audience', '50')->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
