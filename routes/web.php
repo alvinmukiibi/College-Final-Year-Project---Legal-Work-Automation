@@ -63,6 +63,9 @@ Route::group(['middleware' => 'auth:web'], function()
     // Website management routes
     Route::get('/admin/manage/website', "WebsiteController@showWebsite");
     Route::post('/admin/savelawfirmProfile', "WebsiteController@savelawfirmProfile");
+
+    // calendar management routes
+    Route::get('admin/manage/calendar', "CalendarController@viewCalendar");
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

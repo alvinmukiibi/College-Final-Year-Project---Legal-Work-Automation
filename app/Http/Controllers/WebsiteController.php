@@ -36,7 +36,7 @@ $data = $this->validate($request, [
     "street_address"=>"required|max:40",
     "website"=>"required|max:40",
     "description"=>"required|max:200",
-    "avatar"=>"mimes:jpeg,jpg,gif,png,webp|dimensions:min_width=100,min_height=100"
+    "avatar"=>"mimes:jpeg,jpg,gif,png,webp|dimensions:min_width=100,min_height=600"
 ]);
 $image_name = null;
 if($request->hasFile('avatar')){  //if user uploaded a profile picture

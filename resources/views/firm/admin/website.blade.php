@@ -25,8 +25,19 @@
     <div class="container-fluid">
 <div class="row">
             
-            
-<div class="col-md-8">
+<div class="col-md-2">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle", width="500", height="500"
+                        src="{{asset('uploads/firms/'.$firm->avatar)}}"
+                                alt="User profile picture">
+                        </div>
+                        
+                  </div>
+                </div>
+  </div>           
+<div class="col-md-10">
                     <div class="card">
                       <div class="card-header p-2">
                         <ul class="nav nav-pills">

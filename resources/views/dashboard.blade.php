@@ -261,6 +261,7 @@
                                       <a href="#" class="dropdown-item">Add new event</a>
                                       <a href="#" class="dropdown-item">Clear events</a>
                                       <div class="dropdown-divider"></div>
+                                      <a href="{{ url('/admin/manage/roles')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                                       <a href="#" class="dropdown-item">View calendar</a>
                                     </div>
                                   </div>
