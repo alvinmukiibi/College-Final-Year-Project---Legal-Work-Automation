@@ -88,6 +88,7 @@ Route::group(['middleware' => 'auth:web'], function()
 
     // Proceeding Routes
     Route::get('/associate/view/proceedings/{case}', "CasesController@viewProceedings");
+    Route::post('/associate/add/proceeding', "CasesController@addProceeding");
 
 });
 Route::group(['prefix' => 'api'], function () {

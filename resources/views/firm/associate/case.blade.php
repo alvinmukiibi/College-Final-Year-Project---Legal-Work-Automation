@@ -271,6 +271,47 @@
                                     </div>
 
                                 </div>
+                                <div class="card card-warning collapsed-card">
+                                        <div class="card-header">
+                                            <h3 class="card-title text-white">Court Proceedings</h3>
+                                            <div class="card-tools">
+                                                    <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                      <i class="fa fa-minus"></i>
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                                    </button>
+                                                  </div>
+                                        </div>
+                                        <div class="card-body table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <th>Date of Proceeding</th>
+                                                    <th>Courts of Law</th>
+                                                    <th>Outcome</th>
+                                                    <th>Date of Next Proceeding</th>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($proceedings as $proceeding)
+                                                    <tr>
+                                                        <td>{{ date('d-M-Y H:i', strtotime($proceeding->date_of_proceeding)) }}</td>
+                                                        <td>{{ $proceeding->court_of_proceeding }}</td>
+                                                        <td>{{ $proceeding->outcome_of_proceeding }}</td>
+                                                        <td>{{ date('d-M-Y H:i', strtotime($proceeding->date_of_next_proceeding)) }}</td>
+
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="card-footer">
+                                            <a class="btn btn-outline-success pull-right" href="{{ url('/associate/view/proceedings', ['case' => $case->case_number]) }}"> <i class="fa fa-plus"></i> Add Proceeding  </a>
+                                        </div>
+
+                                    </div>
+
+
 
                             <div class="card card-success collapsed-card">
                                     <div class="card-header">
@@ -359,46 +400,7 @@
 
                             </div>
                         <div class="col-8 connectedSortable">
-                            <div class="card card-warning">
-                                <div class="card-header">
-                                    <h3 class="card-title text-white">Court Proceedings</h3>
-                                    <div class="card-tools">
-                                            <button type="button" class="btn btn-tool" data-widget="collapse">
-                                              <i class="fa fa-minus"></i>
-                                            </button>
-
-                                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                                            </button>
-                                          </div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <th>Date of Proceeding</th>
-                                            <th>Courts of Law</th>
-                                            <th>Desc</th>
-                                            <th>Outcome</th>
-                                            <th>Date of Next Proceeding</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <div class="card-footer">
-                                    <a class="btn btn-outline-success pull-right" href="{{ url('/associate/view/proceedings', ['case' => $case->case_number]) }}"> <i class="fa fa-plus"></i> Add Proceeding  </a>
-                                </div>
-
-                            </div>
-
-
+                          ff
 
                                 </div>
 

@@ -24,7 +24,7 @@
             <div class="container-fluid">
                     @include('includes.messages')
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">
@@ -32,44 +32,104 @@
                                     </h3>
                                 </div>
                                 <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="dtp_input1" class="col-md-12 control-label">Date of Proceeding</label>
-                                            <div class="input-group date form_datetime col-md-12" data-date="2019-01-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="date_of_proceeding">
-                                            <input class="form-control" size="16" type="text" value="" readonly>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                        </div>
-                                        <input type="hidden" id="date_of_proceeding" value="" /><br/>
+                                    <form action="{{ url('/associate/add/proceeding') }}" method="post">
+                                    @csrf
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                    <label for="dtp_input1" class="col-md-12 control-label">Date of Proceeding</label>
+                                                    <div class="input-group date form_datetime col-md-12"  data-date-format="dd MM yyyy - HH:ii" data-link-field="date_of_proceeding">
+                                                    <input class="form-control" size="16" type="text"  value="" readonly>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                                <input type="hidden"  name="date_of_proceeding" id="date_of_proceeding" /><br/>
+
+                                                </div>
+                                                <div class="form-group col-md-8">
+                                                        <label for="description">Description</label>
+                                                        <textarea required name="description" cols="5" rows="5" placeholder="What happened during the proceeding..." class="form-control"></textarea>
+
+
+                                                </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea name="description" cols="5" rows="5" placeholder="What happened during the proceeding..." class="form-control"></textarea>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="court">Courts of Law</label>
+                                            <input type="text" required placeholder="High Court" name="court" class="form-control">
+
+                                        </div>
+                                        <div class="form-group col-md-8">
+                                            <label for="court">Outcome of Proceeding</label>
+                                            <input type="text" required placeholder="E.g. Court adjourned..." name="outcome" class="form-control">
+
+                                        </div>
 
                                     </div>
-                                    <div class="form-group">
-                                        <label for="court">Courts of Law</label>
-                                        <input type="text" name="court" class="form-control">
+                                    <div class="row">
+                                            <div class="form-group col-md-4">
+                                                    <label for="dtp_input1" class="col-md-12 control-label">Date of Next Proceeding</label>
+                                                    <div class="input-group date form_datetime col-md-12"  data-date-format="dd MM yyyy - HH:ii" data-link-field="date_of_next_proceeding">
+                                                    <input class="form-control" size="16" type="text" value="" readonly>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                </div>
+                                                <input type="hidden" name="date_of_next_proceeding" id="date_of_next_proceeding" value="" /><br/>
+
+
+                                                </div>
+                                                <div class="form-group col-md-8">
+                                                    <label for=""> <i class="fa fa-login"></i> </label>
+                                                    <input type="hidden" name="caseID" value="{{ $case }}">
+                                                        <button type="submit" class="btn btn-outline-success btn-block"> <b>Submit</b>  </button>
+
+                                                </div>
+
+
                                     </div>
-                                    <div class="form-group">
-                                            <label for="court">Outcome of Proceeding</label>
-                                            <input type="text" name="outcome" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="dtp_input1" class="col-md-12 control-label">Date of Next Proceeding</label>
-                                                <div class="input-group date form_datetime col-md-12" data-date="2019-01-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="date_of_next_proceeding">
-                                                <input class="form-control" size="16" type="text" value="" readonly>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                            </div>
-                                            <input type="hidden" id="date_of_next_proceeding" value="" /><br/>
-                                        </div>
+                                </form>
+
+                                <hr/>
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th style="width:20%">Date</th>
+                                        <th>Issues</th>
+                                        <th style="width:20%">Outcome</th>
+                                        <th style="width:20%">Next Proceeding</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($proceedings as $proceeding)
+                                        <tr>
+                                                <td>{{ date('d-M-Y H:i', strtotime($proceeding->date_of_proceeding)) }}</td>
+                                                <td>
+                                                    <div class="card card-info collapsed-card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Desc</h3>
+                                                            <div class="card-tools">
+                                                                    <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                                      <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                  </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                                {{ $proceeding->description }}
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+                                                <td>{{ $proceeding->outcome_of_proceeding }}</td>
+                                                <td>{{ date('d-M-Y H:i', strtotime($proceeding->date_of_next_proceeding)) }}</td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+
                                 </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
+
                             </div>
                         </div>
-                        <div class="col-md-6">
 
-                        </div>
                     </div>
             </div>
     </section>

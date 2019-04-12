@@ -12,6 +12,7 @@ use App\CaseType;
 use App\DueDiligence;
 use App\File;
 use App\Task;
+use App\Proceeding;
 class CasesController extends Controller
 {
     public function showIntakeForm(Request $request){
@@ -97,7 +98,9 @@ class CasesController extends Controller
         $legalCase->id = $id;
         $tasks = $legalCase->tasks()->orderBy('created_at', 'desc')->get();
 
-        return view('firm.associate.case')->with(['case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
+        $proceedings = $legalCase->proceedings()->orderBy('created_at', 'desc')->get();
+
+        return view('firm.associate.case')->with(['proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
 
     }
     public function makeCase(Request $request){
@@ -187,8 +190,30 @@ class CasesController extends Controller
     }
 
     public function viewProceedings(Request $request){
+        $case_id = $request->segment(4);
+        $case = new LegalCase;
+        $case->id = LegalCase::where(['case_number' => $case_id])->value('id');
+        $proceedings = $case->proceedings()->orderBy('created_at', 'desc')->get();
+        return view('firm.associate.proceedings')->with(['case' => $case_id, 'proceedings' => $proceedings]);
 
-        return view('firm.associate.proceedings');
+    }
+    public function addProceeding(Request $request){
+        $data = $this->validate($request, [
+            'date_of_proceeding' => 'required|date',
+            'description' => 'required',
+            'outcome' => 'required|max:255',
+            'court' => 'required|max:255',
+            'date_of_next_proceeding' => 'required|date',
+            'caseID' => 'required|numeric'
+        ]);
+
+        $proceeding = new Proceeding;
+        $proceeding->data = $data;
+        $proceeding->case_id = LegalCase::where('case_number', $data['caseID'])->value('id');
+        $proceeding->addProceeding();
+
+        return redirect()->back()->with('success', 'Proceeding Recorded!!');
+
 
     }
 

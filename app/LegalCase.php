@@ -25,6 +25,9 @@ class LegalCase extends Model
     public function tasks(){
         return $this->hasMany(Task::class, 'case_id');
     }
+    public function proceedings(){
+        return $this->hasMany(Proceeding::class, 'case_id');
+    }
 
 
     public function makeNewIntake(){
