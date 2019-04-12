@@ -74,3 +74,4 @@ class UserController extends Controller
         return view('firm.calendar');
     }
 }
+

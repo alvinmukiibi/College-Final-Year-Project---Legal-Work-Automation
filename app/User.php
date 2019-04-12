@@ -49,6 +49,9 @@ class User extends Authenticatable
     public function cases(){
         return $this->hasMany(LegalCase::class, 'staff');
     }
+    public function todos(){
+        return $this->hasMany(Todo::class);
+    }
     public function activateUsers(){
 
         $activate = DB::table($this->table)->where(['firm_id'=> $this->firm_id])->update(["account_status"=>"active"]);

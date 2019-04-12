@@ -128,6 +128,16 @@ class Firm extends Model
             return false;
         }
     }
+    public function savelawfirmProfile(){
+        $firm = $this->firmData;
+        if($this->avatar==null){
+        $add = DB::table($this->table)->where('firm_id', auth()->user()->firm_id)->update(['name'=> $firm['name']  , 'city'=> $firm['city'], 'country'=>$firm['country'], 'street_address'=>$firm['street_address'], 'website'=> $firm['website'], 'description'=> $firm['description'], 'contact1'=> $firm['contact1'], 'contact2'=> $firm['contact2'], 'area'=> $firm['area']]);
+        return $add;
+        }else{
+            $add = DB::table($this->table)->where('firm_id', auth()->user()->firm_id)->update(['name'=> $firm['name']  , 'city'=> $firm['city'], 'country'=>$firm['country'], 'street_address'=>$firm['street_address'], 'website'=> $firm['website'], 'description'=> $firm['description'], 'contact1'=> $firm['contact1'], 'contact2'=> $firm['contact2'], 'avatar'=> $this->avatar, 'area'=> $firm['area']]);
+            return $add;
+        }
+    }
 
 
 }

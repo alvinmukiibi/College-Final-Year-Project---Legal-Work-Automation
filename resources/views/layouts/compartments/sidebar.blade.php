@@ -47,6 +47,16 @@
                       </a>
                       @endif
 
+                      @if (auth()->user()->user_role=="Associate")
+                      <a href="{{ url('/associate/profile')}}" class="nav-link">
+                        <i class="nav-icon fa fa-user"></i>
+                        <p>
+                          My Profile
+
+                        </p>
+                      </a>
+                      @endif
+
                   </li>
 
                   @if(auth()->user()->user_role === "ulc")
@@ -80,7 +90,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/admin/departments')}}" class="nav-link">
+                        <a href="{{ url('admin/departments')}}" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>
                               Departments

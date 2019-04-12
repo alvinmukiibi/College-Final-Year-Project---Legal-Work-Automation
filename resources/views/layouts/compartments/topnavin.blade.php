@@ -17,7 +17,11 @@ Date    :   6th-February-2019
         </li>
         @elseif (auth()->user()->user_role == "Associate")
         <li class="nav-item d-none d-sm-inline-block">
+<<<<<<< HEAD
             <a href="{{ url('/associate/make/intake')}}" class="nav-link">New Intake <i class="fa fa-plus-circle"></i>   </a>
+=======
+            <a href="{{ url('/register/firm')}}" class="nav-link">New Intake <i class="fa fa-plus-circle"></i>   </a>
+>>>>>>> ebd9c58ff865a17dd1b3f56f63325ec1208902ef
             </li>
 
 

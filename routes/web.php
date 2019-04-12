@@ -90,6 +90,10 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/view/proceedings/{case}', "CasesController@viewProceedings");
     Route::post('/associate/add/proceeding', "CasesController@addProceeding");
 
+    Route::post('/admin/savelawfirmProfile', "WebsiteController@savelawfirmProfile");
+
+    // calendar management routes
+    Route::get('admin/manage/calendar', "CalendarController@viewCalendar");
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
