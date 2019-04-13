@@ -35,7 +35,7 @@ class LegalCase extends Model
         $caseNumber = $this->generateUniqueCaseNumber();
         $add = DB::table($this->table)->insert(['case_number'=> $caseNumber, 'client' => $this->client, 'staff' => $this->staff, 'case_type' => $data['caseType'], 'date_taken' => $this->date_taken, 'taken_by' => $this->takenBy, 'synopsis' => $data['synopsis'], 'case_status' => $this->status, 'firm' => $this->firm]);
 
-        return $add;
+        return DB::getPdo()->lastInsertId();
     }
     public function generateUniqueCaseNumber($length = 7){
         $characters = '0123456789';
@@ -60,5 +60,9 @@ class LegalCase extends Model
     public function rejectCase(){
         $reject = DB::table($this->table)->where('case_number', $this->case_number)->update(['case_status' => 'closed-rejected']);
         return $reject;
+    }
+    public function getCaseClient(){
+        $client = DB::table($this->table)->join('clients', 'clients.id', '=', 'legal_cases.client')->where(['legal_cases.case_number' => $this->case_number])->value('clients.name');
+        return $client;
     }
 }

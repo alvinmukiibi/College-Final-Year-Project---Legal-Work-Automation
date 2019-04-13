@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Department;
+use App\User;
 class DepartmentsController extends Controller
 {
     public function showDepartments(Request $request){
@@ -57,5 +58,9 @@ class DepartmentsController extends Controller
             return redirect()->back()->with("error", "Failed to Edit");
         }
 
+    }
+    public function fetchUsersInDepartment(Request $request){
+        $users = User::where(['department' => $request->input('id'), 'account_status' => 'active'])->get();
+        return response()->json(['users' => $users]);
     }
 }

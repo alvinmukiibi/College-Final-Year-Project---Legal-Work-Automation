@@ -13,6 +13,8 @@ use App\DueDiligence;
 use App\File;
 use App\Task;
 use App\Proceeding;
+use App\LegalCase_Staff;
+use App\Department;
 class CasesController extends Controller
 {
     public function showIntakeForm(Request $request){
@@ -65,7 +67,11 @@ class CasesController extends Controller
            $case->status = 'intake';
            $case->firm = auth()->user()->firm_id;
 
-           $case->makeNewIntake();
+           $case_id = $case->makeNewIntake();
+
+           $case_staff = new LegalCase_Staff;
+           $case_staff->case_id = $case_id;
+           $case_staff->ownCase();
 
            return redirect()->back()->with('success', 'New Intake Made Successfully');
         }else{
@@ -103,6 +109,47 @@ class CasesController extends Controller
         return view('firm.associate.case')->with(['proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
 
     }
+
+    public function shareCase(Request $request){
+        $case_id = $request->segment(4);
+        $case = new LegalCase;
+        $case->case_number = $case_id;
+        $client = $case->getCaseClient();
+
+        $departments = Department::where(['firm_id' => auth()->user()->firm_id])->get();
+        return view('firm.associate.refer')->with(['case' => $case_id, 'client' => $client, 'departments' => $departments]);
+    }
+    public function submitShare(Request $request){
+        $data = $this->validate($request, [
+            'department' => 'required|numeric',
+            'sharingType' => 'required',
+            'assignee' => 'required|numeric'
+        ]);
+
+        $case_number = $request->input('caseID');
+        $case_id = LegalCase::where('case_number', $case_number)->value('id');
+
+        $owner = LegalCase_Staff::where('case_id', $case_id)->value('owner');
+        if($data['sharingType'] === 'assign'){
+            if($owner !== auth()->user()->id){
+                return redirect()->back()->with('error', "You have no rights to assign this case!!");
+            }else{
+                $assign = new LegalCase_Staff;
+                $assign->assignee = $data['assignee'];
+                $assign->case_id = $case_id;
+                $assign->assignCase();
+
+                return redirect()->intended('/associate/view/intakes')->with('success', 'Case Number ' . $case_number . ' has been assigned succesfully!!');
+
+            }
+
+        }else{
+
+        }
+
+
+    }
+
     public function makeCase(Request $request){
 
         $case = new LegalCase;

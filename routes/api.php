@@ -33,3 +33,6 @@ Route::post('user/todos/getTodos', 'TodosController@getTodos');
 
 // Unread Messages Routes
 Route::post('/user/count/unread', "MessageController@getUnreadMessages");
+
+// Fetch Users in a specific firm department
+Route::post('/associate/fetch/departmenters', "DepartmentsController@fetchUsersInDepartment");

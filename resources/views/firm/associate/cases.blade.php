@@ -9,12 +9,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Intakes Manager</h1>
+                <h1 class="m-0 text-dark">Case Manager</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Intakes</li>
+                    <li class="breadcrumb-item active">Cases</li>
                 </ol>
             </div>
         </div>
@@ -24,11 +24,12 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
+            @include('includes.messages')
             <div class="col-12">
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">
-                            My Intakes
+                            My Cases
                         </h3>
                     </div>
                     <div class="card-body">
@@ -40,7 +41,7 @@
                                     <td>Party Name</td>
                                     <td>Date Taken</td>
                                     <td>Case Status</td>
-                                    <td>Actions</td>
+                                    <td>Action</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,10 +67,25 @@
                                         </td>
                                         <td>
                                                 <div class="btn-group">
-                                                            <a href="{{ url('/associate/view/case', ['caseID' => $case->case_number]) }}" class="btn btn-primary">View</a>
-                                                        </form>
+                                                        <button type="button" class="btn btn-success">Action</button>
+                                                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                                          <span class="caret"></span>
+                                                          <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu" role="menu">
+                                                                <a class="dropdown-item" href="{{ url('/associate/view/case', ['caseID' => $case->case_number]) }}">View</a>
 
+                                                          <div class="dropdown-divider"></div>
+                                                          <a class="dropdown-item" href="{{ url('/associate/share/case', ['caseID' => $case->case_number]) }}">Share Case</a>
+
+
+
+
+
+                                                        </div>
                                                       </div>
+
+
                                         </td>
                                     </tr>
                                 @endforeach

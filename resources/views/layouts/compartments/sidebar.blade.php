@@ -47,15 +47,7 @@
                       </a>
                       @endif
 
-                      @if (auth()->user()->user_role=="Associate")
-                      <a href="{{ url('/associate/profile')}}" class="nav-link">
-                        <i class="nav-icon fa fa-user"></i>
-                        <p>
-                          My Profile
 
-                        </p>
-                      </a>
-                      @endif
 
                   </li>
 
@@ -138,7 +130,7 @@
                       <li class="nav-item">
                       <a href="{{ url('/associate/view/intakes')}}" class="nav-link">
                           <i class="fa fa-circle-o nav-icon"></i>
-                          <p>My New Intakes</p>
+                          <p>My Cases</p>
                         </a>
                       </li>
                       <li class="nav-item">
