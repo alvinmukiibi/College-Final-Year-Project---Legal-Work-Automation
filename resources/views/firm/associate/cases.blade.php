@@ -66,6 +66,11 @@
                                                 @endif
                                         </td>
                                         <td>
+                                            @if ($case->owner == auth()->user()->id && $case->assignee !== null)
+                                            <div class="btn-group">
+                                                <button class="btn btn-danger"> <b>ASSIGNED</b> </button>
+                                            </div>
+                                            @else
                                                 <div class="btn-group">
                                                         <button type="button" class="btn btn-success">Action</button>
                                                         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
@@ -74,16 +79,11 @@
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
                                                                 <a class="dropdown-item" href="{{ url('/associate/view/case', ['caseID' => $case->case_number]) }}">View</a>
-
                                                           <div class="dropdown-divider"></div>
                                                           <a class="dropdown-item" href="{{ url('/associate/share/case', ['caseID' => $case->case_number]) }}">Share Case</a>
-
-
-
-
-
                                                         </div>
                                                       </div>
+                                                      @endif
 
 
                                         </td>

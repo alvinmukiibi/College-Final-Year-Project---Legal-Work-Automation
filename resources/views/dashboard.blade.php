@@ -366,8 +366,10 @@
                     success: res => {
                         if(res.noOfUnread > 0){
                             jQuery('#noOfUnread').html(res.noOfUnread);
+
                         }else{
                             jQuery('#noOfUnread').html(0);
+
                         }
 
                     }

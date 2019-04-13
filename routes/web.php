@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth:web'], function()
 
     // Case Routes
     Route::post('/associate/add/document', "CasesController@addDocumentToCase");
+    Route::post('/associate/schedule/casemeeting', "MeetingsController@scheduleCaseMeeting");
 
     // Case Task Routes
     Route::post('/associate/add/casetask', "CasesController@addCaseTask");

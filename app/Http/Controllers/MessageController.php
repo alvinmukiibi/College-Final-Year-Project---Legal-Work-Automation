@@ -28,7 +28,7 @@ class MessageController extends Controller
         $data  = $this->validate($request, [
             'recipient' => 'required|numeric',
             'message' => 'required|max:255',
-            'attachment' => 'mimes:pdf,doc,docx,xlsx,xls,ppt,pptx,jpeg,jpg,png,webp,bmp,txt|max:10240'
+            'attachment' => 'mimes:pdf,doc,docx,xlsx,xls,ppt,pptx,jpeg,jpg,png,webp,bmp,txt|max:10240|nullable'
         ]);
 
         // check for attachment and process it

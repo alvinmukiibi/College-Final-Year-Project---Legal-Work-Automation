@@ -8,11 +8,7 @@ use App\Firm;
 use App\User;
 class WebsiteController extends Controller
 {
-    /*public function showWebsite(Request $request){
-        $site = Firm::where(['firm_id'=>auth()->user()->firm_id])->get();
-        //dd($site);
-        return view('firm.admin.website')->with('user', $site);
-    }*/
+
 
     public function showWebsite(Request $request){
         $user = new User;
@@ -24,9 +20,11 @@ class WebsiteController extends Controller
 
 
 
-    public function savelawfirmProfile(Request $request){
-//dd($request);
-$data = $this->validate($request, [
+
+       public function savelawfirmProfile(Request $request)
+    {
+
+    $data = $this->validate($request, [
     "name"=>"required|max:150",
     "contact1"=>"required|max:15",
     "contact2"=>"required|max:15",

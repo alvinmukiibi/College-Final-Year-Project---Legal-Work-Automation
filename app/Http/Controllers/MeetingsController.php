@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Meeting;
 use App\User;
 use App\Firm;
+use App\LegalCase_Staff;
+use App\LegalCase;
 use App\Events\MeetingScheduled;
 class MeetingsController extends Controller
 {
@@ -89,5 +91,32 @@ class MeetingsController extends Controller
             $event->sender = auth()->user()->fname . " " . auth()->user()->lname;
             event($event);
         }
+    }
+    public function scheduleCaseMeeting(Request $request){
+        $data = $this->validate($request, [
+            'date' => 'required|date',
+            'time' => 'required',
+            'agenda' => 'required',
+            'venue' => 'required|max:255'
+        ]);
+
+        $meeting = new Meeting;
+        $meeting->data = $data;
+        $meeting->attendance = $request->input('caseID'); //all people concerned with this case id
+
+        $data['name'] = "Client Case Number " . $request->input('caseID');
+        $this->data = $data;
+        $caseStaff = new LegalCase_Staff;
+        $caseStaff->id = LegalCase::where('case_number', $request->input('caseID'))->value('id');
+        $myRecipients = $caseStaff->getAllStaffonCase();
+        foreach($myRecipients as $rec){
+            $this->recipients = $rec;
+            $this->sendMail();
+        }
+        $meeting->scheduleCaseMeeting();
+
+        return redirect()->back()->with('success', 'Meeting has been sheduled, Attendees shall be informed');
+
+
     }
 }

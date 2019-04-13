@@ -33,10 +33,39 @@ Date    :   6th-February-2019
                         {{auth()->user()->email}}
                     </a>
                 </li>
+                <li class="nav-item">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                          <i class="fa fa-comments-o"></i>
+                          <span class="badge badge-danger navbar-badge" id="noOfUnreadTopNavin">
+                          </span>
+                        </a></li>
         <li class="nav-item">
         <a href="{{ url('/logout')}}" class="nav-link">
                 Logout <i class="fa fa-sign-out"></i>
             </a>
         </li>
+
     </ul>
+    <script>
+        window.addEventListener('load', () => {
+
+
+            jQuery.ajax({
+                url: "{{ url('api/user/count/unread/')  }}",
+                method: "POST",
+                data: {
+                    user: {{ auth()->user()->id }}
+                },
+                success: res => {
+                    if(res.noOfUnread > 0){
+                        jQuery('#noOfUnreadTopNavin').html(res.noOfUnread)
+                    }else{
+                        jQuery('#noOfUnreadTopNavin').html(0)
+                    }
+
+                }
+            });
+
+        })
+    </script>
 </nav>

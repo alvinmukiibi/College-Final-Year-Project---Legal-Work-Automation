@@ -26,6 +26,30 @@
                     <div class="row">
 
                         <div class="col-12">
+                                <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                        <h3 class="card-title">
+                                            @if ($staff_on_the_case['owner'] != null)
+                                                <b>Intake Made By:</b> {{ $staff_on_the_case['owner'] }}
+                                            @endif
+                                            @if ($staff_on_the_case['assignee'] != null)
+                                            <b>Assigned To:</b> {{ $staff_on_the_case['assignee'] }}
+                                            @endif
+                                            @if ($staff_on_the_case['referee1'] != null)
+                                            <b>Referred To:</b> {{ $staff_on_the_case['referee1'] }}
+                                            @endif
+                                            @if ($staff_on_the_case['referee2'] != null)
+                                                 {{ ', '. $staff_on_the_case['referee2'] }}
+                                            @endif
+
+
+
+
+                                        </h3>
+
+                                        </div>
+
+                                </div>
                             <div class="callout callout-info">
 
                                     <h5><i class="fa fa-info"></i> CASE STATUS:
@@ -311,6 +335,75 @@
 
                                     </div>
 
+                                    <div class="card card-primary collapsed-card">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Case Meetings</h3>
+                                                <div class="card-tools">
+
+                                                      <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                        <i class="fa fa-minus"></i>
+                                                      </button>
+
+                                                      <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                                      </button>
+                                                    </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <form action="{{ url('/associate/schedule/casemeeting') }}" method="post">
+                                            <div class="form-row">
+                                                  <div class="form-group col-md-6">
+                                                          <label for="date">Date</label>
+                                                          <input required type="date" name="date" class="form-control {{ $errors->has('date')?'is-invalid':'' }}">
+                                                  </div>
+                                                  <div class="form-group col-md-6">
+                                                          <label for="time">Time</label>
+                                                          <input required type="time" name="time" class="form-control {{ $errors->has('time')?'is-invalid':'' }}">
+                                                  </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                  <label for="agenda">Agenda</label>
+                                                  <textarea required name="agenda" class="form-control {{ $errors->has('agenda')?'is-invalid':'' }}"  rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                  <div class="form-group col-md-12">
+                                                    <label for="venue">Venue</label>
+                                                    <input required type="text" name="venue" class="form-control {{ $errors->has('venue')?'is-invalid':'' }}">
+                                                  </div>
+                                              </div>
+                                              <input type="hidden" name="caseID" value="{{ $case->case_number }}">
+                                              <button type="submit" class="btn btn-block btn-flat btn-outline-primary"> <b>Schedule Meeting</b> <i class="fa fa-clock-o"></i> </button>
+                                              @csrf
+                                          </form>
+                                          <div class="row">
+
+                                              <table class="table table-hover">
+                                                  <thead>
+                                                      <tr>
+                                                          <th>Date of Meeting</th>
+                                                          <th>Agenda</th>
+                                                          <th>Venue</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      @foreach($meetings as $meeting)
+                                                      <tr>
+                                                          <td> {{ date('d-M-Y', strtotime($meeting->date)) }} {{ $meeting->time }} </td>
+                                                          <td>
+                                                                  <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Case Type" data-content="{{ $meeting->agenda }}"> <b> Agenda <i class="fa fa-eye"></i></b> </button>
+
+                                                          </td>
+                                                          <td>{{ $meeting->venue }}</td>
+                                                      </tr>
+                                                      @endforeach
+                                                  </tbody>
+
+                                              </table>
+
+                                          </div>
+                                          </div>
+                                        </div>
 
 
                             <div class="card card-success collapsed-card">
@@ -400,7 +493,6 @@
 
                             </div>
                         <div class="col-8 connectedSortable">
-                          ff
 
                                 </div>
 

@@ -17,4 +17,10 @@ class Meeting extends Model
         return $scheduled;
 
     }
+    public function scheduleCaseMeeting(){
+        $data = $this->data;
+        $scheduled = DB::table($this->table)->insert(['agenda' => $data['agenda'], 'date' => $data['date'], 'time' => $data['time'], 'venue' => $data['venue'], 'scheduledBy' => auth()->user()->id, 'attendance' => $this->attendance, 'firm_id' => auth()->user()->firm_id]);
+
+        return $scheduled;
+    }
 }

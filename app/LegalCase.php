@@ -48,8 +48,12 @@ class LegalCase extends Model
 
     }
     public function getLawyerCases(){
+        $user_id = auth()->user()->id;
 
-        $cases = DB::table($this->table)->join('clients', 'legal_cases.client', '=', 'clients.id')->join('users', 'users.id', '=', 'legal_cases.staff')->join('case_types', 'case_types.id', '=', 'legal_cases.case_type')->select('clients.name', 'legal_cases.*', 'case_types.type', 'case_types.description')->where('users.id', auth()->user()->id)->get();
+        // $cases = DB::table('legal_case__staffs')->where(['owner' => $user_id])->orWhere(['assignee' => $user_id])->orWhere(['referee1' => $user_id])->orWhere(['referee2' => $user_id])->get();
+        // dd($cases);
+
+        $cases = DB::table($this->table)->join('clients', 'legal_cases.client', '=', 'clients.id')->join('case_types', 'case_types.id', '=', 'legal_cases.case_type')->select('clients.name', 'legal_case__staffs.owner','legal_case__staffs.referee1','legal_case__staffs.referee2','legal_case__staffs.assignee', 'legal_cases.*', 'case_types.type', 'case_types.description')->join('legal_case__staffs', 'legal_case__staffs.case_id', '=', 'legal_cases.id')->where('legal_case__staffs.owner',$user_id)->orWhere('legal_case__staffs.referee1', $user_id)->orWhere('legal_case__staffs.referee2', $user_id)->orWhere('legal_case__staffs.assignee', $user_id)->get();
         return $cases;
 
     }

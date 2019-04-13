@@ -15,6 +15,8 @@ use App\Task;
 use App\Proceeding;
 use App\LegalCase_Staff;
 use App\Department;
+use App\Meeting;
+use App\Events\CaseShared;
 class CasesController extends Controller
 {
     public function showIntakeForm(Request $request){
@@ -106,7 +108,47 @@ class CasesController extends Controller
 
         $proceedings = $legalCase->proceedings()->orderBy('created_at', 'desc')->get();
 
-        return view('firm.associate.case')->with(['proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
+        $staffCase = new LegalCase_Staff;
+        $staffCase->id = $id;
+        $staff_on_case = $staffCase->getAllStaffonCase();
+
+        $owner = null; $referee1 = null; $referee2 = null; $assignee = null;
+        if(!empty($staff_on_case['owner'])){
+            $owners = $staff_on_case['owner'];
+            foreach($owners as $own){
+                $owner = $own->fname . ' ' . $own->lname;
+            }
+        }
+        if(!empty($staff_on_case['referee1'])){
+            $referees = $staff_on_case['referee1'];
+            foreach($referees as $referee){
+                $referee1 = $referee->fname . ' ' . $referee->lname;
+            }
+        }
+        if(!empty($staff_on_case['referee2'])){
+            $referees = $staff_on_case['referee2'];
+            foreach($referees as $referee){
+                $referee2 = $referee->fname . ' ' . $referee->lname;
+
+            }
+        }
+        if(!empty($staff_on_case['assignee'])){
+            $assignees = $staff_on_case['assignee'];
+            foreach($assignees as $assign){
+                $assignee = $assign->fname . ' ' . $assign->lname;
+
+            }
+        }
+        $staff_on_the_case = [
+            'owner' => $owner,
+            'referee1' => $referee1,
+            'referee2' => $referee2,
+            'assignee' => $assignee
+        ];
+
+        $meetings = Meeting::where(['attendance' => $request->segment(4)])->orderBy('created_at', 'desc')->get();
+
+        return view('firm.associate.case')->with(['staff_on_the_case' => $staff_on_the_case, 'meetings' => $meetings, 'proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
 
     }
 
@@ -117,7 +159,7 @@ class CasesController extends Controller
         $client = $case->getCaseClient();
 
         $departments = Department::where(['firm_id' => auth()->user()->firm_id])->get();
-        return view('firm.associate.refer')->with(['case' => $case_id, 'client' => $client, 'departments' => $departments]);
+        return view('firm.associate.share')->with(['case' => $case_id, 'client' => $client, 'departments' => $departments]);
     }
     public function submitShare(Request $request){
         $data = $this->validate($request, [
@@ -137,13 +179,36 @@ class CasesController extends Controller
                 $assign = new LegalCase_Staff;
                 $assign->assignee = $data['assignee'];
                 $assign->case_id = $case_id;
+                // send email and message to notify assignee of the action
+
                 $assign->assignCase();
+
+                $event = new CaseShared;
+                $event->data = $data;
+                $event->case_id =  $case_number;
+                $event->sharer = auth()->user();
+                $event->sharee = User::find($data['assignee']);
+
+                event($event);
 
                 return redirect()->intended('/associate/view/intakes')->with('success', 'Case Number ' . $case_number . ' has been assigned succesfully!!');
 
             }
 
         }else{
+            // if sharing type is referring
+            $refer = new LegalCase_Staff;
+            $refer->referee = $data['assignee'];
+            $refer->case_id = $case_id;
+            $checkRef = $refer->referCase();
+            if(!$checkRef){
+                return redirect()->back()->with('error', 'Case has already been assigned to the maximum number of people');
+
+            }else if($checkRef == 'same'){
+                return redirect()->back()->with('error', 'You cannot refer a case to the same user twice!!');
+
+            }
+            return redirect()->back()->with('success', 'Case has been referred to another associate!!');
 
         }
 
@@ -263,5 +328,6 @@ class CasesController extends Controller
 
 
     }
+
 
 }

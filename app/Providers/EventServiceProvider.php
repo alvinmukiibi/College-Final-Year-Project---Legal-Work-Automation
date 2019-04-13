@@ -9,9 +9,11 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use App\Events\FirmRegistered;
 use App\Events\UserRegistered;
 use App\Events\MeetingScheduled;
+use App\Events\CaseShared;
 use App\Listeners\SendVerificationMail;
 use App\Listeners\SendUserVerificationMail;
 use App\Listeners\SendNewMeetingNotification;
+use App\Listeners\SendSharedCaseNotification;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -31,7 +33,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         MeetingScheduled::class => [
             SendNewMeetingNotification::class
-        ]
+        ],
+        CaseShared::class => [
+            SendSharedCaseNotification::class
+        ],
+
 
     ];
 
