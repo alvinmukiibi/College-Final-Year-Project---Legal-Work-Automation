@@ -96,7 +96,6 @@
                                                         <div class="col-sm-8">
                                                                <select required id="assignee" name="assignee"  class="form-control {{ $errors->has('assignee')?'is-invalid':'' }}">
                                                                    <option value="">-- Select Associate</option>
-
                                                                </select>
                                                         </div>
 

@@ -108,7 +108,7 @@
 
 
                   @endif
-                  @if (auth()->user()->user_role == "Associate" )
+                  @if (auth()->user()->user_role == "Associate" || auth()->user()->user_role == "Partner" )
                   <li class="nav-item">
                     <a href="{{ url('/associate/make/intake')}}" class="nav-link">
                           <i class="nav-icon fa fa-meh-o"></i>
@@ -169,7 +169,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                      <a href="{{ url('/register/firm')}}" class="nav-link">
+                      <a href="{{ url('/user/manage/tasks')}}" class="nav-link">
                           <i class="fa fa-circle-o nav-icon"></i>
                           <p>Assign Task </p>
                         </a>

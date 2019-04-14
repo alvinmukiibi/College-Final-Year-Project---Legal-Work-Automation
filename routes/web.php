@@ -101,7 +101,12 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/admin/savelawfirmProfile', "WebsiteController@savelawfirmProfile");
 
     // calendar management routes
-    Route::get('admin/manage/calendar', "CalendarController@viewCalendar");
+    Route::get('/admin/manage/calendar', "CalendarController@viewCalendar");
+
+    // Task management routes
+    Route::get('/user/manage/tasks', "TasksController@viewTasks");
+    Route::post('/user/assign/task', "TasksController@assignTask");
+    Route::post('/user/complete/task', "TasksController@completeTask");
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

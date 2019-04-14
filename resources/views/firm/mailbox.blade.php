@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea name="message" required rows="5" id="editor1" placeholder="Your Message Here.." cols="10" id="compose-textarea" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="message" required rows="5"  placeholder="Your Message Here.." cols="10" id="compose-textarea" cols="30" rows="10" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="btn btn-default btn-file">

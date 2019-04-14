@@ -115,6 +115,19 @@
                 <a href="{{ url('/admin/manage/staff')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+              <div class="col-lg-3 col-6">
+                <div class="small-box text-white" style="background-color:#090e12">
+                  <div class="inner">
+                    <h3>Case Types</h3>
+
+                    <p>Manage Case Types</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-briefcase"></i>
+                  </div>
+                <a href="{{ url('/admin/manage/casetypes')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
               @endif
               @if (auth()->user()->firm_id !== null)
               <div class="col-lg-3 col-6">
@@ -140,7 +153,7 @@
                   <div class="icon">
                     <i class="fa fa-tasks"></i>
                   </div>
-                <a href="{{ url('/register/firm')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/user/manage/tasks')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <div class="col-lg-3 col-6">
@@ -324,15 +337,24 @@
                             const date1 = new Date(res.dueBy);
                             const timeDiff = Math.abs(date2.getTime() - date1.getTime());
                             const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                            let flag = '';
+                            let flag = ''; let verbose = '';
                             if(remainingTime >= 5){
                                 flag = 'success';
+                                verbose = remainingTime + ' days';
                             }else if(remainingTime >= 2 && remainingTime < 5){
+                                flag = 'info';
+                                verbose = remainingTime + ' days';
+                            }else if(remainingTime < 2 && remainingTime > 0){
                                 flag = 'warning';
+                                verbose = remainingTime + ' day';
+                            }else if(remainingTime < 0){
+                                flag='danger'
+                                verbose = 'overdue';
                             }else{
-                                flag = 'danger';
+                                flag='primary';
+                                verbose = 'Today'
                             }
-                           return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><small class="pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>  ' + ' ' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
+                           return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><small class="pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>  ' + ' ' + verbose + '  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
 
                          }
                      });
@@ -359,17 +381,26 @@
                             const date1 = new Date(obj.dueBy);
                             const timeDiff = Math.abs(date2.getTime() - date1.getTime());
                             const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                            let flag = '';
+                            let flag = ''; let verbose = '';
                             if(remainingTime >= 5){
                                 flag = 'success';
+                                verbose = remainingTime + ' days';
                             }else if(remainingTime >= 2 && remainingTime < 5){
+                                flag = 'info';
+                                verbose = remainingTime + ' days';
+                            }else if(remainingTime < 2 && remainingTime > 0){
                                 flag = 'warning';
+                                verbose = remainingTime + ' day';
+                            }else if(remainingTime < 0){
+                                flag='danger'
+                                verbose = 'overdue';
                             }else{
-                                flag = 'danger';
+                                flag='primary';
+                                verbose = 'Today'
                             }
                             //const deleteUrl = "{{ url('api/user/delete/todo/"+7+"') }}"
 
-                            return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><small class=" pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + ' ' + remainingTime + ' days  </small><div class="tools"> <i class="fa fa-trash-o"></i></div></li>');
+                            return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><small class=" pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + ' ' + verbose + '  </small><div class="tools"> <i class="fa fa-trash-o"></i></div></li>');
                         })
                     }
                 });
