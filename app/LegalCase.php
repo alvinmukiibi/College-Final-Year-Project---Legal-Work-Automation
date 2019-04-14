@@ -49,7 +49,7 @@ class LegalCase extends Model
     }
     public function getLawyerCases(){
         $user_id = $this->staff;
-        $cases = DB::table($this->table)->join('clients', 'legal_cases.client', '=', 'clients.id')->join('case_types', 'case_types.id', '=', 'legal_cases.case_type')->select('clients.name', 'legal_case__staffs.owner','legal_case__staffs.referee1','legal_case__staffs.referee2','legal_case__staffs.assignee', 'legal_cases.*', 'case_types.type', 'case_types.description')->join('legal_case__staffs', 'legal_case__staffs.case_id', '=', 'legal_cases.id')->where('legal_case__staffs.owner',$user_id)->orWhere('legal_case__staffs.referee1', $user_id)->orWhere('legal_case__staffs.referee2', $user_id)->orWhere('legal_case__staffs.assignee', $user_id)->orderBy('created_at','desc')->get();
+        $cases = DB::table($this->table)->join('clients', 'legal_cases.client', '=', 'clients.id')->join('case_types', 'case_types.id', '=', 'legal_cases.case_type')->select('clients.name', 'legal_case__staffs.owner','legal_case__staffs.referee1','legal_case__staffs.referee2','legal_case__staffs.assignee', 'legal_cases.*', 'case_types.acronym', 'case_types.casetype')->join('legal_case__staffs', 'legal_case__staffs.case_id', '=', 'legal_cases.id')->where('legal_case__staffs.owner',$user_id)->orWhere('legal_case__staffs.referee1', $user_id)->orWhere('legal_case__staffs.referee2', $user_id)->orWhere('legal_case__staffs.assignee', $user_id)->orderBy('created_at','desc')->get();
         return $cases;
 
     }

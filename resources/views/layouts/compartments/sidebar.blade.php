@@ -97,6 +97,14 @@
                                     </p>
                                   </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('/admin/manage/casetypes')}}" class="nav-link">
+                                        <i class="nav-icon fa fa-briefcase"></i>
+                                        <p>
+                                          Case Types
+                                        </p>
+                                      </a>
+                                    </li>
                         <li class="nav-item">
                             <a href="{{ url('/admin/manage/staff')}}" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i>

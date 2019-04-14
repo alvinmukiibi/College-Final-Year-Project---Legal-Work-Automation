@@ -50,7 +50,7 @@
                                         <td>{{ $case->case_number }}</td>
                                         <td>
 
-                                                <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Case Type" data-content="{{ $case->description }}"> <b>{{ $case->type }}</b> </button>
+                                                <button type="button" class="btn btn-sm btn-info" data-toggle="popover" title="Case Type" data-content="{{ $case->casetype }}"> <b>{{ $case->acronym }}</b> </button>
                                         </td>
                                         <td>{{ $case->name }}</td>
                                         <td>{{ date('d-M-Y', strtotime($case->date_taken)) }}</td>

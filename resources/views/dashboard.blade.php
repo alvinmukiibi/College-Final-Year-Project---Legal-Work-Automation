@@ -122,7 +122,7 @@
 
                     <p>Manage Case Types</p>
                   </div>
-                  <div class="icon">
+                  <div class="icon text-white">
                     <i class="fa fa-briefcase"></i>
                   </div>
                 <a href="{{ url('/admin/manage/casetypes')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>

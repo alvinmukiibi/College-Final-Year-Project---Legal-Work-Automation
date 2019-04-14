@@ -107,6 +107,12 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/user/manage/tasks', "TasksController@viewTasks");
     Route::post('/user/assign/task', "TasksController@assignTask");
     Route::post('/user/complete/task', "TasksController@completeTask");
+
+    // Case Type management routes
+    Route::get('/admin/manage/casetypes', "CaseTypesController@viewCaseTypes");
+    Route::get('/admin/manage/casetypes/{casetype}', "CaseTypesController@getCaseType");
+    Route::post('/admin/add/casetype', "CaseTypesController@addCaseType");
+    Route::post('/admin/edit/casetype', "CaseTypesController@editCaseType");
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

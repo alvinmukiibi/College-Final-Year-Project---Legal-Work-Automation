@@ -45,7 +45,7 @@
                                                     @foreach ($caseTypes as $type)
 
 
-                                                    <option title="{{ $type->description }}" value={{ $type->id }}>{{ $type->type }} : {{ $type->description }}</option>
+                                                    <option title="{{ $type->casetype }}" value={{ $type->id }}>{{ $type->acronym }} : {{ $type->casetype }}</option>
 
                                                     @endforeach
                                                 </select>
