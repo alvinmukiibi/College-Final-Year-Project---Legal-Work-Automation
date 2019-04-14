@@ -15,10 +15,13 @@ Route::get('/', function () {
     return view("index");
 });
 
+
+
 Route::resource('/home', "FirmsController"); //binding the controller to its resources
 Route::get('/login', "AuthController@showLogin")->name("login");
 Route::post('/login', "AuthController@doLogin");
-Route::get('/logout', "AuthController@logout");
+
+
 Route::group(['middleware' => 'auth:web'], function()
 {
     Route::get('/register/firm', "FirmsController@showRegister")->name("register.firm");
@@ -113,9 +116,20 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/admin/manage/casetypes/{casetype}', "CaseTypesController@getCaseType");
     Route::post('/admin/add/casetype', "CaseTypesController@addCaseType");
     Route::post('/admin/edit/casetype', "CaseTypesController@editCaseType");
+
+
+    //logout route
+    Route::get('/logout', "AuthController@logout");
+
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
     Route::get('/user/verifyEmail/{token}', "StaffController@verifyEmail");
     Route::get('/user/todos/getTodos/{id}/', "TodosController@getTodos");
 });
+
+ //fallback routes
+ Route::fallback(function(){
+     return response()->view('page404', [], 404);
+});
+

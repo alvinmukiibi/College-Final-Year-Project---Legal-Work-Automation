@@ -39,3 +39,6 @@ Route::post('/associate/fetch/departmenters', "DepartmentsController@fetchUsersI
 
 // Count Open cases for a specific lawyer
 Route::post('/associate/count/opencases', "CasesController@countOpenCases");
+
+// Count uncompleted Tasks Assigned to me
+Route::post('/user/count/tasks', "TasksController@countUncompletedTasks");

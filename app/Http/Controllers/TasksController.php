@@ -43,4 +43,10 @@ class TasksController extends Controller
         return redirect()->back()->with('success', 'Task Completed!!');
 
     }
+    public function countUncompletedTasks(Request $request){
+
+        $unCompleted = InterTask::where(['assignee' => $request->input('user'), 'completion_status' => 'pending'])->count();
+        return response()->json(['noOfunCompleted' => $unCompleted]);
+
+    }
 }

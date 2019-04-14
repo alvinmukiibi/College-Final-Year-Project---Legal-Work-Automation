@@ -38,7 +38,15 @@ Date    :   6th-February-2019
                           <i class="fa fa-comments-o"></i>
                           <span class="badge badge-danger navbar-badge" id="noOfUnreadTopNavin">
                           </span>
-                        </a></li>
+                        </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                      <i class="fa fa-tasks"></i>
+                      <span class="badge badge-warning navbar-badge" id="noOfunCompletedTopNavin">
+                      </span>
+                    </a>
+            </li>
         <li class="nav-item">
         <a href="{{ url('/logout')}}" class="nav-link">
                 Logout <i class="fa fa-sign-out"></i>
@@ -63,6 +71,20 @@ Date    :   6th-February-2019
                         jQuery('#noOfUnreadTopNavin').html(0)
                     }
 
+                }
+            });
+            jQuery.ajax({
+                url: "{{ url('/api/user/count/tasks/')  }}",
+                method: "POST",
+                data: {
+                    user: {{ auth()->user()->id }}
+                },
+                success: res => {
+                    if(res.noOfunCompleted > 0){
+                        jQuery('#noOfunCompletedTopNavin').html(res.noOfunCompleted);
+                    }else{
+                        jQuery('#noOfunCompletedTopNavin').html(0);
+                    }
                 }
             });
 

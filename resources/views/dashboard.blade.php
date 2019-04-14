@@ -146,7 +146,7 @@
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-primary">
                   <div class="inner">
-                    <h3>Tasks</h3>
+                    <h3>Tasks <span id="unCompleted"></span></h3>
 
                     <p>My Tasks</p>
                   </div>
@@ -421,6 +421,24 @@
 
                     }
                 });
+                jQuery.ajax({
+                    url: "{{ url('/api/user/count/tasks/')  }}",
+                    method: "POST",
+                    data: {
+                        user: {{ auth()->user()->id }}
+                    },
+                    success: res => {
+                        if(res.noOfunCompleted > 0){
+                            jQuery('#unCompleted').html(res.noOfunCompleted);
+
+                        }else{
+                            jQuery('#unCompleted').html(0);
+
+                        }
+
+                    }
+                });
+
                 jQuery.ajax({
                     url: "{{ url('api/associate/count/opencases/')  }}",
                     method: "POST",
