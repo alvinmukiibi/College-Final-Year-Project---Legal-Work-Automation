@@ -93,7 +93,7 @@
                                                   </div>
                                         </div>
                                         <div class="card-body table-responsive">
-                                            <table class="table table-hover">
+                                            <table class="table table-hover" id="example1">
                                                 <thead>
                                                     <tr>
                                                         <th>Date of Upload</th>
@@ -159,7 +159,7 @@
                                         </div>
                                         <div class="card-body">
 
-                                            <table class="table table-hover">
+                                            <table class="table table-hover" id="example2">
                                                 <thead>
                                                     <tr>
                                                         <td>Date Carried Out </td>
@@ -248,34 +248,38 @@
                                               </div>
                                     </div>
                                     <div class="card-body p-0">
-                                            <table class="table table-hover">
-                                                    <tr>
+                                            <table class="table table-hover" id="example2">
+                                                    <thead>
+                                                            <tr>
 
-                                                      <th>Task</th>
+                                                                    <th>Task</th>
 
-                                                      <th style="width: 40px">Label</th>
-                                                      <th style="width: 40px">Action</th>
-                                                    </tr>
-                                                    @foreach ($tasks as $task)
-                                                    <tr>
-                                                            <td>{{ $task->task }}</td>
-                                                            <td>
-                                                                @if ($task->status == 'done')
-                                                                <span class="badge bg-success">    {{ __('DONE') }} </span>
-                                                                @else
-                                                                <span class="badge bg-warning">    {{ __('PENDING') }} </span>
-                                                                @endif
-                                                              </td>
-                                                              <td>
-                                                                    @if ($task->status == 'pending')
+                                                                    <th style="width: 40px">Label</th>
+                                                                    <th style="width: 40px">Action</th>
+                                                                  </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            @foreach ($tasks as $task)
+                                                            <tr>
+                                                                    <td>{{ $task->task }}</td>
+                                                                    <td>
+                                                                        @if ($task->status == 'done')
+                                                                        <span class="badge bg-success">    {{ __('DONE') }} </span>
+                                                                        @else
+                                                                        <span class="badge bg-warning">    {{ __('PENDING') }} </span>
+                                                                        @endif
+                                                                      </td>
+                                                                      <td>
+                                                                            @if ($task->status == 'pending')
 
-                                                                    <a title="COMPLETE" class="btn btn-sm btn-primary" href="{{ url('/associate/complete/task', ['task' => $task->id]) }}"> <i class="fa fa-check"></i> </a>
+                                                                            <a title="COMPLETE" class="btn btn-sm btn-primary" href="{{ url('/associate/complete/task', ['task' => $task->id]) }}"> <i class="fa fa-check"></i> </a>
 
-                                                                    @endif
+                                                                            @endif
 
-                                                              </td>
-                                                        </tr>
-                                                    @endforeach
+                                                                      </td>
+                                                                </tr>
+                                                            @endforeach
+                                                    </tbody>
 
                                                 </table>
 
@@ -363,7 +367,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                   <label for="agenda">Agenda</label>
-                                                  <textarea required name="agenda" class="form-control {{ $errors->has('agenda')?'is-invalid':'' }}"  rows="5"></textarea>
+                                                  <textarea id="editor1" required name="agenda" class="form-control {{ $errors->has('agenda')?'is-invalid':'' }}"  rows="5"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-row">
@@ -378,7 +382,7 @@
                                           </form>
                                           <div class="row">
 
-                                              <table class="table table-hover">
+                                              <table class="table table-hover" id="example2">
                                                   <thead>
                                                       <tr>
                                                           <th>Date of Meeting</th>

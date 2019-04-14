@@ -33,15 +33,15 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-hover" id="example1">
                             <thead>
                                 <tr>
-                                    <td>Case No</td>
-                                    <td>Case Type</td>
-                                    <td>Party Name</td>
-                                    <td>Date Taken</td>
-                                    <td>Case Status</td>
-                                    <td>Action</td>
+                                    <th>Case No</th>
+                                    <th>Case Type</th>
+                                    <th>Party Name</th>
+                                    <th>Date Taken</th>
+                                    <th>Case Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

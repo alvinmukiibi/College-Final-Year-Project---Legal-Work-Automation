@@ -46,7 +46,7 @@
                                                 </div>
                                                 <div class="form-group col-md-8">
                                                         <label for="description">Description</label>
-                                                        <textarea required name="description" cols="5" rows="5" placeholder="What happened during the proceeding..." class="form-control"></textarea>
+                                                        <textarea id="editor1" required name="description" cols="5" rows="5" placeholder="What happened during the proceeding..." class="form-control"></textarea>
 
 
                                                 </div>

@@ -46,6 +46,7 @@ Date    :   6th-February-2019
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+<script src="{{asset('plugins/ckeditor/ckeditor.js')}}"></script>
 <script>
     $(function () {
       //Initialize Select2 Elements
@@ -279,7 +280,8 @@ Date    :   6th-February-2019
             });
             $(function () {
                 $('[data-toggle="popover"]').popover()
-              })
+              });
+              ClassicEditor.create(document.querySelector('#editor1')).then(function (editor) {}).catch(function (error) {console.error(error) })
           </script>
 
 </body>

@@ -46,6 +46,11 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/admin/activate/staff/{staff}', "StaffController@activateStaff");
     Route::get('/admin/deactivate/staff/{staff}', "StaffController@deactivateStaff");
 
+    // User Role Management Routes
+    Route::get('/admin/manage/roles', "UserRolesController@viewRoles");
+    Route::get('/admin/manage/roles/{role}', "UserRolesController@getRole");
+    Route::post('admin/add/role', "UserRolesController@addRole");
+    Route::post('admin/edit/role', "UserRolesController@editRole");
     // Associate role routes
     Route::get('/user/profile', "UserController@showProfile");
 

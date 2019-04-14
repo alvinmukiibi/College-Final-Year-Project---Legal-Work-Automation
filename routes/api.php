@@ -36,3 +36,6 @@ Route::post('/user/count/unread', "MessageController@getUnreadMessages");
 
 // Fetch Users in a specific firm department
 Route::post('/associate/fetch/departmenters', "DepartmentsController@fetchUsersInDepartment");
+
+// Count Open cases for a specific lawyer
+Route::post('/associate/count/opencases', "CasesController@countOpenCases");

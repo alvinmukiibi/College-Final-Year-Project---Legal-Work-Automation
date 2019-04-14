@@ -160,7 +160,7 @@
 
 
               <section class="col-lg-7 connectedSortable">
-                    <div class="card collapsed-card">
+                    <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fa fa-clipboard mr-1">
@@ -208,42 +208,57 @@
               <section class="col-lg-5 connectedSortable">
 
 
-                    @if (auth()->user()->user_role == 'Associate')
-                <div class="card ">
-                    <div class="card-header bg-danger">
-                        <h3 class="card-title">
-                            My Cases
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="info-box">
-                                        <span class="info-box-icon bg-info elevation-1"><i class="fa fa-shopping-cart"></i></span>
-                                        <div class="info-box-content">
-                                                <span class="info-box-text">Open Cases</span>
-                                                <span class="info-box-number">
-                                                    10
-                                                </span>
-                                            </div>
-                                    </div>
+                @if (auth()->user()->user_role == 'Associate')
+                    <div class="card card-danger">
+                        <div class="card-header no-border">
+                            <h3 class="card-title">
+                                <i class="fa fa-briefcase"></i> Cases
 
+                            </h3>
+                            <div class="card-tools">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
+                                              <i class="fa fa-bars"></i></button>
+                                        <div class="dropdown-menu float-right" role="menu">
+                                            <a href="#" class="dropdown-item" style="color:#fff">Clear events</a>
+                                        </div>
+                                    </div>
+                                <button type="button" class="btn btn-tool" data-widget="collapse">
+                                  <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                </button>
                             </div>
-                            <div class="col-6">
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
                                     <div class="info-box">
-                                            <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-gear"></i></span>
+                                            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-briefcase"></i></span>
                                             <div class="info-box-content">
-                                                    <span class="info-box-text">All Cases</span>
-                                                    <span class="info-box-number">
-                                                        10
+                                                    <span class="info-box-text">Open Cases</span>
+                                                    <span id="noOfOpenCases" class="info-box-number">
+
                                                     </span>
                                                 </div>
                                         </div>
 
                                 </div>
+                                <div class="col-6">
+                                        <div class="info-box">
+                                                <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-gear"></i></span>
+                                                <div class="info-box-content">
+                                                        <span class="info-box-text">All Cases</span>
+                                                        <span class="info-box-number">
+                                                            10
+                                                        </span>
+                                                    </div>
+                                            </div>
+
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endif
 
                     <div class="card collapsed-card bg-success-gradient">
@@ -317,7 +332,7 @@
                             }else{
                                 flag = 'danger';
                             }
-                           return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><small class="pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
+                           return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><small class="pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>  ' + ' ' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
 
                          }
                      });
@@ -352,8 +367,9 @@
                             }else{
                                 flag = 'danger';
                             }
+                            //const deleteUrl = "{{ url('api/user/delete/todo/"+7+"') }}"
 
-                            return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><small class=" pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
+                            return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><small class=" pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + ' ' + remainingTime + ' days  </small><div class="tools"> <i class="fa fa-trash-o"></i></div></li>');
                         })
                     }
                 });
@@ -369,6 +385,23 @@
 
                         }else{
                             jQuery('#noOfUnread').html(0);
+
+                        }
+
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ url('api/associate/count/opencases/')  }}",
+                    method: "POST",
+                    data: {
+                        id: {{ auth()->user()->id }}
+                    },
+                    success: res => {
+                        if(res.count > 0){
+                            jQuery('#noOfOpenCases').html(res.count);
+
+                        }else{
+                            jQuery('#noOfOpenCases').html(0);
 
                         }
 

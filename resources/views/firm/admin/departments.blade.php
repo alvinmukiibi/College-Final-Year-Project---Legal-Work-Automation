@@ -88,26 +88,31 @@
                             </h3>
                         </div>
                         <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <tr>
+                            <table class="table table-striped" >
+                                <thead>
+                                        <tr>
 
-                                    <th style="width: 180px">Name</th>
-                                    <th >Role</th>
-                                    <th  style="width: 40px">Action</th>
-                                </tr>
-                                @foreach ($departments as $department)
-                                <tr>
+                                                <th style="width: 180px">Name</th>
+                                                <th >Role</th>
+                                                <th  style="width: 40px">Action</th>
+                                            </tr>
+                                </thead>
 
-                                        <td>{{$department->name}}</td>
-                                        <td>
-                                                {{$department->description}}
-                                        </td>
-                                        <td>
-                                        <a href="{{url('admin/departments',['department'=>$department->id])}}" class="btn btn-primary"> <i class="fa fa-pencil"></i>  </a>
+                                <tbody>
+                                        @foreach ($departments as $department)
+                                        <tr>
 
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                <td>{{$department->name}}</td>
+                                                <td>
+                                                        {{$department->description}}
+                                                </td>
+                                                <td>
+                                                <a href="{{url('admin/departments',['department'=>$department->id])}}" class="btn btn-primary"> <i class="fa fa-pencil"></i>  </a>
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                </tbody>
 
                             </table>
                         </div>

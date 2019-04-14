@@ -11,7 +11,7 @@ class TodosController extends Controller
     public function getTodos(Request $request){
         $user = new User;
         $user->id = $request->input('owner');
-        $todos = $user->todos;
+        $todos = $user->todos()->orderBy('date', 'desc')->get();
         return response()->json($todos, 200);
     }
 
@@ -25,7 +25,7 @@ class TodosController extends Controller
 
         $todo = new Todo;
         $todo->todo = $data['todo'];
-        $todo->dueBy = $request->input('dueBy');
+        $todo->dueBy = $request->input('dueBy') == null? date('Y-m-d'): $request->input('dueBy');
         $todo->owner = $request->input('owner');
         $todo->firm_id = $request->input('firm_id');
 

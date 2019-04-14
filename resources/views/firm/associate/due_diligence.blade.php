@@ -39,7 +39,7 @@
                                             </div>
                                             <div class="form-group">
                                                     <label for="description">Textual Description</label>
-                                                    <textarea name="description" cols="5" rows="5" class="form-control" placeholder="Give Detailed Description of findings...">
+                                                    <textarea id="editor1" name="description" cols="5" rows="5" class="form-control" placeholder="Give Detailed Description of findings...">
 
                                                     </textarea>
                                                 </div>

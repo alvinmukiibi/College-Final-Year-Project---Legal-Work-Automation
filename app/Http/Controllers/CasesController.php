@@ -81,7 +81,6 @@ class CasesController extends Controller
         }
     }
     public function viewIntakes(){
-
         $case = new LegalCase;
         $case->staff = auth()->user()->id;
         $cases = $case->getLawyerCases();
@@ -328,6 +327,13 @@ class CasesController extends Controller
 
 
     }
+    public function countOpenCases(Request $request){
+        $case = new LegalCase;
+        $case->staff =  $request->input('id');
+        $cases = $case->getLawyerCases()->count();
+        return response()->json(['count' => $cases]);
+    }
+
 
 
 }

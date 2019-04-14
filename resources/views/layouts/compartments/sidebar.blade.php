@@ -130,15 +130,10 @@
                       <li class="nav-item">
                       <a href="{{ url('/associate/view/intakes')}}" class="nav-link">
                           <i class="fa fa-circle-o nav-icon"></i>
-                          <p>My Cases</p>
+                          <p>Open Cases</p>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a href="{{ url('/register/firm')}}" class="nav-link">
-                            <i class="fa fa-circle-o nav-icon"></i>
-                            <p>Open Cases <span class="right badge badge-danger">50</span></p>
-                          </a>
-                        </li>
+
 
                     </ul>
                   </li>

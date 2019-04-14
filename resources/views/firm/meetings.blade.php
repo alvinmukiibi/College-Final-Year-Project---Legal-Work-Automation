@@ -156,7 +156,7 @@
                                     <div class="form-group row">
                                             <label for="agenda" class="col-sm-4 col-form-label">Agenda</label>
                                             <div class="col-sm-8">
-                                               <textarea name="agenda"  cols="10" rows="5" class="form-control"></textarea>
+                                               <textarea name="agenda"  id="editor1" cols="10" rows="5" class="form-control"></textarea>
 
 
                                             </div>
