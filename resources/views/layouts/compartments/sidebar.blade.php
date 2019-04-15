@@ -29,8 +29,16 @@
                                     </a>
                                   </li>
                   <li class="nav-item">
-                      @if (auth()->user()->user_role=="administrator")
+                      @if (auth()->user()->user_role == "administrator")
                       <a href="{{ url('/admin/profile')}}" class="nav-link">
+                        <i class="nav-icon fa fa-user"></i>
+                        <p>
+                          My Profile
+
+                        </p>
+                      </a>
+                     @else
+                      <a href="{{ url('/user/profile')}}" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
                         <p>
                           My Profile
@@ -110,7 +118,7 @@
                   @endif
                   @if (auth()->user()->user_role == "Associate" )
                   <li class="nav-item">
-                    <a href="{{ url('/dashboard')}}" class="nav-link">
+                    <a href="{{ url('/associate/make/intake')}}" class="nav-link">
                           <i class="nav-icon fa fa-meh-o"></i>
                           <p>
                             New Intake
@@ -128,9 +136,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                      <a href="{{ url('/register/firm')}}" class="nav-link">
+                      <a href="{{ url('/associate/view/intakes')}}" class="nav-link">
                           <i class="fa fa-circle-o nav-icon"></i>
-                          <p>All My Cases</p>
+                          <p>My New Intakes</p>
                         </a>
                       </li>
                       <li class="nav-item">
@@ -189,7 +197,7 @@
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('/admin/admin/staff')}}" class="nav-link">
+                    <a href="{{ url('/user/manage/calendar')}}" class="nav-link">
                         <i class="nav-icon fa fa-calendar"></i>
                         <p>
                           My Calendar

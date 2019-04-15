@@ -40,11 +40,11 @@
                 <a href="{{ url('admin/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
 
-                @elseif(auth()->user()->user_role=="Associate")
-                <a href="{{ url('associate/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                @elseif(auth()->user()->user_role=="ulc")
+                <a href="{{ url('/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
                 @else
-                <a href="{{ url('profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/user/profile')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
                 @endif
             </div>
@@ -82,7 +82,6 @@
                     <div class="small-box bg-warning text-white">
                       <div class="inner">
                         <h3>Departments</h3>
-    
                         <p>Manage Firm Departments</p>
                       </div>
                       <div class="icon">
@@ -95,7 +94,6 @@
                     <div class="small-box text-white" style="background-color:#fb7a24">
                       <div class="inner">
                         <h3>User Roles</h3>
-    
                         <p>Manage User Roles</p>
                       </div>
                       <div class="icon">
@@ -104,7 +102,6 @@
                     <a href="{{ url('/admin/manage/roles')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
-             
               <div class="col-lg-3 col-6">
                 <div class="small-box text-white" style="background-color:#452b17">
                   <div class="inner">
@@ -197,6 +194,7 @@
                               <input type="text"  id="todo" maxlength="100" required class="form-control {{$errors->has('todo')?'is-invalid':''}}">
                               <input type="hidden" id="owner" value={{auth()->user()->id}}>
                               <input type="hidden" id="firm_id" value={{auth()->user()->firm_id}}>
+                              <input type="date"  id="dueBy" class="form-control">
                                 <span class="input-group-append">
                                   <button type="submit" id="addTodo" class="btn btn-outline-primary"> <i class="fa fa-plus"></i> Add Todo</button>
                                 </span>
@@ -261,7 +259,6 @@
                                       <a href="#" class="dropdown-item">Add new event</a>
                                       <a href="#" class="dropdown-item">Clear events</a>
                                       <div class="dropdown-divider"></div>
-                                      <a href="{{ url('/admin/manage/roles')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                                       <a href="#" class="dropdown-item">View calendar</a>
                                     </div>
                                   </div>
@@ -302,10 +299,25 @@
                          data: {
                             'todo': jQuery('#todo').val(),
                             'owner': jQuery('#owner').val(),
+                            'dueBy': jQuery('#dueBy').val(),
                             'firm_id': jQuery('#firm_id').val()
                          },
                          success: res => {
-                            jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div></li>');
+                            const date = new Date(); //.format('m-d-Y')-obj.dueBy;
+                            const  today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+                            const date2 = new Date(today);
+                            const date1 = new Date(res.dueBy);
+                            const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            let flag = '';
+                            if(remainingTime >= 5){
+                                flag = 'success';
+                            }else if(remainingTime >= 2 && remainingTime < 5){
+                                flag = 'warning';
+                            }else{
+                                flag = 'danger';
+                            }
+                           return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + res.tagline + '</span><small class="pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
 
                          }
                      });
@@ -326,7 +338,22 @@
                     },
                     success: res => {
                         res.map(obj => {
-                            jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div></li>');
+                            const date = new Date(); //.format('m-d-Y')-obj.dueBy;
+                            const  today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+                            const date2 = new Date(today);
+                            const date1 = new Date(obj.dueBy);
+                            const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                            let flag = '';
+                            if(remainingTime >= 5){
+                                flag = 'success';
+                            }else if(remainingTime >= 2 && remainingTime < 5){
+                                flag = 'warning';
+                            }else{
+                                flag = 'danger';
+                            }
+
+                            return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><small class=" pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + remainingTime + ' days  </small><div class="tools"><i class="fa fa-trash-o"></i></div></li>');
                         })
                     }
                 });

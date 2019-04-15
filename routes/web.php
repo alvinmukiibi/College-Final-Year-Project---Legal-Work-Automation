@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/admin/deactivate/staff/{staff}', "StaffController@deactivateStaff");
 
     // Associate role routes
-    Route::get('/associate/profile', "UserController@showProfile");
+    Route::get('/user/profile', "UserController@showProfile");
 
     // Meeting management routes
     Route::get('/user/manage/meetings', "MeetingsController@showMeetings");
@@ -61,11 +61,39 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/user/delete/conversation', "MessageController@deleteConversation");
 
     // Website management routes
-    Route::get('/admin/manage/website', "WebsiteController@showWebsite");
+    Route::get('/admin/manage/website', "WebsiteController@savelawfirmProfile");
     Route::post('/admin/savelawfirmProfile', "WebsiteController@savelawfirmProfile");
 
-    // calendar management routes
-    Route::get('admin/manage/calendar', "CalendarController@viewCalendar");
+    // Calendar & Event routes
+    Route::get('/user/manage/calendar', "UserController@showCalendar");
+
+    // Intake routes
+    Route::get('/associate/make/intake', "CasesController@showIntakeForm");
+    Route::post('/associate/register/intake', "CasesController@makeIntake");
+    Route::get('/associate/view/intakes', "CasesController@viewIntakes");
+    Route::get('/associate/view/case/{case}', "CasesController@viewCase");
+    Route::get('/associate/make/case/{case}', "CasesController@makeCase");
+    Route::get('/associate/reject/case/{case}', "CasesController@rejectCase");
+
+    // Due Diligence routes
+    Route::get('/associate/make/due_diligence/{case}', "DueDiligenceController@makeDueDiligence");
+    Route::post('/associate/add/duediligence', "DueDiligenceController@addDueDiligence");
+    Route::get('/associate/download/file/{file}', "DueDiligenceController@downloadFile");
+
+    // Case Routes
+    Route::post('/associate/add/document', "CasesController@addDocumentToCase");
+
+    // Case Task Routes
+    Route::post('/associate/add/casetask', "CasesController@addCaseTask");
+    Route::get('/associate/complete/task/{task}', "CasesController@completeTask");
+
+    //Note Routes
+    Route::post('/associate/add/note', "CasesController@addNote");
+    
+    // Proceeding Routes
+    Route::get('/associate/view/proceedings/{case}', "CasesController@viewProceedings");
+    Route::post('/associate/add/proceeding', "CasesController@addProceeding");
+
 });
 Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');

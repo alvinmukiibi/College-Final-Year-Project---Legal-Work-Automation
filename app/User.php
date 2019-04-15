@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Firm;
 use App\Department;
 use App\Todo;
+use App\LegalCase;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 
@@ -37,14 +38,18 @@ class User extends Authenticatable
     ];
 
     public function firm(){
-        return $this->belongsTo(Firm::class, 'firm_id','firm_id');
+        return $this->belongsTo(Firm::class, 'firm_id', 'firm_id');
     }
     public function dept(){
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'department');
     }
     public function todos(){
         return $this->hasMany(Todo::class);
     }
+    public function cases(){
+        return $this->hasMany(LegalCase::class, 'staff');
+    }
+    
     public function activateUsers(){
 
         $activate = DB::table($this->table)->where(['firm_id'=> $this->firm_id])->update(["account_status"=>"active"]);

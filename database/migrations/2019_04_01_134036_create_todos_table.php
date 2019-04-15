@@ -16,6 +16,7 @@ class CreateTodosTable extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->increments('id');
             $table->text('tagline', '100');
+            $table->string('dueBy')->nullable();
             $table->unSignedInteger('user_id');
             $table->text('firm_id');
             $table->timestamp('date')->useCurrent();

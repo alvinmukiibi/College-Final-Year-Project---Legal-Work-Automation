@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\LegalCase;
-use App\ImportantDate;
-use App\Resolution;
+use Illuminate\Support\Facades\DB;
 class Proceeding extends Model
 {
     protected $table ='proceedings';
@@ -14,12 +13,12 @@ class Proceeding extends Model
     {
         return $this->belongsTo(LegalCase::class);
     }
-    public function importantdates()
-    {
-        return $this->hasMany(ImportantDate::class);
+
+    public function addProceeding(){
+        $data = $this->data;
+        return DB::table($this->table)->insert(['description' => $data['description'] , 'date_of_proceeding' => $data['date_of_proceeding'], 'court_of_proceeding' => $data['court'], 'date_of_next_proceeding' => $data['date_of_next_proceeding'], 'outcome_of_proceeding' => $data['outcome'], 'case_id' =>$this->case_id ]);
+
     }
-    public function resolutions()
-    {
-        return $this->hasMany(Resolution::class);
-    }
+
+
 }

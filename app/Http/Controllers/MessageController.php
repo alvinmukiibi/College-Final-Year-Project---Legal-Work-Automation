@@ -37,7 +37,7 @@ class MessageController extends Controller
             $file = $request->file('attachment');
             $savedTo = 'public'.DIRECTORY_SEPARATOR;
             $originalName = $file->getClientOriginalName();
-            $arr = explode('.',$originalName);
+            $arr = explode('.',$originalName); // $name = pathinfo($originalName, PATHINFO_FILENAME)
             $replaced = \str_replace(' ', '_', $arr[0]);
             $newName = $replaced . '_' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs($savedTo, $newName);

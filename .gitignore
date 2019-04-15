@@ -1,7 +1,10 @@
 /node_modules
 /storage/*.key
 /vendor
+/public
 .env
+.gitignore
+/public/uploads/profiles
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

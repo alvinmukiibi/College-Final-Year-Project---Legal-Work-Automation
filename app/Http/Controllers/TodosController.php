@@ -19,11 +19,13 @@ class TodosController extends Controller
 
 
         $data = $this->validate($request, [
-            "todo" => "required|max:100|"
+            "todo" => "required|max:100|",
+
         ]);
 
         $todo = new Todo;
         $todo->todo = $data['todo'];
+        $todo->dueBy = $request->input('dueBy');
         $todo->owner = $request->input('owner');
         $todo->firm_id = $request->input('firm_id');
 

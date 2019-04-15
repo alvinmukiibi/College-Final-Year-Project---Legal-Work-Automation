@@ -8,12 +8,6 @@ use App\Firm;
 use App\User;
 class WebsiteController extends Controller
 {
-    /*public function showWebsite(Request $request){
-        $site = Firm::where(['firm_id'=>auth()->user()->firm_id])->get();
-        //dd($site);
-        return view('firm.admin.website')->with('user', $site);
-    }*/
-
     public function showWebsite(Request $request){
         $user = new User;
          $user->firm_id = auth()->user()->firm_id;
@@ -62,6 +56,5 @@ if($save){
 }else{
  return redirect()->back()->with("error", "Nothing was changed");
 }
-
-    }
+ }
 }

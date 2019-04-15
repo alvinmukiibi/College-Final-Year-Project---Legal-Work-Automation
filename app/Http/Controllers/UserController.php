@@ -17,9 +17,9 @@ class UserController extends Controller
         $user = auth()->user();
         if($user->user_role=="administrator"){
             return view("firm.admin.profile")->with('user', $user);
-        }else if($user->user_role=="Associate"){
+        }else {
             $user->dept = Department::find($user->department);
-            return view("firm.associate.profile")->with('user', $user);
+            return view("firm.profile")->with('user', $user);
         }
 
     }
@@ -68,6 +68,10 @@ class UserController extends Controller
         return redirect()->back()->with("error", "Nothing was changed");
        }
 
+    }
+    public function showCalendar(){
+
+        return view('firm.calendar');
     }
 }
 
