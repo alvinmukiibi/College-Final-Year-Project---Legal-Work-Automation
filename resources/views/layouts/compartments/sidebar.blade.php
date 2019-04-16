@@ -207,21 +207,50 @@
                             <i class="right fa fa-angle-left"></i>
                           </p>
                         </a>
+                        @if (auth()->user()->user_role == 'Associate')
                         <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                          <a href="{{ url('/register/firm')}}" class="nav-link">
-                              <i class="fa fa-circle-o nav-icon"></i>
-                              <p>Make Requisition</p>
-                            </a>
-                          </li>
-                          <li class="nav-item">
-                            <a href="{{ url('/register/firm')}}" class="nav-link">
-                                <i class="fa fa-circle-o nav-icon"></i>
-                                <p>View Requisitions <span class="right badge badge-danger">50</span></p>
-                              </a>
-                            </li>
+                                <li class="nav-item">
+                                <a href="{{ url('/associate/manage/requisitions')}}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>Make Requisition</p>
+                                  </a>
+                                </li>
+                                <li class="nav-item">
+                                  <a href="{{ url('/associate/manage/requisitions')}}" class="nav-link">
+                                      <i class="fa fa-circle-o nav-icon"></i>
+                                      <p>View Requisitions <span class="right badge badge-danger">50</span></p>
+                                    </a>
+                                  </li>
 
-                        </ul>
+                              </ul>
+                        @endif
+                        @if (auth()->user()->user_role == 'Finance')
+                        <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                  <a href="{{ url('/finance/manage/requisitions')}}" class="nav-link">
+                                      <i class="fa fa-circle-o nav-icon"></i>
+                                      <p>View Requisitions <span class="right badge badge-danger">50</span></p>
+                                    </a>
+                                  </li>
+
+                              </ul>
+
+                        @endif
+                        @if (auth()->user()->user_role == 'Partner')
+                        <ul class="nav nav-treeview">
+
+                                <li class="nav-item">
+                                  <a href="{{ url('/partner/manage/requisitions')}}" class="nav-link">
+                                      <i class="fa fa-circle-o nav-icon"></i>
+                                      <p>View Requisitions <span class="right badge badge-danger">50</span></p>
+                                    </a>
+                                  </li>
+
+                              </ul>
+
+                        @endif
+
                       </li>
                       <li class="nav-item has-treeview">
                       <a href="#" class="nav-link">

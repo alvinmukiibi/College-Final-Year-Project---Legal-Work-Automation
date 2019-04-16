@@ -162,7 +162,7 @@
                                             <div class="form-group row">
                                                     <label for="address" class="col-sm-4 col-form-label ">Synopsis</label>
                                                     <div class="col-sm-8">
-                                                        <textarea rows="10" id="editor1" required cols="10" name="synopsis" placeholder = "Brief Description of case..."required class="form-control {{ $errors->has('synopsis')?'is-invalid':''}}"></textarea>
+                                                        <textarea rows="10" required cols="10" name="synopsis" placeholder = "Brief Description of case..."required class="form-control {{ $errors->has('synopsis')?'is-invalid':''}}"></textarea>
                                                     </div>
 
                                             </div>

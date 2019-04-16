@@ -8,6 +8,7 @@ use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use App\User;
 use App\Department;
 use App\CaseType;
+use App\Requisition;
 use Illuminate\Support\Facades\DB;
 
 class Firm extends Model
@@ -28,6 +29,9 @@ class Firm extends Model
     }
     public function caseTypes(){
         return $this->hasMany(CaseType::class, 'firm_id', 'firm_id');
+    }
+    public function staffRequisitions(){
+        return $this->hasMany(Requisition::class, 'firm_id');
     }
 
 

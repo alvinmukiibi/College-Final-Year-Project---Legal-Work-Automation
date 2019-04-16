@@ -117,7 +117,16 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/admin/add/casetype', "CaseTypesController@addCaseType");
     Route::post('/admin/edit/casetype', "CaseTypesController@editCaseType");
 
-
+    // Requisition management routes
+    Route::get('/associate/manage/requisitions', "RequisitionsController@viewRequisitions");
+    Route::post('/associate/make/requisition', "RequisitionsController@makeRequisition");
+    Route::get('/associate/cancel/requisition/{requisition}', "RequisitionsController@cancelRequisition");
+    Route::get('/finance/manage/requisitions', "RequisitionsController@manageRequisitions");
+    Route::get('/finance/approve/requisition/{requistion}', "RequisitionsController@approveRequisition");
+    Route::get('/finance/serve/requisition/{requistion}', "RequisitionsController@markAsServed");
+    Route::post('/finance/decline/requisition', "RequisitionsController@declineRequisition");
+    Route::get('/finance/submit/requisition/{requisition}', "RequisitionsController@submitRequisition");
+    Route::get('/partner/manage/requisitions', "RequisitionsController@partnerManageRequisitions");
     //logout route
     Route::get('/logout', "AuthController@logout");
 

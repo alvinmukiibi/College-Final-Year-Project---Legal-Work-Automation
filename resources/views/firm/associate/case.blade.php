@@ -286,7 +286,7 @@
 
                                     </div>
                                     <div class="card-footer">
-                                            <form action="{{ URL('/associate/add/casetask') }}" method="post">
+                                            <form action="{{ url('/associate/add/casetask') }}" method="post">
                                                     <div class="input-group">
                                                         @csrf
                                                         <input type="hidden" name="caseID" value="{{ $case->id }}">

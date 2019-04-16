@@ -87,10 +87,10 @@
                                                     </div>
                                                   </div>
                                                   <div class="form-group row">
-                                                        <label for="contact" required class="col-sm-4 col-form-label">Phone Number</label>
+                                                        <label for="contact"  class="col-sm-4 col-form-label">Phone Number</label>
 
                                                         <div class="col-sm-8">
-                                                          <input type="text" value="{{$user->contact}}" class="form-control {{$errors->has('contact')?'is-invalid':''}}" name="contact"  placeholder="Personal Contact">
+                                                          <input type="text" required value="{{$user->contact}}" class="form-control {{$errors->has('contact')?'is-invalid':''}}" name="contact"  placeholder="Personal Contact">
                                                         </div>
                                                       </div>
                                                       <div class="form-group row">

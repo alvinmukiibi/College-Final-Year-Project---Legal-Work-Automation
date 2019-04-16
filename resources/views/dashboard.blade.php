@@ -156,19 +156,35 @@
                 <a href="{{ url('/user/manage/tasks')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              <div class="col-lg-3 col-6">
-                <div class="small-box bg-success" >
-                  <div class="inner">
-                    <h3>Requisitions</h3>
 
-                    <p>My Requisitions</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-money"></i>
-                  </div>
-                <a href="{{ url('/register/firm')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success" >
+                      <div class="inner">
+                        <h3>Requisitions</h3>
+
+                        <p>My Requisitions</p>
+                      </div>
+                      <div class="icon">
+                        <i class="fa fa-money"></i>
+                      </div>
+                      @if (auth()->user()->user_role == 'Associate')
+                      <a href="{{ url('/associate/manage/requisitions')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
+                      @endif
+                      @if (auth()->user()->user_role == 'Partner')
+                      <a href="{{ url('/partner/manage/requisitions')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
+                      @endif
+                      @if (auth()->user()->user_role == 'Finance')
+                      <a href="{{ url('/finance/manage/requisitions')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
+                      @endif
+
+
                 </div>
-              </div>
+                  </div>
+
+
 
 
 
