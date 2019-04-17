@@ -155,7 +155,7 @@ class CasesController extends Controller
         $case_id = $request->segment(4);
         $case = new LegalCase;
         $case->case_number = $case_id;
-        $client = $case->getCaseClient();
+        $client = $case->getCaseClient()[0]->name;
 
         $departments = Department::where(['firm_id' => auth()->user()->firm_id])->get();
         return view('firm.associate.share')->with(['case' => $case_id, 'client' => $client, 'departments' => $departments]);

@@ -156,6 +156,21 @@
                 <a href="{{ url('/user/manage/tasks')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+              @if (auth()->user()->user_role=='Finance')
+              <div class="col-lg-3 col-6">
+                    <div class="small-box text-white" style="background-color:#452b17">
+                      <div class="inner">
+                        <h3>Payments</h3>
+
+                        <p>Manage Case Payments</p>
+                      </div>
+                      <div class="icon">
+                        <i class="fa fa-users"></i>
+                      </div>
+                    <a href="{{ url('/finance/manage/payments')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+              @endif
 
               <div class="col-lg-3 col-6">
                     <div class="small-box bg-success" >

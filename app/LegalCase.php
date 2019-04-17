@@ -62,7 +62,17 @@ class LegalCase extends Model
         return $reject;
     }
     public function getCaseClient(){
-        $client = DB::table($this->table)->join('clients', 'clients.id', '=', 'legal_cases.client')->where(['legal_cases.case_number' => $this->case_number])->value('clients.name');
+        $client = DB::table($this->table)->join('clients', 'clients.id', '=', 'legal_cases.client')->where(['legal_cases.case_number' => $this->case_number])->select('clients.*')->get();
         return $client;
     }
+    public function checkIfCaseBelongsToFirm(){
+        $check = DB::table($this->table)->where(['case_number' => $this->case_number, 'firm' => $this->firm_id])->get();
+        $count = $check->count();
+        if($count > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

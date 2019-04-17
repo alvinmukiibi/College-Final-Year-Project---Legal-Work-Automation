@@ -127,6 +127,13 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/finance/decline/requisition', "RequisitionsController@declineRequisition");
     Route::get('/finance/submit/requisition/{requisition}', "RequisitionsController@submitRequisition");
     Route::get('/partner/manage/requisitions', "RequisitionsController@partnerManageRequisitions");
+
+    // Case Payment Routes
+    Route::post('/associate/record/payment', "PaymentsController@recordPayment");
+    Route::get('/associate/view/payments/{case}', "PaymentsController@viewPayments");
+    Route::get('/finance/manage/payments', "PaymentsController@managePayments");
+    Route::get('/finance/view/receipt/{case}/{payment}', "PaymentsController@viewReceipt");
+
     //logout route
     Route::get('/logout', "AuthController@logout");
 

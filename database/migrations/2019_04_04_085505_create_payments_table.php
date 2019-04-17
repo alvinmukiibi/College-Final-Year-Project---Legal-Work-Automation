@@ -15,7 +15,21 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->unsignedInteger('case_id');
+            $table->string('amount');
+            $table->string('paid_by');
+            $table->string('paid_for');
+            $table->string('ref', '6')->unique();
+            $table->timestamp('date_of_payment')->useCurrent();
+            $table->unsignedInteger('received_by');
+            $table->string('status', '50')->default('pending');
+            $table->unsignedInteger('firm_id');
+            $table->timestamp('created_at')->useCurrent();
+
+            $table->foreign('case_id')->references('id')->on('legal_cases');
+            $table->foreign('received_by')->references('id')->on('users');
+            $table->foreign('firm_id')->references('id')->on('firms');
+
         });
     }
 

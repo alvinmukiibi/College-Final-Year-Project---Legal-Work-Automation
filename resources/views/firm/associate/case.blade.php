@@ -497,8 +497,53 @@
 
                             </div>
                         <div class="col-8 connectedSortable">
+                            <div class="card card-success">
+                                <form action="{{ url('/associate/record/payment') }}" method="post">
+                                    @csrf
+                                <div class="card-header">
+                                    <h3 class="card-title">Payments</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="callout callout-info">
+                                        <h5> <i class="fa fa-info"></i>Note </h5>
+                                        <p> {{ __('Receipts shall be automatically generated and sent to the clients for any kind of payment that they make.') }}</p>
+                                    </div>
+
+                                    <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                    <label for="amount">Amount Paid (SHS)</label>
+                                                    <input name="amount" value="{{ old('amount') }}" required type="number" class="form-control {{ $errors->has('amount')?'is-invalid':'' }}" >
+                                                </div>
+                                    </div>
+                                    <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                    <label for="paidby">Paid By <small class="text-danger">Person that has delivered the payment</small> </label>
+                                                    <input name="paidby" value="{{ old('paidby') }}" required type="text" class="form-control {{ $errors->has('paidby')?'is-invalid':'' }}" >
+                                                </div>
+                                    </div>
+                                    <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                    <label for="paidfor">Paid For / Invoice No <small class="text-success">Reason for payment</small> </label>
+                                                    <input name="paidfor" value="{{ old('paidfor') }}" required type="text" class="form-control {{ $errors->has('paidfor')?'is-invalid':'' }}" >
+                                                </div>
+                                    </div>
+                                    <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                    <label for="date">Date of Payment </label>
+                                                    <input name="date" value="{{ old('date') }}" type="date" class="form-control {{ $errors->has('date')?'is-invalid':'' }}" >
+                                                </div>
+                                    </div>
 
                                 </div>
+                                <div class="card-footer">
+                                    <input type="hidden" name="caseID" value={{ $case->id  }} >
+                                    <button type="submit" class="btn btn-outline-success pull-right"> <b>SUBMIT</b> </button>
+
+                                    <a href="{{ url('/associate/view/payments', ['case' => $case->case_number]) }}" class="btn btn-primary btn-flat"><b>Past Payments</b> </a>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
 
                     </div>
             </div>
