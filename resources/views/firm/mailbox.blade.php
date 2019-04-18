@@ -38,7 +38,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive mailbox-messages">
-                        <table class="table table-hover table-striped" >
+                        <table class="table table-hover table-striped" id="example2" >
                             <tbody>
                                 @foreach ($conversations as $conversation)
                                 <tr>
@@ -52,7 +52,7 @@
                                 <td class="mailbox-name">
 
 
-                                    <a href={{ url('user/make/chat',['msg' => $conversation['conv']->id , 'user' => $conversation['otherUser'][0]->id]) }} class="btn btn-outline-success">{{$conversation['otherUser'][0]->fname}} {{$conversation['otherUser'][0]->lname}}
+                                    <a href={{ url('user/make/chat',['msg' => $conversation['conv']->id , 'user' => $conversation['otherUser'][0]->id]) }} class="btn btn-outline-success btn-sm">{{$conversation['otherUser'][0]->fname}} {{$conversation['otherUser'][0]->lname}}
 
                                     </a>
 

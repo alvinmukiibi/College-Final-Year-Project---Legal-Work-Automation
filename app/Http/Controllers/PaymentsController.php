@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Payment;
 use App\Firm;
 use App\LegalCase;
+use PDF;
+use App\Events\SendReceiptToClient;
 class PaymentsController extends Controller
 {
 
@@ -57,9 +59,7 @@ class PaymentsController extends Controller
         return view('firm.finance.payments')->with(['payments' => $payments]);
 
     }
-    public function viewReceipt(Request $request){
-        $case_number = $request->segment(4);
-        $payment_ref = $request->segment(5);
+    public function getReceiptData($case_number, $payment_ref){
         $case_id = LegalCase::where('case_number', $case_number)->value('id');
 
         $firm = Firm::where('firm_id', auth()->user()->firm_id)->get()[0];
@@ -75,7 +75,43 @@ class PaymentsController extends Controller
 
         $case = LegalCase::find($case_id);
 
-        return view('firm.finance.receipt')->with(['firm' => $firm, 'case' => $case, 'client' => $client, 'payment' => $payment]);
+        return $data = [
+            'firm' => $firm,
+            'client' => $client,
+            'payment' => $payment,
+            'case' => $case
+        ];
+    }
+    public function viewReceipt(Request $request){
+        $case_number = $request->segment(4);
+        $payment_ref = $request->segment(5);
+        $data = $this->getReceiptData($case_number, $payment_ref);
+        return PDF::loadView('firm.finance.receipt', ['firm' => $data['firm'], 'client' => $data['client'], 'payment' => $data['payment'], 'case' => $data['case']])->stream($data['payment']->ref. '.pdf');
+
+    }
+
+    public function sendReceipt(Request $request){
+        $case_number = $request->segment(4);
+        $payment_ref = $request->segment(5);
+        $data = $this->getReceiptData($case_number, $payment_ref);
+
+        $event = new SendReceiptToClient;
+        $event->data = $data;
+        $event->recipient = $data['client']->email;
+        $event->attachment = PDF::loadView('firm.finance.receipt', ['firm' => $data['firm'], 'client' => $data['client'], 'payment' => $data['payment'], 'case' => $data['case']]);
+        event($event);
+
+        //update payments table to receipted
+        $pay = new Payment;
+        $pay->ref = $data['payment']->ref;
+        $pay->case_id = $data['case']->id;
+        $pay->firm_id = $data['firm']->id;
+
+        $pay->markAsReceipted();
+
+
+        return redirect()->back()->with('success', "Receipt has been successfully sent to the client!! Please confirm with client!!");
+
 
     }
 }

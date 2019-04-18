@@ -133,6 +133,8 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/view/payments/{case}', "PaymentsController@viewPayments");
     Route::get('/finance/manage/payments', "PaymentsController@managePayments");
     Route::get('/finance/view/receipt/{case}/{payment}', "PaymentsController@viewReceipt");
+    Route::get('/finance/send/receipt/{case}/{payment}', "PaymentsController@sendReceipt");
+
 
     //logout route
     Route::get('/logout', "AuthController@logout");

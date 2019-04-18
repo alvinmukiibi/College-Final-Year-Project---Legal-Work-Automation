@@ -32,27 +32,26 @@
 
                         </div>
                         <section class="col-lg-9 connectedSortable">
-                            <div class="card direct-chat direct-chart-primary">
+                            <div class="card direct-chat direct-chart-primary card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Direct Chat</h3>
                                     <div class="card-tools">
-                                            <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
+
                                             <button type="button" class="btn btn-tool" data-widget="collapse">
                                               <i class="fa fa-minus"></i>
                                             </button>
 
-                                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                                            </button>
+
                                           </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="direct-chat-messages">
+                                    <div class="direct-chat-messages" style="height:350px">
                                         @foreach ($messages as $message)
                                         @if ($message->recipient_id == auth()->user()->id)
                                         <div class="direct-chat-msg right">
                                                 <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name float-right">{{$user->fname}} {{$user->lname}} </span>
-                                                <span class="direct-chat-timestamp float-left">{{$message->date}}</span>
+                                                <span class="direct-chat-timestamp float-left">{{ date('d-M-Y H:i', strtotime($message->date)) }}</span>
                                                 </div>
 
                                                 <img class="direct-chat-img" src="{{asset('uploads/profiles/'.$user->profile_pic)}}" alt="message user image"/>
@@ -72,7 +71,7 @@
                                         <div class="direct-chat-msg">
                                                 <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name float-left">{{auth()->user()->fname}} {{auth()->user()->lname}}</span>
-                                                    <span class="direct-chat-timestamp float-right">{{$message->date}}</span>
+                                                    <span class="direct-chat-timestamp float-right">{{ date('d-M-Y H:i', strtotime($message->date)) }}</span>
                                                 </div>
                                             <img class="direct-chat-img" src="{{asset('uploads/profiles/'.auth()->user()->profile_pic)}}" alt="message user image">
                                                 <div class="direct-chat-text ">

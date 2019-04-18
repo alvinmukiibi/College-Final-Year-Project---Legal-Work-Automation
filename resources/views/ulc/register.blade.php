@@ -119,8 +119,8 @@
                             <div class="card-header">
                                 <h3 class="card-title">All Law Firms</h3>
                             </div>
-                            <div class="card-body">
-                                <table class="table table-bordered table-responsive" id="example2">
+                            <div class="card-body table-responsive">
+                                <table class="table table-bordered table-hover">
                                     <tr>
                                         <th>Firm Name</th>
                                         <th style="width: 5px">Status</th>
@@ -133,17 +133,17 @@
 
 
                                                 @if ($firm->verification_flag=='not_verified')
-                                                <button class="btn btn-warning"  title="NOT VERIFIED EMAIL"  >NV  <i class="fa fa-circle-o-notch fa-spin"></i> </button>
+                                                <span class="badge badge-warning"> <b>pending</b> </span>
                                                 @elseif($firm->verification_flag=='verified' && $firm->activity_flag=='inactive')
-                                                <button class="btn btn-danger" title="ACCOUT INACTIVE"  >IN <i class="fa fa-close"></i> </button>
+                                                <span class="badge badge-danger"> <b>inactive</b> </span>
                                                 @else
-                                                <button class="btn btn-success" title="ACCOUNT ACTIVE" >AC <i class="fa fa-check-circle"></i> </button>
-                                                @endif
+                                                <span class="badge badge-success"> <b>active</b> </span>
+                                                                                              @endif
 
                                             </td>
                                             <td>
                                                     <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Action</button>
+                                                            <button type="button" class="btn btn-success btn-sm">Action</button>
                                                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                                               <span class="caret"></span>
                                                               <span class="sr-only">Toggle Dropdown</span>

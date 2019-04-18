@@ -60,9 +60,13 @@
                                                 <td>{{ $payment->fname }} {{ $payment->lname }}</td>
                                                 <th>
                                                     @if ($payment->status == 'pending')
-                                                        <a href={{ url('/finance/view/receipt', ['case' => $payment->case_number, 'payment' => $payment->ref]) }}  class="btn btn-sm btn-outline-primary">Receipt</a>
+                                                    <a href={{ url('/finance/send/receipt', ['case' => $payment->case_number, 'payment' => $payment->ref]) }}  class="btn btn-sm btn-outline-success" title="SEND TO CLIENT"> <i class="fa fa-send-o"></i> <b>SEND</b> </a>
+
+                                                        <a href={{ url('/finance/view/receipt', ['case' => $payment->case_number, 'payment' => $payment->ref]) }}  class="btn btn-sm btn-outline-primary" title="PRINT RECEIPT"> <i class="fa fa-print"></i> </a>
                                                     @else
                                                     <span class="badge badge-success">receipted</span>
+                                                    <a href={{ url('/finance/view/receipt', ['case' => $payment->case_number, 'payment' => $payment->ref]) }}  class="btn btn-sm btn-outline-primary" title="PRINT RECEIPT"> <i class="fa fa-print"></i> </a>
+
                                                     @endif
 
                                                 </th>

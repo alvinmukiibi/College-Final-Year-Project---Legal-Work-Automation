@@ -30,6 +30,12 @@ class Payment extends Model
         $info = DB::table($this->table)->join('users', 'users.id', '=', 'payments.received_by')->where(['ref' => $this->ref, 'case_id' => $this->case_id])->select('users.fname','users.lname','payments.*')->get();
         return $info;
     }
+    public function markAsReceipted(){
+        $mark = DB::table($this->table)->where(['ref' => $this->ref, 'case_id' => $this->case_id, 'firm_id' => $this->firm_id])->update(['status' => 'receipted']);
+
+        return $mark;
+
+    }
     public function generatePaymentReference($length = 6){
         $characters = '0123456789ABC';
         $charactersLength = strlen($characters);

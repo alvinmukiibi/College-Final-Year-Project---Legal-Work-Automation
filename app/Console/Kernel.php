@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->call(function(){
         //     DB::table('todos')->delete();
-        // })->everyMinute()->appendOutputTo('~/Desktop/cron/hey.sh');
+        // })->everyMinute();
     }
 
     /**
