@@ -135,7 +135,16 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/finance/view/receipt/{case}/{payment}', "PaymentsController@viewReceipt");
     Route::get('/finance/send/receipt/{case}/{payment}', "PaymentsController@sendReceipt");
 
+    // Time tracking routes
+    Route::post('/associate/add/time', "TimeController@addEntry");
+    Route::get('/associate/view/times/{case}', "TimeController@viewEntries");
 
+    // Invoice routes
+    Route::post('/associate/make/invoice', "InvoicesController@makeInvoice");
+    Route::get('/associate/view/invoices/{case}', "InvoicesController@viewInvoices");
+    Route::get('/associate/print/invoice/{case}/{invoice}', "InvoicesController@printInvoice");
+    Route::get('/finance/manage/invoices', "InvoicesController@manageInvoices");
+    Route::get('/finance/send/invoice/{case}/{invoice}', "InvoicesController@sendInvoice");
     //logout route
     Route::get('/logout', "AuthController@logout");
 

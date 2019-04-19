@@ -165,11 +165,24 @@
                         <p>Manage Case Payments</p>
                       </div>
                       <div class="icon">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-credit-card"></i>
                       </div>
                     <a href="{{ url('/finance/manage/payments')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
+                  <div class="col-lg-3 col-6">
+                        <div class="small-box bg-warning">
+                          <div class="inner">
+                            <h3>Invoices</h3>
+
+                            <p>Manage Case Invoices</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fa fa-money"></i>
+                          </div>
+                        <a href="{{ url('/finance/manage/invoices')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
               @endif
 
               <div class="col-lg-3 col-6">

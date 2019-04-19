@@ -23,7 +23,7 @@ class Payment extends Model
 
     public function fetchAllPayments(){
 
-        $allPayments = DB::table($this->table)->join('users', 'payments.received_by', '=', 'users.id')->join('legal_cases', 'payments.case_id', '=', 'legal_cases.id')->select('legal_cases.case_number', 'users.fname', 'users.lname', 'payments.*')->orderBy('payments.created_at', 'desc')->get();
+        $allPayments = DB::table($this->table)->join('users', 'payments.received_by', '=', 'users.id')->join('legal_cases', 'payments.case_id', '=', 'legal_cases.id')->where('payments.firm_id',$this->firm_id)->select('legal_cases.case_number', 'users.fname', 'users.lname', 'payments.*')->orderBy('payments.created_at', 'desc')->get();
         return $allPayments;
     }
     public function getPaymentInfo(){

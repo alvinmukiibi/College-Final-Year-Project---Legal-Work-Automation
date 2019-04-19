@@ -56,19 +56,19 @@
                                         <td>{{ date('d-M-Y', strtotime($case->date_taken)) }}</td>
                                         <td>
                                                 @if ($case->case_status == 'intake')
-                                                <button class="btn btn-warning text-white"><b>{{ __('INTAKE') }}</b></button>
+                                                <span class="badge badge-warning text-white"><b>{{ __('INTAKE') }}</b></span>
                                                 @endif
                                                 @if ($case->case_status == 'open')
-                                                <button class="btn btn-success text-white"><b>{{ __('OPEN') }}</button>
+                                                <span class="badge badge-success text-white"><b>{{ __('OPEN') }}</span>
                                                 @endif
                                                 @if ($case->case_status == 'closed-rejected')
-                                                <button class="btn btn-danger text-white"><b>{{ __('REJECTED') }}</button>
+                                                <span class="badge badge-danger text-white"><b>{{ __('REJECTED') }}</span>
                                                 @endif
                                         </td>
                                         <td>
                                             @if ($case->owner == auth()->user()->id && $case->assignee !== null)
                                             <div class="btn-group">
-                                                <button class="btn btn-danger"> <b>ASSIGNED</b> </button>
+                                                <button class="btn btn-sm btn-danger"> <b>ASSIGNED</b> </button>
                                             </div>
                                             @else
                                                 <div class="btn-group">

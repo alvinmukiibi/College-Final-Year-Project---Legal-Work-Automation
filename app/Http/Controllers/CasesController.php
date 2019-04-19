@@ -16,6 +16,7 @@ use App\Proceeding;
 use App\LegalCase_Staff;
 use App\Department;
 use App\Meeting;
+use App\Time;
 use App\Events\CaseShared;
 class CasesController extends Controller
 {
@@ -147,7 +148,14 @@ class CasesController extends Controller
 
         $meetings = Meeting::where(['attendance' => $request->segment(4)])->orderBy('created_at', 'desc')->get();
 
-        return view('firm.associate.case')->with(['staff_on_the_case' => $staff_on_the_case, 'meetings' => $meetings, 'proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
+        $time = new Time;
+        $time->case_id = $id;
+        $time->firm_id = Firm::where(['firm_id' => auth()->user()->firm_id])->value('id');
+        $totalhrs = $time->countTotalHrs();
+        $invoicedhrs = $time->countBilledHrs();
+        $remaininghrs = $totalhrs - $invoicedhrs;
+
+        return view('firm.associate.case')->with(['remaininghrs' => $remaininghrs,'staff_on_the_case' => $staff_on_the_case, 'meetings' => $meetings, 'proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
 
     }
 

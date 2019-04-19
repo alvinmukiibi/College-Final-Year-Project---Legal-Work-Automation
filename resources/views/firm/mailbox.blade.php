@@ -42,18 +42,12 @@
                             <tbody>
                                 @foreach ($conversations as $conversation)
                                 <tr>
-                                        {{-- <td>
-                                        <form action="{{ url('user/delete/conversation') }}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="conv" value={{ $conversation['conv']->id  }}>
-                                            <button type="submit" title="DELETE CONVERSATION" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></button>
-                                        </form>
-                                        </td> --}}
+
                                 <td class="mailbox-name">
 
 
-                                    <a href={{ url('user/make/chat',['msg' => $conversation['conv']->id , 'user' => $conversation['otherUser'][0]->id]) }} class="btn btn-outline-success btn-sm">{{$conversation['otherUser'][0]->fname}} {{$conversation['otherUser'][0]->lname}}
-
+                                    <a href={{ url('user/make/chat',['msg' => $conversation['conv']->id , 'user' => $conversation['otherUser'][0]->id]) }} class="btn btn-outline-success btn-sm"> <b> {{$conversation['otherUser'][0]->fname}} {{$conversation['otherUser'][0]->lname}}
+                                        </b>
                                     </a>
 
                             </td>
@@ -65,7 +59,7 @@
 
 
                                 </td>
-                                        <td class="mailbox-date">{{$conversation['msg'][0]->date}}</td>
+                                        <td class="mailbox-date">{{ date('d-M-Y H:i', strtotime($conversation['msg'][0]->date)) }}</td>
                                     </tr>
                                 @endforeach
 

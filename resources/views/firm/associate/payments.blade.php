@@ -41,6 +41,7 @@
                                             <th>Amount (SHS)</th>
                                             <th>Delivered By</th>
                                             <th>Paid For</th>
+                                            <th>Status</th>
                                             <th>Recieved By</th>
 
                                         </tr>
@@ -53,6 +54,14 @@
                                                 <td>{{ $payment->amount }}</td>
                                                 <td>{{ $payment->paid_by }}</td>
                                                 <td>{{ $payment->paid_for }}</td>
+                                                <td>
+                                                        @if ($payment->status == 'pending')
+                                                        <span class="badge badge-warning">pending</span>
+                                                        @else
+                                                        <span class="badge badge-success">receipted</span>
+
+                                                        @endif
+                                                </td>
                                                 <td>{{ $payment->fname }} {{ $payment->lname }}</td>
                                             </tr>
                                         @endforeach
