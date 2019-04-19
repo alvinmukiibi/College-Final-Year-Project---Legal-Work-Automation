@@ -562,7 +562,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
                                               <label for="agenda">Agenda</label>
-                                              <textarea id="editor1" required name="agenda" class="form-control {{ $errors->has('agenda')?'is-invalid':'' }}"  rows="5"></textarea>
+                                              <textarea required name="agenda" class="form-control {{ $errors->has('agenda')?'is-invalid':'' }}"  rows="5"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-row">

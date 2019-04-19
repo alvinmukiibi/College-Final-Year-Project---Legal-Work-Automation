@@ -29,6 +29,7 @@ class AuthController extends Controller
         $user_data = $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:8',
+            'online_status' => 'offline'
         ]);
 
 
@@ -48,7 +49,7 @@ class AuthController extends Controller
                     return redirect('/changePassword');
 
                 }else{
-
+                    User::where(['id' => auth()->user()->id])->update(['online_status' => 'online']);
                     return redirect('/dashboard');
                 }
 
@@ -67,8 +68,9 @@ class AuthController extends Controller
     }
     public function logout()
     {
+        User::where(['id' => auth()->user()->id])->update(['online_status' => 'offline']);
         Auth::logout();
-            return redirect()->route("login");
+        return redirect()->route("login");
 
     }
     public function showChangePasswordForm(){

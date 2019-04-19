@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('account_status', '20');
             $table->string('verification_status', '20')->nullable();
             $table->text('identification_token')->nullable();
+            $table->string('online_status', '10')->default('offline')->nullable();
             $table->text('firm_id')->nullable();
             $table->timestamps();
             $table->rememberToken();

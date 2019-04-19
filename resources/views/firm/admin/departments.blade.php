@@ -107,7 +107,7 @@
                                                         {{$department->description}}
                                                 </td>
                                                 <td>
-                                                <a href="{{url('admin/departments',['department'=>$department->id])}}" class="btn btn-primary"> <i class="fa fa-pencil"></i>  </a>
+                                                <a href="{{url('admin/departments',['department'=>$department->id])}}" class="btn btn-primary btn-sm"> <i class="fa fa-pencil"></i>  </a>
 
                                                 </td>
                                             </tr>

@@ -106,7 +106,7 @@
                                                           {{$role->description}}
                                                   </td>
                                                   <td>
-                                                     <a href="{{url('admin/manage/roles',['role'=>$role->id])}}" class="btn btn-primary"> <i class="fa fa-pencil"></i>  </a>
+                                                     <a title="Edit" href="{{url('admin/manage/roles',['role'=>$role->id])}}" class="btn btn-primary btn-sm"> <i class="fa fa-pencil"></i>  </a>
 
                                                     </td>
                                               </tr>

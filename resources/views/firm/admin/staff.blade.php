@@ -61,18 +61,18 @@
 
                                     <td>
                                         @if ($user->account_status=='inactive')
-                                        <button class="btn btn-danger btn-sm" title="Inactive">I</button>
+                                        <span class="badge badge-danger">inactive</button>
                                         @else
 
-                                        <button class="btn btn-success btn-sm" title="Active">A</button>
+                                        <span class="badge badge-success" title="Active">active</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if ($user->account_status=='inactive')
-                                        <a href={{url('/admin/activate/staff', ['id'=>$user->id])}}  class="btn btn-outline-success">Activate</a>
+                                        <a href={{url('/admin/activate/staff', ['id'=>$user->id])}}  class="btn btn-outline-success btn-sm">Activate</a>
                                         @else
 
-                                        <a href={{url('/admin/deactivate/staff', ['id'=>$user->id])}} class="btn btn-outline-danger">Deactivate</a>
+                                        <a href={{url('/admin/deactivate/staff', ['id'=>$user->id])}} class="btn btn-outline-danger btn-sm">Deactivate</a>
                                         @endif
 
                                     </td>
