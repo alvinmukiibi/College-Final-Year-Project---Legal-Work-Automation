@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Payment;
 use App\Firm;
 use App\LegalCase;
+use App\Invoice;
 use PDF;
 use App\Events\SendReceiptToClient;
 class PaymentsController extends Controller
@@ -38,6 +39,26 @@ class PaymentsController extends Controller
             'date' => 'nullable|date',
             'caseID' => 'required|numeric'
         ]);
+
+        // check if the paidfor field contains and invoice number for an invoice thats unpaid
+        // then change its status to paid
+
+        $invoice = new Invoice;
+        $invoice->invoice_no = $data['paidfor'];
+        $invoice->case_id = $data['caseID'];
+        $invoice->amount = $data['amount'];
+        $check = $invoice->checkIfInvoiceExistsAndItHasPendingPayments();
+        if($check){
+            $invoice->addPaymentToInvoice();
+        }else{
+            // invoice exists and it is fully settled or hes not paying for an invoice
+            $checkForPaid = $invoice->checkIfInvoiceExistsAndItIsFullySettled();
+            if($checkForPaid){
+                return redirect()->back()->with('error', 'Invoice '. $data['paidfor']. ' is fully settled, please make payment on something else!!');
+            }else{
+                // no connection to invoice, just another payment i.e. do nothing
+            }
+        }
 
         $payment = new Payment;
         $payment->data = $data;

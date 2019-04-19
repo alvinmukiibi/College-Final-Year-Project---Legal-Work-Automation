@@ -17,6 +17,7 @@ use App\LegalCase_Staff;
 use App\Department;
 use App\Meeting;
 use App\Time;
+use App\Payment;
 use App\Events\CaseShared;
 class CasesController extends Controller
 {
@@ -147,15 +148,17 @@ class CasesController extends Controller
         ];
 
         $meetings = Meeting::where(['attendance' => $request->segment(4)])->orderBy('created_at', 'desc')->get();
-
+        $firm_id = Firm::where(['firm_id' => auth()->user()->firm_id])->value('id');
         $time = new Time;
         $time->case_id = $id;
-        $time->firm_id = Firm::where(['firm_id' => auth()->user()->firm_id])->value('id');
+        $time->firm_id = $firm_id;
         $totalhrs = $time->countTotalHrs();
         $invoicedhrs = $time->countBilledHrs();
         $remaininghrs = $totalhrs - $invoicedhrs;
 
-        return view('firm.associate.case')->with(['remaininghrs' => $remaininghrs,'staff_on_the_case' => $staff_on_the_case, 'meetings' => $meetings, 'proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
+        $totalpayment = Payment::where(['case_id' => $id, 'firm_id' => $firm_id ])->sum('amount');
+
+        return view('firm.associate.case')->with(['totalpayment' => $totalpayment, 'remaininghrs' => $remaininghrs,'staff_on_the_case' => $staff_on_the_case, 'meetings' => $meetings, 'proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
 
     }
 

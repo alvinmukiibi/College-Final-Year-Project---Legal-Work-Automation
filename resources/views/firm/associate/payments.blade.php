@@ -33,7 +33,7 @@
                                 </h3>
                             </div>
                             <div class="card-body table-responsive">
-                                <table class="table table-hover table-bordered" id="example2">
+                                <table class="table table-hover table-bordered" id="example1">
                                     <thead>
                                         <tr>
                                             <th>Date of Payment</th>

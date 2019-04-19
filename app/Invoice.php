@@ -11,7 +11,7 @@ class Invoice extends Model
     public function makeInvoice(){
         $data = $this->data;
         $invoice_no = $this->generateUniqueInvoiceNumber();
-        return DB::table($this->table)->insert(['invoice_no' => $invoice_no, 'rate' => $data['rate'], 'time' => $data['time'], 'amount' => $data['amount'], 'reason' => $data['reason'], 'invoicer' => $this->invoicer, 'case_id' => $this->case_id, 'firm_id' => $this->firm_id]);
+        return DB::table($this->table)->insert(['invoice_no' => $invoice_no, 'rate' => $data['rate'], 'time' => $data['time'], 'amount' => $data['amount'], 'balance' => $data['amount'], 'reason' => $data['reason'], 'invoicer' => $this->invoicer, 'case_id' => $this->case_id, 'firm_id' => $this->firm_id]);
 
     }
     public function getCaseInvoices(){
@@ -42,5 +42,56 @@ class Invoice extends Model
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+    public function checkIfInvoiceExistsAndItHasPendingPayments(){
+        $invoice =  DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id, 'status' => 'unpaid'])->orWhere(['status' => 'partpaid'])->orWhere(['status' => 'invoiced'])->get();
+        $count = $invoice->count();
+        if($count > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function checkIfInvoiceExistsAndItIsFullySettled(){
+        $invoice =  DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id, 'status' => 'paid'])->get();
+        $count = $invoice->count();
+        if($count > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function addPaymentToInvoice(){
+        $moneyBeingPaid = $this->amount;
+        $originalBalance = DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id])->value('balance');
+        $sumOfFormerPayments = DB::table('payments')->where(['paid_for' => $this->invoice_no, 'case_id' => $this->case_id])->sum('amount');
+        if($sumOfFormerPayments == 0){
+            // if no former payments
+            if($moneyBeingPaid < $originalBalance){
+                $balance = $originalBalance - $moneyBeingPaid;
+                return DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id])->update(['status' => 'partpaid', 'balance' => $balance]);
+            }else{
+                $balance = $originalBalance - $moneyBeingPaid;
+                return DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id])->update(['status' => 'paid', 'balance' => $balance]);
+            }
+        }else{
+            // with some former payments
+            $newBalance = DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id])->value('balance');
+            if($moneyBeingPaid <= $newBalance){
+                $balance = $newBalance - $moneyBeingPaid;
+                if($balance == 0){
+                    return DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id])->update(['status' => 'paid', 'balance' => $balance]);
+                }else{
+                    return DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id])->update(['status' => 'partpaid', 'balance' => $balance]);
+                }
+            }else{
+                // client is paying more than his balance on the invoice
+                $balance = $newBalance - $moneyBeingPaid;
+                return DB::table($this->table)->where(['invoice_no' => $this->invoice_no, 'case_id' => $this->case_id])->update(['status' => 'paid', 'balance' => $balance]);
+            }
+
+
+        }
+
     }
 }

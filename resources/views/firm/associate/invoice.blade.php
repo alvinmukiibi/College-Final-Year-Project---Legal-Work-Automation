@@ -217,8 +217,6 @@
                             <table border="0" cellspacing="0" cellpadding="0">
                                 <thead>
                                     <tr>
-
-
                                         <th class="text-left"> <b>Reason</b> </th>
                                         <th class="text-right">RATE (SHS/HR) </th>
                                         <th class="text-right">HOURS</th>
@@ -226,25 +224,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <tr>
-
                                         <td class="text-left"><h3>LEGAL FEES</h3> {{ $invoice->reason }} </td>
                                         <td class="text-right">{{ $invoice->rate }} </td>
                                         <td class="text-right">{{ $invoice->time }}</td>
                                         <td class="total">{{ $invoice->amount }}</td>
-
-
                                     </tr>
-
                                 </tbody>
                                 <tfoot>
 
-                                    <tr>
+                                            @if ($invoice->balance > 0)
+                                            <tr>
+                                                <td colspan="3">Balance</td>
+                                                <td>{{ $invoice->balance }}</td>
+                                            </tr>
+                                            @else
+                                            <tr>
+                                                <td colspan="3">GRAND TOTAL</td>
+                                                <td>{{ $invoice->amount }}</td>
+                                            </tr>
+                                            @endif
 
-                                        <td colspan="3">GRAND TOTAL</td>
-                                        <td>{{ $invoice->amount }}</td>
-                                    </tr>
                                 </tfoot>
                             </table><br><br>
 

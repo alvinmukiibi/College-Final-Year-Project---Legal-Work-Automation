@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->unsignedInteger('rate')->nullable();
             $table->float('time', 8, 4)->nullable();
             $table->float('amount', 8, 2);
+            $table->float('balance', 8, 2)->nullable();
             $table->string('reason');
             $table->unsignedInteger('invoicer');
             $table->unsignedInteger('case_id');
