@@ -44,11 +44,6 @@ class MeetingsController extends Controller
         }else{
             return redirect()->back()->with("error", "Failed, Please retry");
         }
-
-
-
-
-
     }
 
     public function notifyAccordingToAttendance(){

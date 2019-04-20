@@ -29,8 +29,10 @@ class AuthController extends Controller
         $user_data = $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'online_status' => 'offline'
+
         ]);
+
+        $user_data['online_status'] = 'offline';
 
 
 
