@@ -8,6 +8,7 @@ use App\User;
 use App\DueDiligence;
 use App\File;
 use App\Task;
+use App\Note;
 class LegalCase extends Model
 {
     protected $table = 'legal_cases';
@@ -24,6 +25,9 @@ class LegalCase extends Model
     }
     public function tasks(){
         return $this->hasMany(Task::class, 'case_id');
+    }
+    public function notes(){
+        return $this->hasMany(Note::class, 'case_id');
     }
     public function proceedings(){
         return $this->hasMany(Proceeding::class, 'case_id');

@@ -375,9 +375,57 @@
                                     </form>
                                     </div>
 
+                                <div class="card card-primary collapsed-card">
+                          <div class="card-header">
+                                        <h3 class="card-title">
+                                            Notes
+                                        </h3>
+                                        <div class="card-tools">
 
+                                                <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                  <i class="fa fa-minus"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                                </button>
+                                              </div>
+                                    </div>
+                          <div class="card-body p-0 table-responsive">
+                                            <table class="table table-hover">
+                                                    <tr>
+
+                                                      <th>note</th>
+
+                                                      <th style="width: 30%">created_at</th>
+                                                      <!--<th style="width: 40px">note</th>-->
+                                                    </tr>
+                                                    @foreach ($notes as $note)
+                                                    <tr>
+                                                     <td>{{ $note->note }}</td>
+                                                     <td>{{ $note->created_at }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+
+
+                                    </div>
+                                    <div class="card-footer">
+                                            <form action="{{ url('/associate/add/note') }}" method="post">
+                                                    <div class="input-group">
+                                                        @csrf
+                                                        <input type="hidden" name="caseID" value="{{ $case->id }}">
+                                                      <input required type="text" name="note" placeholder="Make notes here" class="form-control">
+                                                      <span class="input-group-append">
+                                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Add Note</button>
+                                                      </span>
+                                                    </div>
+                                                  </form>
+                                    </div>
+
+                                </div>
 
                             </div>
+
                         <div class="col-8 connectedSortable">
                             <div class="card card-info collapsed-card">
                                 <div class="card-header">
@@ -742,6 +790,7 @@
                         </div>
 
                     </div>
+            </div>
             </div>
 
 

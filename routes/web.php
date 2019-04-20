@@ -97,6 +97,9 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/associate/add/casetask', "CasesController@addCaseTask");
     Route::get('/associate/complete/task/{task}', "CasesController@completeTask");
 
+    //Note Routes
+    Route::post('/associate/add/note', "CasesController@addNote");
+
     // Proceeding Routes
     Route::get('/associate/view/proceedings/{case}', "CasesController@viewProceedings");
     Route::post('/associate/add/proceeding', "CasesController@addProceeding");

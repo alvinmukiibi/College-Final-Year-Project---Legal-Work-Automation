@@ -143,3 +143,7 @@
   </section>
 @endsection
 
+<<<<<<< HEAD
+=======
+    </div>
+>>>>>>> e3d1e9657bdfe385b0928ac009291afbfe78b3ab

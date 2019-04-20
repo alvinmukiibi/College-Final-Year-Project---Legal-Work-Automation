@@ -11,6 +11,7 @@ use App\Firm;
 use App\CaseType;
 use App\DueDiligence;
 use App\File;
+use App\Note;
 use App\Task;
 use App\Proceeding;
 use App\LegalCase_Staff;
@@ -108,6 +109,8 @@ class CasesController extends Controller
         $tasks = $legalCase->tasks()->orderBy('created_at', 'desc')->get();
         // $proc = new Proceeding;
         // $proceedings = $proc->testProc();
+        $notes = $legalCase->notes()->orderBy('created_at')->get();
+
         $proceedings = $legalCase->proceedings()->orderBy('created_at', 'desc')->get();
         $staffCase = new LegalCase_Staff;
         $staffCase->id = $id;
@@ -158,7 +161,7 @@ class CasesController extends Controller
 
         $totalpayment = Payment::where(['case_id' => $id, 'firm_id' => $firm_id ])->sum('amount');
 
-        return view('firm.associate.case')->with(['totalpayment' => $totalpayment, 'remaininghrs' => $remaininghrs,'staff_on_the_case' => $staff_on_the_case, 'meetings' => $meetings, 'proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
+        return view('firm.associate.case')->with(['notes' => $notes, 'totalpayment' => $totalpayment, 'remaininghrs' => $remaininghrs,'staff_on_the_case' => $staff_on_the_case, 'meetings' => $meetings, 'proceedings' => $proceedings, 'case' => $case, 'caseType' => $caseType, 'client' => $client, 'staff' => $staff, 'dds' => $diligences, 'docs' => $docs, 'tasks' => $tasks]);
 
     }
 
@@ -310,6 +313,31 @@ class CasesController extends Controller
         return redirect()->back();
 
     }
+
+    public function addNote(Request $request){
+        $data = $this->validate($request, [
+            'note' => 'required|max:255'
+        ]);
+
+        $note = new Note;
+        $note->note = $data['note'];
+        $note->case_id = $request->input('caseID');
+
+        $note->createNote();
+
+        return redirect()->back()->with('success', 'Note Added Successfully!!');
+    }
+
+    /*public function completeNote(Request $request){
+
+        $note = new Note;
+        $note->id = $request->segment(4);
+
+        $note->complete();
+
+        return redirect()->back();
+
+    }*/
 
     public function viewProceedings(Request $request){
         $case_id = $request->segment(4);
