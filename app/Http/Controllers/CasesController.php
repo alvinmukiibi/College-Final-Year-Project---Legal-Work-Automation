@@ -106,9 +106,9 @@ class CasesController extends Controller
         $legalCase = new LegalCase;
         $legalCase->id = $id;
         $tasks = $legalCase->tasks()->orderBy('created_at', 'desc')->get();
-
+        // $proc = new Proceeding;
+        // $proceedings = $proc->testProc();
         $proceedings = $legalCase->proceedings()->orderBy('created_at', 'desc')->get();
-
         $staffCase = new LegalCase_Staff;
         $staffCase->id = $id;
         $staff_on_case = $staffCase->getAllStaffonCase();
