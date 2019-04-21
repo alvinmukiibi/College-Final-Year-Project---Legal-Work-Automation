@@ -328,17 +328,6 @@ class CasesController extends Controller
         return redirect()->back()->with('success', 'Note Added Successfully!!');
     }
 
-    /*public function completeNote(Request $request){
-
-        $note = new Note;
-        $note->id = $request->segment(4);
-
-        $note->complete();
-
-        return redirect()->back();
-
-    }*/
-
     public function viewProceedings(Request $request){
         $case_id = $request->segment(4);
         $case = new LegalCase;

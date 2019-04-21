@@ -143,7 +143,7 @@
                                             </td>
                                             <td>
                                                     <div class="btn-group">
-                                                            <button type="button" class="btn btn-success btn-sm">Action</button>
+                                                            <button type="button" class="btn btn-success btn-sm"> <b>Action</b> </button>
                                                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                                               <span class="caret"></span>
                                                               <span class="sr-only">Toggle Dropdown</span>

@@ -12,12 +12,14 @@ use App\Events\MeetingScheduled;
 use App\Events\CaseShared;
 use App\Events\SendReceiptToClient;
 use App\Events\SendInvoiceToClient;
+use App\Events\FirmContacted;
 use App\Listeners\SendVerificationMail;
 use App\Listeners\SendUserVerificationMail;
 use App\Listeners\SendNewMeetingNotification;
 use App\Listeners\SendSharedCaseNotification;
 use App\Listeners\SendReceiptToClientMail;
 use App\Listeners\SendInvoiceToClientMail;
+use App\Listeners\SendFirmContactedNotification;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -47,6 +49,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         SendInvoiceToClient::class => [
             SendInvoiceToClientMail::class
+        ],
+        FirmContacted::class => [
+            SendFirmContactedNotification::class
         ],
 
 

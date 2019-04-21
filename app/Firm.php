@@ -34,6 +34,10 @@ class Firm extends Model
         return $this->hasMany(Requisition::class, 'firm_id');
     }
 
+    public function getAllFirms(){
+
+        return DB::table($this->table)->where(['activity_flag' => 'active', 'verification_flag' => 'verified'])->get();
+    }
 
 
     protected function registerFirm($request){
@@ -141,6 +145,10 @@ class Firm extends Model
             $add = DB::table($this->table)->where('firm_id', auth()->user()->firm_id)->update(['name'=> $firm['name']  , 'city'=> $firm['city'], 'country'=>$firm['country'], 'street_address'=>$firm['street_address'], 'website'=> $firm['website'], 'description'=> $firm['description'], 'contact1'=> $firm['contact1'], 'contact2'=> $firm['contact2'], 'avatar'=> $this->avatar, 'area'=> $firm['area']]);
             return $add;
         }
+    }
+    public function searchFirms(){
+        $pattern = $this->pattern;
+        return DB::table($this->table)->where('name', 'like', '%'.$pattern.'%')->where(['activity_flag' => 'active'])->get();
     }
 
 

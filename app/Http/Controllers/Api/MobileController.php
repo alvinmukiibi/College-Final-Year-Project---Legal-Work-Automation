@@ -10,6 +10,7 @@ use App\Meeting;
 use App\LegalCase_Staff;
 use App\Task;
 use App\User;
+use App\Note;
 use Auth;
 use Validator;
 use App\Events\MeetingScheduled;
@@ -149,6 +150,38 @@ class MobileController extends Controller
         return response()->json($res, $this->statusCode201);
 
     }
+    // add a note on a case
+    // synonymous to CasesController@addCaseNote
+    public function addCaseNote(Request $request){
+        $validator = Validator($request->all(), [
+            'note' => 'required|max:255'
+        ]);
+
+        if($validator->fails()){
+            $res['error'] = true;
+            $res['message'] = $validator->errors()->first();
+            return response()->json($res, $this->statusCode422);
+        }
+        $data = [
+            'note' => $request->input('note'),
+            'caseID' => $request->input('caseID'),
+        ];
+
+
+        $note = new Note;
+        $note->note = $data['note'];
+        $note->case_id = $data['caseID'];
+
+        $note->createNote();
+
+        $res['error'] = false;
+        $res['message'] = "Note Successfully Added!!";
+
+        return response()->json($res, $this->statusCode201);
+
+    }
+
+
     public function logout()
     {
         User::where(['id' => Auth::user()->id])->update(['online_status' => 'offline']);

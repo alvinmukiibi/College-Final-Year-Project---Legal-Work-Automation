@@ -18,16 +18,22 @@ use Illuminate\Http\Request;
 // });
 
 Route::group(['middleware' => ['guest:api']], function () {
-    Route::post("login", "Api\OauthController@login");
+
+    Route::get('/guest/view/firms', "Api\GuestController@showAllFirms");
+    Route::post('/guest/view/firm', "Api\GuestController@viewFirm");
+    Route::post('/guest/contact/firm', "Api\GuestController@contactFirm");
+    Route::post('/guest/search/firm', "Api\GuestController@searchFirm");
+    Route::post('/login', "Api\OauthController@login");
 });
 
 
 Route::group(['middleware' => ['auth:api']], function () {
-    Route::get('user', "Api\OauthController@details");
+
     Route::get('/user/cases', "Api\MobileController@getCases");
     Route::post('/user/view/case', "Api\MobileController@getCase");
     Route::post('/user/schedule/meeting', "Api\MobileController@scheduleMeeting");
     Route::post('/user/add/casetask', "Api\MobileController@addCaseTask");
+    Route::post('/user/add/casenote', "Api\MobileController@addCaseNote");
     Route::get('/logout', "Api\MobileController@logout");
 
 });
