@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         ]);
 
-        $user_data['online_status'] = 'offline';
+        //$user_data['online_status'] = 'offline';
 
 
 
