@@ -29,6 +29,7 @@ Route::group(['middleware' => ['guest:api']], function () {
 
 Route::group(['middleware' => ['auth:api']], function () {
 
+    Route::get('/get/user', "Api\OauthController@getAuthenticatedUser");
     Route::get('/user/cases', "Api\MobileController@getCases");
     Route::post('/user/view/case', "Api\MobileController@getCase");
     Route::post('/user/schedule/meeting', "Api\MobileController@scheduleMeeting");

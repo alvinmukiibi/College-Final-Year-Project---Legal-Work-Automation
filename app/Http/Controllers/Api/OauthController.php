@@ -60,9 +60,13 @@ class OauthController extends Controller
         }
     }
 
-    public function details(){
+    public function getAuthenticatedUser(){
         $user = Auth::user();
-        return response()->json(["user" => $user], $this->statusCode200);
+
+        $res['error'] = false;
+        $res['user'] = $user;
+
+        return response()->json($res, $this->statusCode200);
     }
 
 }
