@@ -1,6 +1,6 @@
 /node_modules
 /vendor
-.env
+/public
 .gitignore
 .phpunit.result.cache
 Homestead.json
