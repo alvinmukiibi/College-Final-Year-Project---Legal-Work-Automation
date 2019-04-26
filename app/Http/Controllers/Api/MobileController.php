@@ -180,6 +180,12 @@ class MobileController extends Controller
         return response()->json($res, $this->statusCode201);
 
     }
+    public function getUser(Request $request){
+        $user = Auth::user();
+        $res['error'] = false;
+        $res['user'] = $user;
+        return response()->json($res, $this->statusCode200);
+    }
 
 
     public function logout()
