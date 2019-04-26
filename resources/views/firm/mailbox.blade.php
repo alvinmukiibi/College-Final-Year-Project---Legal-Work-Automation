@@ -96,13 +96,16 @@
                 <div class="form-group">
                     <textarea name="message" required rows="5"  placeholder="Your Message Here.." cols="10" id="compose-textarea" cols="30" rows="10" class="form-control"></textarea>
                 </div>
-                <div class="form-group">
-                    <div class="btn btn-default btn-file">
-                        <i class="fa fa-paperclip"></i> Attachment
-                        <input type="file" name="attachment" id="" class="form-control">
-                    </div>
-                    <p class="help-block">Max. 32MB</p>
+                <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input {{$errors->has('attachment')?'is-invalid':''}}" name="attachment">
+                          <label class="custom-file-label" > <i class="fa fa-paperclip"></i> Attachment</label>
+
+                        </div>
+
                 </div>
+                <p class="help-block">Max. 32MB</p>
+
 
             </div>
             <div class="modal-footer">

@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/reject/case/{case}', "CasesController@rejectCase");
     Route::get('/associate/share/case/{case}', "CasesController@shareCase");
     Route::post('/associate/submit/share', "CasesController@submitShare");
+    Route::post('/associate/close/case', "CasesController@closeCase");
 
     // Due Diligence routes
     Route::get('/associate/make/due_diligence/{case}', "DueDiligenceController@makeDueDiligence");

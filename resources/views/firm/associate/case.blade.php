@@ -59,15 +59,28 @@
                                         @if ($case->case_status == 'open')
                                             <span class="badge badge-success text-white">{{ __('OPEN') }}</span>
                                         @endif
-                                        @if ($case->case_status == 'closed-rejected')
-                                            <span class="badge badge-danger text-white">{{ __('CLOSED/REJECTED') }}</span>
+                                        @if ($case->case_status == 'closed')
+                                            <span class="badge badge-danger text-white">{{ __('CLOSED') }}</span>
                                         @endif
 
                                     </h5>
                                     @if ($case->case_status == 'intake')
-                                        {{ __('This case is still an intake. Use the Buttons on the right to either accept or reject it') }}
-                                        <a href="{{ url('/associate/make/case', ['case' => $case->case_number]) }}" class="btn btn-success btn-sm pull-right"> <b>MAKE CASE</b> </a>
-                                        <a href="{{ url('/associate/reject/case', ['case' => $case->case_number]) }}" class="btn btn-danger btn-sm pull-right"> <b>REJECT CASE</b> </a>
+                                        {{ __('This case is still an intake. Use the buttons on the right to either accept or reject it') }}
+                                        <a style="text-decoration: none" href="{{ url('/associate/make/case', ['case' => $case->case_number]) }}" class="btn btn-success btn-sm pull-right"> <b>MAKE CASE</b> </a>
+                                        <a  style="text-decoration: none" href="{{ url('/associate/reject/case', ['case' => $case->case_number]) }}" class="btn btn-danger btn-sm pull-right"> <b>REJECT CASE</b> </a>
+                                    @endif
+                                    @if ($case->case_status == 'open' )
+                                        {{ __('Case can be flagged closed at any time. Use the button on the right to close the case') }}
+                                         <button data-toggle="modal" data-target="#closeCase"  class="btn btn-outline-danger btn-sm pull-right"> <b>CLOSE CASE</b> </button>
+                                    @endif
+                                    @if ($case->case_status == 'closed' )
+                                        <b>CLOSURE TYPE</b>:
+                                        {{ __($case->closure_status) }} <br>
+                                        @if ($case->reason_for_closure != null)
+                                        <b>REASON FOR CLOSURE</b>:
+                                        {{ __($case->reason_for_closure) }}
+                                        @endif
+
                                     @endif
 
                                 </div>
@@ -75,6 +88,45 @@
                         </div>
 
                     </div>
+                    <div class="modal fade" id="closeCase" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                              <div class="modal-content">
+                                    <form action="{{url('/associate/close/case')}}" method="post">
+
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalScrollableTitle">Case Closure</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                   <div class="form-group">
+                                        <label for="how">Case Closure Type</label>
+                                        <select required name="closure" id="" class="form-control {{ $errors->has('closure')?'is-invalid':'' }}">
+                                            <option value="Defendant Aquitted">Defendant Aquitted</option>
+                                            <option value="Defendant Convicted">Defendant Convicted</option>
+                                            <option value="Dismissed by Court">Dismissed by Court</option>
+                                            <option value="Rejected by Court">Rejected by Court</option>
+                                        </select>
+                                   </div>
+                                   <div class="form-group">
+                                       <label for="Reason">Give Reason If Any <small class="text-danger">optional</small></label>
+                                        <textarea name="reason" class="form-control {{ $errors->has('reason')?'is-invalid':'' }}" id="" cols="5" rows="5" placeholder="E.g. Defendant was proved guilty..."></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                        <input type="hidden" name="caseID" value={{ $case->case_number }}>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary pull-right">CONFIRM</button>
+                                        @csrf
+                                      </div>
+                            </form>
+                              </div>
+                            </div>
+                            </div>
+
+
                     <div class="row">
                             <div class="col-md-6 col-sm-6 col-12">
                                     <div class="info-box">

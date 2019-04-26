@@ -355,11 +355,37 @@ class CasesController extends Controller
 
 
     }
-    public function countOpenCases(Request $request){
+    public function countAllCases(Request $request){
         $case = new LegalCase;
         $case->staff =  $request->input('id');
         $cases = $case->getLawyerCases()->count();
         return response()->json(['count' => $cases]);
+    }
+    public function countOpenCases(Request $request){
+        $case = new LegalCase;
+        $case->staff =  $request->input('id');
+        $cases = $case->getLawyerOpenCases()->count();
+        return response()->json(['count' => $cases]);
+    }
+    public function closeCase(Request $request){
+
+        $data = $this->validate($request, [
+            'closure' => 'required',
+            'reason' => 'max:255|nullable',
+            'caseID' => 'required',
+        ]);
+
+
+        $case = new LegalCase;
+        $case->data = $data;
+
+        $case->closeCase();
+
+        return redirect()->back()->with('success', 'Case has been closed!!');
+
+
+
+
     }
 
 

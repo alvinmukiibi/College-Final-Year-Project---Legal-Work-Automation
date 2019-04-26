@@ -88,14 +88,14 @@
                               Case Types
                           </h3>
                       </div>
-                      <div class="card-body p-0">
-                          <table class="table table-hover" >
+                      <div class="card-body table-responsive">
+                          <table class="table table-hover ">
                               <thead>
                                       <tr>
 
                                               <th style="width: 180px">Case Type</th>
                                               <th >Acronym</th>
-                                              <th  style="width: 40px">Action</th>
+                                              <th></th>
                                           </tr>
                               </thead>
 
@@ -107,13 +107,15 @@
                                                       {{$casetype->acronym}}
                                               </td>
                                               <td>
-                                                 <a href="{{url('/admin/manage/casetypes',['casetype' => $casetype->id])}}" class="btn btn-primary"> <i class="fa fa-pencil"></i>  </a>
+                                                 <a href="{{url('/admin/manage/casetypes',['casetype' => $casetype->id])}}" title="Edit" class="btn btn-outline-primary btn-sm btn-flat"> <i class="fa fa-pencil"></i>  </a>
                                               </td>
                                           </tr>
                                       @endforeach
+
                               </tbody>
 
                           </table>
+                          {{ $casetypes->links() }}
                       </div>
 
                   </div>

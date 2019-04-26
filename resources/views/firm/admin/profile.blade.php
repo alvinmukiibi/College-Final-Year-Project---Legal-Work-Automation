@@ -62,43 +62,49 @@
                               <div class="active tab-pane" id="profile">
                                     <form action="{{url('/admin/saveProfile')}}" method="post" enctype="multipart/form-data">
                                         @csrf
-                                    <div class="form-group">
-                                            <label for="firstName" class="col-sm-2 control-label">First Name</label>
+                                    <div class="form-group row">
+                                            <label for="firstName" class="col-sm-4 control-form-label">First Name</label>
 
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-8">
                                             <input type="text" value="{{$user->fname}}" required class="form-control {{$errors->has('firstName')?'is-invalid':''}}" name="firstName"   placeholder="First Name">
                                             </div>
                                           </div>
-                                          <div class="form-group">
+                                          <div class="form-group row">
 
-                                                <label for="lastName"  class="col-sm-2 control-label">Last Name</label>
+                                                <label for="lastName"  class="col-sm-4 control-form-label">Last Name</label>
 
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-8">
                                                   <input type="text" value="{{$user->lname}}" required class="form-control {{$errors->has('lastName')?'is-invalid':''}}" name="lastName"  placeholder="Last Name">
                                                 </div>
                                               </div>
-                                              <div class="form-group">
-                                                    <label for="email" class="col-sm-2 control-label">Email</label>
+                                              <div class="form-group row">
+                                                    <label for="email" class="col-sm-4 control-form-label">Email</label>
 
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-8">
                                                     <input type="text" class="form-control" readonly  value="{{$user->email}}">
                                                     </div>
                                                   </div>
-                                                  <div class="form-group">
-                                                        <label for="contact" required class="col-sm-4 control-label">Phone Number</label>
+                                                  <div class="form-group row">
+                                                        <label for="contact" required class="col-sm-4 control-form-label">Phone Number</label>
 
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-8">
                                                           <input type="text" value="{{$user->contact}}" class="form-control {{$errors->has('contact')?'is-invalid':''}}" name="contact"  placeholder="Personal Contact">
                                                         </div>
                                                       </div>
-                                                      <div class="form-group">
-                                                            <label for="profilePicture" class="col-sm-4 control-label">Profile Picture</label>
+                                                      <div class="form-group row">
+                                                            <label for="profilePicture" class="col-sm-4 control-form-label">Profile Picture</label>
 
-                                                            <div class="col-sm-12">
-                                                              <input type="file" class="form-control {{$errors->has('profilePicture')?'is-invalid':''}}"  name="profilePicture">
+                                                            <div class="col-sm-8">
+                                                                    <div class="input-group">
+                                                                            <div class="custom-file">
+                                                                              <input type="file" class="custom-file-input {{$errors->has('profilePicture')?'is-invalid':''}}" name="profilePicture">
+                                                                              <label class="custom-file-label" >Choose file</label>
+                                                                            </div>
+                                                                    </div>
+
                                                             </div>
                                                           </div>
-                                                          <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> Save</button>
+                                                          <button type="submit" class="btn btn-outline-primary btn-flat pull-right"> <i class="fa fa-save"></i> <b>Save</b></button>
 
                                                         </form>
                                                         </div>

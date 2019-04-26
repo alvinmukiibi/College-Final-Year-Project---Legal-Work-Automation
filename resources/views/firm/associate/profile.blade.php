@@ -97,8 +97,13 @@
                                                             <label for="profilePicture" class="col-sm-4 col-form-label">Profile Picture</label>
 
                                                             <div class="col-sm-8">
-                                                              <input type="file" class="form-control {{$errors->has('profilePicture')?'is-invalid':''}}"  name="profilePicture">
-                                                            </div>
+                                                                    <div class="input-group">
+                                                                            <div class="custom-file">
+                                                                              <input type="file" class="custom-file-input {{$errors->has('profilePicture')?'is-invalid':''}}" name="profilePicture">
+                                                                              <label class="custom-file-label" >Choose file</label>
+                                                                            </div>
+                                                                    </div>
+                                                               </div>
                                                           </div>
                                                           <div class="form-group row">
                                                               <label for="password" class="col-sm-4 col-form-label">Password</label>

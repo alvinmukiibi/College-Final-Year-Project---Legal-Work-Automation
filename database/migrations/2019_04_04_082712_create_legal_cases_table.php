@@ -23,6 +23,8 @@ class CreateLegalCasesTable extends Migration
             $table->string('taken_by'); // e.g. partner, associate etc i.e. the role
             $table->text('synopsis'); // description of case by client
             $table->string('case_status'); // open, closed, etc
+            $table->string('closure_status')->nullable();
+            $table->text('reason_for_closure')->nullable();
             $table->text('firm'); // firm identification number
             $table->timestamp('created_at')->useCurrent();
 

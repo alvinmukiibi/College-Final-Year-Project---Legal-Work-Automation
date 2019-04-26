@@ -104,11 +104,16 @@
                                                         </div>
                                                       </div>
                                                       <div class="form-group row">
-                                                            <label for="profilePicture" class="col-sm-4 col-form-label">Profile Picture</label>
+                                                            <label for="profilePicture" class="col-sm-4 col-form-label">Profile icture</label>
 
                                                             <div class="col-sm-8">
-                                                              <input type="file" class="form-control {{$errors->has('profilePicture')?'is-invalid':''}}"  name="profilePicture">
-                                                            </div>
+                                                                    <div class="input-group">
+                                                                            <div class="custom-file">
+                                                                              <input type="file" class="custom-file-input {{$errors->has('profilePicture')?'is-invalid':''}}" name="profilePicture">
+                                                                              <label class="custom-file-label" >Choose file</label>
+                                                                            </div>
+                                                                    </div>
+                                                                                                  </div>
                                                           </div>
                                                           <div class="form-group row">
                                                               <label for="password" class="col-sm-4 col-form-label">Password</label>
@@ -122,7 +127,7 @@
                                                                 <input type="password" name="password_confirmation" class="form-control {{$errors->has('password_confirmation')?'is-invalid':''}}" >
                                                                 </div>
                                                             </div>
-                                                          <button type="submit" class="btn btn-outline-primary"> <i class="fa fa-save"></i> Save</button>
+                                                          <button type="submit" class="btn btn-outline-primary pull-right"> <i class="fa fa-save"></i> Save</button>
 
                                                         </form>
                                                         </div>

@@ -35,7 +35,7 @@
                                                     <label for="case_number" class="col-sm-6 col-form-label">Choose How You Want To Share</label>
                                                     <div class="col-sm-6">
                                                         <select  required name="sharingType" id="sharingType" class="form-control {{ $errors->has('sharingType')?'is-invalid':'' }}">
-                                                            <option  value="refer">Refer</option>
+                                                            <option  value="refer">Share</option>
                                                             <option value="assign">Assign</option>
                                                         </select>
                                                     </div>
@@ -44,7 +44,7 @@
                                   </div>
                             <div class="callout callout-info">
                                     <h5><i class="fa fa-info"></i> IMPORTANT NOTE:</h5>
-                                     <p id="note"> Referring a case to another party means that you shall both be working on the case concurrently. The other party will be able to see all the case information and all the updates you make on the case and you shall be able to see their activity on the case too </p>
+                                     <p id="note"> Sharing a case with another lawyer means that you shall both be working on the case concurrently. The other lawyer will be able to see all the case information and all the updates you make on the case and you shall be able to see their activity on the case too </p>
                             </div>
                             <div class="card card-primary">
                                 <div class="card-header">
@@ -123,11 +123,11 @@
                     if(shType === "refer"){
 
 
-                        jQuery('#note').html('Referring a case to another party means that you shall both be working on the case concurrently. The other party will be able to see all the case information and all the updates you make on the case and you shall be able to see their activity on the case too');
+                        jQuery('#note').html('Sharing a case to another lawyer means that you shall both be working on the case concurrently. The other lawyer will be able to see all the case information and all the updates you make on the case and you shall be able to see their activity on the case too');
                         jQuery('#submit').html('REFER CASE');
                     }else{
 
-                        jQuery('#note').html('Assigning a case to another party means that you are transfering the case completely to them, although you remain the original owner of the case. You wont be able to see activity of the other party on the case and you cant work with the case');
+                        jQuery('#note').html('Assigning a case to another lawyer means that you are transfering the case completely to them, although you remain the original owner of the case. You wont be able to see activity of the other lawyer on the case and you can`t work with the case');
                         jQuery('#submit').html('ASSIGN CASE');
                     }
                 });

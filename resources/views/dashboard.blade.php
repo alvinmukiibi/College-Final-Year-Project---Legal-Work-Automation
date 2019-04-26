@@ -26,7 +26,7 @@
       <section class="content">
          <div class="container-fluid">
            <div class="row">
-              <div class="col-lg-3 col-6">
+              {{-- <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                   <div class="inner">
                     <h3>Profile</h3>
@@ -48,7 +48,7 @@
 
                 @endif
             </div>
-              </div>
+              </div> --}}
               @if (auth()->user()->user_role === "ulc")
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
@@ -65,7 +65,7 @@
               </div>
               @endif
               @if (auth()->user()->user_role === "administrator")
-              <div class="col-lg-3 col-6">
+              {{--  <div class="col-lg-3 col-6">
                 <div class="small-box bg-secondary">
                   <div class="inner">
                     <h3>Site Profile</h3>
@@ -77,9 +77,9 @@
                   </div>
                 <a href="{{ url('/admin/manage/website')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-              </div>
+              </div>  --}}
               <div class="col-lg-3 col-6">
-                    <div class="small-box bg-warning text-white">
+                    <div class="small-box bg-success text-white">
                       <div class="inner">
                         <h3>Departments</h3>
                         <p>Manage Firm Departments</p>
@@ -90,7 +90,7 @@
                     <a href="{{ url('/admin/departments')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
-              <div class="col-lg-3 col-6">
+              {{--  <div class="col-lg-3 col-6">
                     <div class="small-box text-white" style="background-color:#fb7a24">
                       <div class="inner">
                         <h3>User Roles</h3>
@@ -101,7 +101,7 @@
                       </div>
                     <a href="{{ url('/admin/manage/roles')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
-                  </div>
+                  </div>  --}}
               <div class="col-lg-3 col-6">
                 <div class="small-box text-white" style="background-color:#452b17">
                   <div class="inner">
@@ -115,7 +115,7 @@
                 <a href="{{ url('/admin/manage/staff')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              <div class="col-lg-3 col-6">
+              {{--  <div class="col-lg-3 col-6">
                 <div class="small-box text-white" style="background-color:#090e12">
                   <div class="inner">
                     <h3>Case Types</h3>
@@ -127,7 +127,7 @@
                   </div>
                 <a href="{{ url('/admin/manage/casetypes')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-              </div>
+              </div>  --}}
               @endif
               @if (auth()->user()->firm_id !== null)
               <div class="col-lg-3 col-6">
@@ -156,6 +156,63 @@
                 <a href="{{ url('/user/manage/tasks')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+              @if (auth()->user()->user_role == 'Associate' || auth()->user()->user_role == 'Partner')
+              <div class="col-lg-6">
+
+                    <div class="card card-danger">
+                        <div class="card-header no-border">
+                            <h3 class="card-title">
+                                <i class="fa fa-briefcase"></i> Cases
+
+                            </h3>
+                            <div class="card-tools">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
+                                              <i class="fa fa-bars"></i></button>
+                                        <div class="dropdown-menu float-right" role="menu">
+                                            <a href="#" class="dropdown-item" style="color:#fff">Clear events</a>
+                                        </div>
+                                    </div>
+                                <button type="button" class="btn btn-tool" data-widget="collapse">
+                                  <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="info-box">
+                                            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-briefcase"></i></span>
+                                            <div class="info-box-content">
+                                                    <span class="info-box-text">Open Cases</span>
+                                                    <span id="noOfOpenCases" class="info-box-number">
+
+                                                    </span>
+                                                </div>
+                                        </div>
+
+                                </div>
+                                <div class="col-6">
+                                        <div class="info-box">
+                                                <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-gear"></i></span>
+                                                <div class="info-box-content">
+                                                        <span class="info-box-text">All Cases</span>
+                                                        <span id="noOfAllCases" class="info-box-number">
+
+                                                        </span>
+                                                    </div>
+                                            </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+              </div>
+              @endif
               @if (auth()->user()->user_role=='Finance')
               <div class="col-lg-3 col-6">
                     <div class="small-box text-white" style="background-color:#452b17">
@@ -184,7 +241,7 @@
                         </div>
                       </div>
               @endif
-
+              @if (auth()->user()->user_role == 'Finance' )
               <div class="col-lg-3 col-6">
                     <div class="small-box bg-success" >
                       <div class="inner">
@@ -195,23 +252,24 @@
                       <div class="icon">
                         <i class="fa fa-money"></i>
                       </div>
-                      @if (auth()->user()->user_role == 'Associate')
+                      {{-- @if (auth()->user()->user_role == 'Associate')
                       <a href="{{ url('/associate/manage/requisitions')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
-                      @endif
-                      @if (auth()->user()->user_role == 'Partner')
+                      @endif --}}
+                      {{--  @if (auth()->user()->user_role == 'Partner')
                       <a href="{{ url('/partner/manage/requisitions')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
-                      @endif
+                      @endif  --}}
                       @if (auth()->user()->user_role == 'Finance')
                       <a href="{{ url('/finance/manage/requisitions')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
                       @endif
 
 
+
                 </div>
                   </div>
-
+                  @endif
 
 
 
@@ -265,58 +323,7 @@
               <section class="col-lg-5 connectedSortable">
 
 
-                @if (auth()->user()->user_role == 'Associate')
-                    <div class="card card-danger">
-                        <div class="card-header no-border">
-                            <h3 class="card-title">
-                                <i class="fa fa-briefcase"></i> Cases
 
-                            </h3>
-                            <div class="card-tools">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">
-                                              <i class="fa fa-bars"></i></button>
-                                        <div class="dropdown-menu float-right" role="menu">
-                                            <a href="#" class="dropdown-item" style="color:#fff">Clear events</a>
-                                        </div>
-                                    </div>
-                                <button type="button" class="btn btn-tool" data-widget="collapse">
-                                  <i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="info-box">
-                                            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-briefcase"></i></span>
-                                            <div class="info-box-content">
-                                                    <span class="info-box-text">Open Cases</span>
-                                                    <span id="noOfOpenCases" class="info-box-number">
-
-                                                    </span>
-                                                </div>
-                                        </div>
-
-                                </div>
-                                <div class="col-6">
-                                        <div class="info-box">
-                                                <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-gear"></i></span>
-                                                <div class="info-box-content">
-                                                        <span class="info-box-text">All Cases</span>
-                                                        <span class="info-box-number">
-                                                            10
-                                                        </span>
-                                                    </div>
-                                            </div>
-
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
 
                     <div class="card collapsed-card bg-success-gradient">
                         <div class="card-header no-border">
@@ -484,6 +491,23 @@
                 });
 
                 jQuery.ajax({
+                    url: "{{ url('api/associate/count/allcases/')  }}",
+                    method: "POST",
+                    data: {
+                        id: {{ auth()->user()->id }}
+                    },
+                    success: res => {
+                        if(res.count > 0){
+                            jQuery('#noOfAllCases').html(res.count);
+
+                        }else{
+                            jQuery('#noOfAllCases').html(0);
+
+                        }
+
+                    }
+                });
+                jQuery.ajax({
                     url: "{{ url('api/associate/count/opencases/')  }}",
                     method: "POST",
                     data: {
@@ -492,12 +516,10 @@
                     success: res => {
                         if(res.count > 0){
                             jQuery('#noOfOpenCases').html(res.count);
-
                         }else{
                             jQuery('#noOfOpenCases').html(0);
 
                         }
-
                     }
                 });
 

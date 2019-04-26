@@ -79,4 +79,15 @@ class LegalCase extends Model
         }
     }
 
+    public function closeCase(){
+        $data = $this->data;
+        $close = DB::table($this->table)->where('case_number', $data['caseID'])->update(['case_status' => 'closed', 'closure_status' => $data['closure'], 'reason_for_closure' => $data['reason']]);
+        return $close;
+    }
+    public function getLawyerOpenCases(){
+        $user_id = $this->staff;
+        $cases = DB::table($this->table)->where(['legal_cases.staff' => $user_id, 'case_status' => 'open'])->get();
+        return $cases;
+    }
+
 }

@@ -8,7 +8,7 @@ use App\User;
 class DepartmentsController extends Controller
 {
     public function showDepartments(Request $request){
-        $departments = Department::where(['firm_id'=>auth()->user()->firm_id])->get();
+        $departments = Department::where(['firm_id'=>auth()->user()->firm_id])->paginate(5);
         return view('firm.admin.departments')->with("departments", $departments);
 
     }

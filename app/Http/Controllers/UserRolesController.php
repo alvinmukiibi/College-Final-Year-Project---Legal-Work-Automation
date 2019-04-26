@@ -10,7 +10,7 @@ class UserRolesController extends Controller
 
     public function viewRoles(Request $request){
 
-        $roles = Role::where(['firm_id' => auth()->user()->firm_id])->get();
+        $roles = Role::where(['firm_id' => auth()->user()->firm_id])->paginate(5);
         return view('firm.admin.roles')->with(['roles' => $roles]);
 
     }

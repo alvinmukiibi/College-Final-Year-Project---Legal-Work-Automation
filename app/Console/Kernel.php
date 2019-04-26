@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Proceeding;
 use App\LegalCase_Staff;
+use Illuminate\Support\Facades\Session;
 
 class Kernel extends ConsoleKernel
 {
@@ -65,7 +66,11 @@ class Kernel extends ConsoleKernel
             }
         })->everyMinute();
         $schedule->call(function(){
+            if ((time() - Session::activity()) > (config('session.lifetime') * 60))
+            {
+                DB::table('users')->where('id', 4)->update(['online_status' => 'offline']);
 
+            }
 
 
         })->everyMinute();

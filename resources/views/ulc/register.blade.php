@@ -89,7 +89,7 @@
 
                                     <div class="form-group">
                                         <textarea name="street_address" required cols="20" rows="3"
-                                                  placeholder="Street Adress"
+                                                  placeholder="Street Address"
                                                   class="form-control {{$errors->has('street_address')?'is-invalid':''}}"></textarea>
 
 

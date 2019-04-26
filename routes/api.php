@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/associate/fetch/departmenters', "DepartmentsController@fetchUsersInDepartment");
 
     // Count Open cases for a specific lawyer
+    Route::post('/associate/count/allcases', "CasesController@countAllCases");
     Route::post('/associate/count/opencases', "CasesController@countOpenCases");
 
     // Count uncompleted Tasks Assigned to me

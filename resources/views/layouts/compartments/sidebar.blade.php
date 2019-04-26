@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-        <a href="index3.html" class="brand-link">
+        <a href="#" class="brand-link">
           <img src="{{asset('dist/img/lwat_logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                style="opacity: .8">
-          <span class="brand-text font-weight-light">L-WAT</span>
+          <span class="brand-text font-weight-light">WAT-Legal</span>
         </a>
 
 
@@ -121,7 +121,7 @@
                     <a href="{{ url('/associate/make/intake')}}" class="nav-link">
                           <i class="nav-icon fa fa-meh-o"></i>
                           <p>
-                            New Intake
+                            Client Intake
 
                           </p>
                         </a>

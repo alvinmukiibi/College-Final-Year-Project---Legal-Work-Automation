@@ -176,7 +176,7 @@
                     <div class="modal-footer">
 
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Add </button>
+                      <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Submit </button>
                       @csrf
                     </div>
                         </form>

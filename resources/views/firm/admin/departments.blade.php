@@ -87,14 +87,14 @@
                                 Our Departments
                             </h3>
                         </div>
-                        <div class="card-body p-0">
-                            <table class="table table-striped" >
+                        <div class="card-body table-responsive">
+                            <table class="table table-striped table-bordered">
                                 <thead>
                                         <tr>
 
                                                 <th style="width: 180px">Name</th>
                                                 <th >Role</th>
-                                                <th  style="width: 40px">Action</th>
+                                                <th></th>
                                             </tr>
                                 </thead>
 
@@ -107,14 +107,15 @@
                                                         {{$department->description}}
                                                 </td>
                                                 <td>
-                                                <a href="{{url('admin/departments',['department'=>$department->id])}}" class="btn btn-primary btn-sm"> <i class="fa fa-pencil"></i>  </a>
+                                                <a href="{{url('admin/departments',['department'=>$department->id])}}" title="Edit" class="btn btn-outline-primary btn-sm"> <i class="fa fa-pencil"></i>  </a>
 
                                                 </td>
                                             </tr>
                                         @endforeach
                                 </tbody>
 
-                            </table>
+                            </table><br/>
+                            {{ $departments->links() }}
                         </div>
 
                     </div>

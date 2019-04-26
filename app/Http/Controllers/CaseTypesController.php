@@ -10,7 +10,7 @@ class CaseTypesController extends Controller
     public function viewCaseTypes(Request $request){
         $firm = new Firm;
         $firm->firm_id = auth()->user()->firm_id;
-        $caseTypes = $firm->caseTypes()->orderBy('created_at', 'desc')->get();
+        $caseTypes = $firm->caseTypes()->orderBy('created_at', 'desc')->paginate(5);
         return view('firm.admin.casetypes')->with(['casetypes' => $caseTypes]);
     }
     public function addCaseType(Request $request){

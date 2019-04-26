@@ -32,15 +32,14 @@ class AuthController extends Controller
 
         ]);
 
-        $user_data['online_status'] = 'offline';
-
-
 
         if (Auth::attempt($user_data)) {
             if(Auth::user()->account_status !== "active"){
                 return redirect()->back()->with('error', 'Account Inactive, See System Adminstrator');
             }
-
+            if(Auth::user()->online_status !== "offline"){
+                return redirect()->back()->with('error', 'Currently active elsewhere!');
+            }
             if(auth()->guard('web')->user()->firm_id !== NULL){
 
                 $user = new User;
@@ -70,7 +69,6 @@ class AuthController extends Controller
     }
     public function logout()
     {
-        User::where(['id' => auth()->user()->id])->update(['online_status' => 'offline']);
         Auth::logout();
         return redirect()->route("login");
 

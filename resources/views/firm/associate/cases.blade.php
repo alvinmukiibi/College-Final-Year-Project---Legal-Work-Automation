@@ -61,8 +61,8 @@
                                                 @if ($case->case_status == 'open')
                                                 <span class="badge badge-success text-white"><b>{{ __('OPEN') }}</span>
                                                 @endif
-                                                @if ($case->case_status == 'closed-rejected')
-                                                <span class="badge badge-danger text-white"><b>{{ __('REJECTED') }}</span>
+                                                @if ($case->case_status == 'closed')
+                                                <span class="badge badge-danger text-white"><b>{{ __('CLOSED') }}</span>
                                                 @endif
                                         </td>
                                         <td>
@@ -79,8 +79,12 @@
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
                                                                 <a class="dropdown-item" href="{{ url('/associate/view/case', ['caseID' => $case->case_number]) }}">View</a>
-                                                          <div class="dropdown-divider"></div>
-                                                          <a class="dropdown-item" href="{{ url('/associate/share/case', ['caseID' => $case->case_number]) }}">Share Case</a>
+                                                            @if ($case->case_status != 'closed')
+                                                            <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" href="{{ url('/associate/share/case', ['caseID' => $case->case_number]) }}">Share Case</a>
+
+                                                            @endif
+
                                                         </div>
                                                       </div>
                                                       @endif

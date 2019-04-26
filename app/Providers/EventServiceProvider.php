@@ -20,6 +20,7 @@ use App\Listeners\SendSharedCaseNotification;
 use App\Listeners\SendReceiptToClientMail;
 use App\Listeners\SendInvoiceToClientMail;
 use App\Listeners\SendFirmContactedNotification;
+use App\Listeners\UserEventSubscriber;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -63,6 +64,11 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    public $subscribe = [
+        'App\Listeners\UserEventSubscriber',
+    ];
+
     public function boot()
     {
         parent::boot();

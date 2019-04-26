@@ -1,12 +1,12 @@
 @include('layouts.partials.headin')
 
 
-
-      <body>
+{{--  style="background-color:#0679fb"  --}}
+      <body style="background-image: url({{ asset('images/img_bg_3.jpg') }});background-repeat:no-repeat;background-size:cover" >
           <nav class="navbar navbar-expand navbar-dark bg-primary">
               <div class="container">
               <a href="{{ url('/')}}" class="navbar-brand">
-                  L-WAT
+                  <b>Legal Work Automation Tool</b>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
@@ -25,12 +25,12 @@
 <div class="container">
   <div class="row mt-3">
     <div class="col-md-5 mx-auto">
-      <div class="card">
+      <div class="card shadow-lg">
         <div class="card-body">
           <h1 class="text-center pb-4 pt-3">
             <span class="text-primary">
               <i class="fa fa-lock"></i>
-              Login
+              <b>Login</b>
             </span>
           </h1>
           <form action="/login" method="POST">
@@ -69,8 +69,8 @@
 
               @endif
 
-              <input type="submit" value="Login" class="btn btn-primary btn-block btn-flat">
 
+                  <button type="submit" class="btn btn-primary btn-block"> <i class="fa fa-sign-in"></i> <b>Login</b> </button>
 
 
           </form>

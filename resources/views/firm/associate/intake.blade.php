@@ -41,7 +41,7 @@
                                 <div class="form-row">
                                         <div class="form-group col-md-3">
                                                 <label for="caseType">Case Type</label>
-                                                <select required name="caseType" class="form-control">
+                                                <select required name="caseType" class="form-control select2">
                                                     @foreach ($caseTypes as $type)
 
 
@@ -68,7 +68,7 @@
                                 <h4>Client Information</h4>
                                 <div class="form-row">
                                             <div class="form-group col-md-4">
-                                                    <label for="clientName">Client Name</label>
+                                                    <label for="clientName">Client Name <small style="font-size:16px" class="text-danger">*</small></label>
                                                     <input name="clientName" value="{{ old('clientName') }}" required type="text" class="form-control {{ $errors->has('clientName')?'is-invalid':'' }}" >
                                                 </div>
 

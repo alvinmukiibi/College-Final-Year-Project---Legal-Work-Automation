@@ -16,7 +16,7 @@ class CreateCaseTypesTable extends Migration
         Schema::create('case_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('casetype');
-            $table->string('acronym', '4');
+            $table->string('acronym', '4')->unique();
             $table->text('firm_id');
             $table->timestamp('created_at')->useCurrent();
 
