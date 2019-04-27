@@ -29,9 +29,9 @@ class FirmsTableSeeder extends Seeder
         //     'description' => 'uygiuf iuh',
         //     'activity_flag' => 'active',
         //     'verification_flag' => 'verified'
-           
+
         // ]);
-        factory(App\Firms::class, 20)->create();
+        factory(App\Firm::class, 20)->create();
         // factory(App\Firms::class, 10)->create()->each(function ($firm) {
         //     $firm->firms()->save(factory(App\Firms::class)->make());
         // });
