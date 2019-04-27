@@ -2,9 +2,9 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Firms::class, function (Faker $faker) {
+$factory->define(App\Firm::class, function (Faker $faker) {
     return [
-        
+
             'firm_id' => $faker->word,
             'name' => $faker->name,
             'email' => $faker->unique()->safeEmail,
@@ -20,7 +20,7 @@ $factory->define(App\Firms::class, function (Faker $faker) {
             'website' => $faker->url,
             'uuid' => $faker->uuid,
             'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-            'activity_flag' => $faker->city,
-            'verification_flag' => $faker->city
+            'activity_flag' => "active",
+            'verification_flag' => "verified"
     ];
 });
