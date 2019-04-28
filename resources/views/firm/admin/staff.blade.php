@@ -69,11 +69,17 @@
                                     </td>
                                     <td>
                                         @if ($user->account_status=='inactive')
-                                        <a href={{url('/admin/activate/staff', ['id'=>$user->id])}}  class="btn btn-outline-success btn-sm">Activate</a>
+                                        <a href={{url('/admin/activate/staff', ['id'=>$user->id])}}  class="btn btn-outline-success btn-sm">Actvt</a>
                                         @else
 
-                                        <a href={{url('/admin/deactivate/staff', ['id'=>$user->id])}} class="btn btn-outline-danger btn-sm">Deactivate</a>
+                                        <a href={{url('/admin/deactivate/staff', ['id'=>$user->id])}} class="btn btn-outline-danger btn-sm">Deact</a>
                                         @endif
+                                        @if ($user->online_status=='online')
+
+                                        <a href={{url('/admin/logout/staff', ['id'=>$user->id])}}  class="btn btn-outline-danger btn-sm"> <i class="fa fa-sign-in"></i> </a>
+
+                                          @endif
+
 
                                     </td>
 

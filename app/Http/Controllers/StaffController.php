@@ -94,6 +94,16 @@ class StaffController extends Controller
             return redirect()->back()->with("error", "Failed to deactivate");
         }
     }
+    public function killStaffSessions(Request $request){
+        $user = new User;
+        $user->id = $request->segment(4);
+        $done = $user->killStaffSessions();
+        if($done){
+            return redirect()->back()->with("success", "User offline!!");
+        }else{
+            return redirect()->back()->with("error", "Failed to kill sessions");
+        }
+    }
     public function verifyEmail(Request $request){
         $identifier = $request->segment(4);
 

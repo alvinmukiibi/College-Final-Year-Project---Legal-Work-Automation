@@ -178,6 +178,14 @@ class User extends Authenticatable
             return false;
         }
     }
+    public function killStaffSessions(){
+        $kill = DB::table($this->table)->where(['id'=>$this->id])->update(['online_status'=>'offline']);
+        if($kill){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function verifyEmail(){
 
         $verified = DB::table($this->table)->where(['identification_token'=>$this->identifier])->update(["verification_status"=>'verified']);
