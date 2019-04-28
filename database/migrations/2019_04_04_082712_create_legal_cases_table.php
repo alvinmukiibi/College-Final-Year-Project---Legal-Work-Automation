@@ -18,7 +18,7 @@ class CreateLegalCasesTable extends Migration
             $table->string('case_number'); //e.g 200604
             $table->unsignedInteger('client');
             $table->unsignedInteger('staff'); // open, closed, etc
-            $table->string('case_type'); //e.g PER, CORP, etc
+            $table->unsignedInteger('case_type'); //e.g PER, CORP, etc
             $table->string('date_taken');
             $table->string('taken_by'); // e.g. partner, associate etc i.e. the role
             $table->text('synopsis'); // description of case by client
@@ -32,6 +32,7 @@ class CreateLegalCasesTable extends Migration
             //$table->foreign('firm')->references('firm_id')->on('firms');
             $table->foreign('staff')->references('id')->on('users');
             $table->foreign('client')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('case_type')->references('id')->on('case_types');
 
 
 
