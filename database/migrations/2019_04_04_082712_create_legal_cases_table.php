@@ -32,7 +32,7 @@ class CreateLegalCasesTable extends Migration
             //$table->foreign('firm')->references('firm_id')->on('firms');
             $table->foreign('staff')->references('id')->on('users');
             $table->foreign('client')->references('id')->on('clients')->onDelete('cascade');
-            $table->foreign('case_type')->references('id')->on('case_types');
+
 
 
 
