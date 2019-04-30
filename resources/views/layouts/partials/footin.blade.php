@@ -42,11 +42,13 @@ Date    :   6th-February-2019
 
 {{-- FullCalendar --}}
 <script src="{{asset('plugins/fullcalendar/fullcalendar.min.js')}}"></script>
+<script src="{{asset('plugins/chartjs.min.js')}}" charset="utf-8"></script>
 
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('plugins/ckeditor/ckeditor.js')}}"></script>
+
 <script>
     $(function () {
       //Initialize Select2 Elements

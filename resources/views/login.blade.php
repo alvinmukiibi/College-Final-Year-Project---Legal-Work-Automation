@@ -37,7 +37,7 @@
             @csrf
           <div class="form-group">
 
-              <input type="email" required placeholder="Email" class="form-control {{$errors->has('email')?'is-invalid':''}}" name="email"  />
+              <input type="email" required placeholder="Email"  class="form-control {{$errors->has('email')?'is-invalid':''}}" name="email" value="{{ old('email') }}" />
             </div>
             <div class="form-group">
 

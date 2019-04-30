@@ -149,6 +149,11 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/print/invoice/{case}/{invoice}', "InvoicesController@printInvoice");
     Route::get('/finance/manage/invoices', "InvoicesController@manageInvoices");
     Route::get('/finance/send/invoice/{case}/{invoice}', "InvoicesController@sendInvoice");
+
+    // Reports routes
+    Route::get('/partner/view/reports', "AnalyticsController@viewReports");
+
+
     //logout route
     Route::get('/logout', "AuthController@logout");
 

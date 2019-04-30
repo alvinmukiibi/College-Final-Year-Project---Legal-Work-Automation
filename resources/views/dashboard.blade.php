@@ -107,7 +107,7 @@
                   <div class="inner">
                     <h3>Staff</h3>
 
-                    <p>Manage Firm Staff</p>
+                    <p>Active Staff <span id="noOfStaff"></span></p>
                   </div>
                   <div class="icon">
                     <i class="fa fa-users"></i>
@@ -212,6 +212,23 @@
 
 
               </div>
+              @if (auth()->user()->user_role == 'Partner')
+              <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success" >
+                        <div class="inner">
+                            <h3>Reports</h3>
+                            <p>View Analytics Reports</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-pie-chart"></i>
+                        </div>
+                        <a href="{{ url('/partner/view/reports')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+
+                    </div>
+
+              </div>
+
+              @endif
               @endif
               @if (auth()->user()->user_role=='Finance')
               <div class="col-lg-3 col-6">
@@ -518,6 +535,21 @@
                             jQuery('#noOfOpenCases').html(res.count);
                         }else{
                             jQuery('#noOfOpenCases').html(0);
+
+                        }
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ url('api/admin/count/staff/')  }}",
+                    method: "POST",
+                    data: {
+                        firm_id: "{{ auth()->user()->firm_id }}"
+                    },
+                    success: res => {
+                        if(res.count > 0){
+                            jQuery('#noOfStaff').html(res.count);
+                        }else{
+                            jQuery('#noOfStaff').html(0);
 
                         }
                     }

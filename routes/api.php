@@ -58,5 +58,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     // Count uncompleted Tasks Assigned to me
     Route::post('/user/count/tasks', "TasksController@countUncompletedTasks");
 
+    // Count active staff for a law firm
+    Route::post('/admin/count/staff', "StaffController@countActiveStaff");
+
 
 
