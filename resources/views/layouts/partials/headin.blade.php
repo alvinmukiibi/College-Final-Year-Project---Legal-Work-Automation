@@ -35,6 +35,11 @@ Date    :   6th-February-2019
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/fullcalendar/fullcalendar.print.css')}}">  --}}
     <link rel="stylesheet" type="text/css" href="{{asset('dist/css/adminlte.min.css')}}"/>
 
+    {{--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart']});
+     // google.charts.setOnLoadCallback(drawChart);
 
+    </script>  --}}
 
 </head>

@@ -168,6 +168,7 @@ return [
         'Webpatser\Countries\CountriesServiceProvider',
         Laravel\Passport\PassportServiceProvider::class ,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         //Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
 
         /*
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Countries' => 'Webpatser\Countries\CountriesFacade',
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
 
     ],
 

@@ -92,7 +92,7 @@
                                 <thead>
                                         <tr>
 
-                                                <th style="width: 180px">Name</th>
+                                                <th>Name</th>
                                                 <th >Role</th>
                                                 <th></th>
                                             </tr>
