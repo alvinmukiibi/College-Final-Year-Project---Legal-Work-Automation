@@ -70,8 +70,11 @@
                                         <a  style="text-decoration: none" href="{{ url('/associate/reject/case', ['case' => $case->case_number]) }}" class="btn btn-danger btn-sm pull-right"> <b>REJECT CASE</b> </a>
                                     @endif
                                     @if ($case->case_status == 'open' )
+                                        {{--  check if logged in person is either the owner or was assigned the case, then show them the close case button --}}
+                                        @if((auth()->user()->fname . ' ' . auth()->user()-> lname) == $staff_on_the_case['owner'] || (auth()->user()->fname . ' ' . auth()->user()-> lname) == $staff_on_the_case['assignee'])
                                         {{ __('Case can be flagged closed at any time. Use the button on the right to close the case') }}
-                                         <button data-toggle="modal" data-target="#closeCase"  class="btn btn-outline-danger btn-sm pull-right"> <b>CLOSE CASE</b> </button>
+                                        <button data-toggle="modal" data-target="#closeCase"  class="btn btn-outline-danger btn-sm pull-right"> <b>CLOSE CASE</b> </button>
+                                        @endif
                                     @endif
                                     @if ($case->case_status == 'closed' )
                                         <b>CLOSURE TYPE</b>:

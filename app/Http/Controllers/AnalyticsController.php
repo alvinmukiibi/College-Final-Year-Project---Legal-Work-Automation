@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 // use App\Charts\ChartOne;
-use Lava;
+use Lava; // this inclusion is supported by an alias in the configuration file
 use App\LegalCase;
 use App\User;
 use App\Firm;
 use App\Department;
 use App\CaseType;
+use App\LegalCase_Staff;
 class AnalyticsController extends Controller
 {
     public function viewReports(Request $request){
@@ -24,9 +25,25 @@ class AnalyticsController extends Controller
         $this->lineGraphForLearning();
         $this->pieChartForDepartmentToCases();
         $this->LineChartForCaseTypesToCases();
-
-        return view('firm.partner.reports');
+        $lawyers = $this->getLaywerIntakesOpenClosedCases();
+        return view('firm.partner.reports')->with(['lawyers' => $lawyers]);
     }
+
+
+    public function getLaywerIntakesOpenClosedCases(){
+
+        $dept = auth()->user()->department;
+
+        $user = new User;
+        $user->dept = $dept;
+        $results = $user->getLaywerIntakesOpenClosedCases();
+
+        return $results;
+
+
+
+    }
+
 
     public function getTotalCasesInDept(){
         // this function retrieves the number of all cases that were intaken to all users in a certain department

@@ -251,6 +251,18 @@
                         @endif
 
                       </li>
+
+                      @if(auth()->user()->user_role == 'Partner')
+                      <li class="nav-item">
+                        <a href="{{ url('/partner/view/reports')}}" class="nav-link">
+                            <i class="nav-icon fa fa-pie-chart"></i>
+                            <p>
+                              Reports
+                            </p>
+                          </a>
+                        </li>
+
+                      @endif
                       <li class="nav-item has-treeview">
                       <a href="#" class="nav-link">
                           <i class="nav-icon fa fa-clock-o"></i>
@@ -275,6 +287,7 @@
 
                         </ul>
                       </li>
+
 
                   @endif
 
