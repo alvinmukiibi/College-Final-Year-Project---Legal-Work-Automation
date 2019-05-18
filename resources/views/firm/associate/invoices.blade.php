@@ -56,23 +56,23 @@
                                                 <td>{{ $invoice->fname }}</td>
                                                 <td>
                                                     @if ($invoice->status == 'unpaid')
-                                                        <span class="badge badge-warning">unpaid</span>
+                                                        <span class="badge badge-warning" title="Client has not paid at all">unpaid</span>
                                                     @endif
                                                     @if ($invoice->status == 'paid')
-                                                        <span class="badge badge-success">paid</span>
+                                                        <span class="badge badge-success" title="Client has fully paid">paid</span>
                                                     @endif
                                                     @if ($invoice->status == 'invoiced')
-                                                        <span class="badge badge-primary">invoiced</span>
+                                                        <span class="badge badge-primary" title="Invoice sent To Client">invoiced</span>
                                                     @endif
                                                     @if ($invoice->status == 'partpaid')
-                                                    <span class="badge badge-info">partpaid</span>
+                                                    <span class="badge badge-info" title="Client has made a partial payment">partpaid</span>
                                                     @endif
 
                                                 </td>
                                                 <td>
                                                     @if ($invoice->invoicer == auth()->user()->id)
                                                     @if ($invoice->status != 'paid')
-                                                        <a href="{{ url('/associate/print/invoice', ['case' => $case_number, 'invoice' => $invoice->invoice_no ]) }}" class="btn btn-outline-success btn-sm"> <i class="fa fa-print"></i></a>
+                                                        <a href="{{ url('/associate/print/invoice', ['case' => $case_number, 'invoice' => $invoice->invoice_no ]) }}" title="Print Invoice" class="btn btn-outline-success btn-sm"> <i class="fa fa-print"></i></a>
                                                     @endif
                                                     @endif
 

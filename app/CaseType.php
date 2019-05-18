@@ -22,4 +22,17 @@ class CaseType extends Model
 
     }
 
+    public function getCaseTypesForCases(){
+        $arr = [];
+
+        $query = DB::table('legal_cases')->where('firm', $this->firm_id)->select('case_type')->get();
+        foreach($query as $que){
+            $arr[] = $que->case_type;
+        }
+
+        $types = DB::table($this->table)->whereIn('id', $arr)->get();
+        return $types;
+
+    }
+
 }

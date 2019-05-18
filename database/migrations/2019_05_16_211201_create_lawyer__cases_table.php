@@ -19,6 +19,7 @@ class CreateLawyerCasesTable extends Migration
             $table->unsignedBigInteger('intakes')->default(0);
             $table->unsignedBigInteger('open_cases')->default(0);
             $table->unsignedBigInteger('closed_cases')->default(0);
+            $table->unsignedBigInteger('rejected_cases')->default(0);
             $table->timestamp('created_at')->useCurrent();
         });
     }

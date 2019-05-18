@@ -264,6 +264,10 @@ class CasesController extends Controller
         $case->case_number = $request->segment(4);
         $case->rejectCase();
 
+        $rec = new Lawyer_Case;
+        $rec->lawyer = auth()->user()->id;
+        $rec->countRejectedCase();
+
         return redirect()->back()->with('error', 'INTAKE '. $case->case_number. ' has been rejected');
 
     }

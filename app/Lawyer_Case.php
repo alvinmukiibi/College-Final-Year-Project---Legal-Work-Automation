@@ -116,4 +116,48 @@ class Lawyer_Case extends Model
 
     }
 
+    public function countRejectedCase(){
+
+        $getRejected = DB::table($this->table)->where(['lawyer' => $this->lawyer])->value('rejected_cases');
+
+        $newValue = $getRejected + 1;
+
+        $count = DB::table($this->table)->where(['lawyer' => $this->lawyer])->update(['rejected_cases' => $newValue]);
+
+        return $count;
+
+
+    }
+
+    public function getTotalIntakes(){
+
+        $dept = $this->dept;
+
+        $res = DB::table($this->table)->join('users', 'users.id', '=', 'lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('lawyer__cases.intakes');
+
+        return $res;
+
+
+    }
+    public function getTotalOpen(){
+
+        $dept = $this->dept;
+
+        $res = DB::table($this->table)->join('users', 'users.id', '=', 'lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('lawyer__cases.open_cases');
+
+        return $res;
+
+
+    }
+    public function getTotalRejected(){
+
+        $dept = $this->dept;
+
+        $res = DB::table($this->table)->join('users', 'users.id', '=', 'lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('lawyer__cases.rejected_cases');
+
+        return $res;
+
+
+    }
+
 }

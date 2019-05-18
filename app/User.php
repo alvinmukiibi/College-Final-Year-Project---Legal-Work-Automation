@@ -213,4 +213,17 @@ class User extends Authenticatable
 
     }
 
+    public function getLawyersForCases(){
+
+        $arr = [];
+
+        $query = DB::table('payments')->where('firm_id', $this->firm_id)->select('received_by')->get();
+        foreach($query as $que){
+            $arr[] = $que->received_by;
+        }
+
+        $lawyers = DB::table($this->table)->whereIn('id', $arr)->get();
+        return $lawyers;
+    }
+
 }
