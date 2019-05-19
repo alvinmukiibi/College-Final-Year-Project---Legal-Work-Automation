@@ -160,4 +160,13 @@ class Lawyer_Case extends Model
 
     }
 
+    public function countOpenCases(){
+
+        $count = DB::table($this->table)->where(['lawyer' => $this->staff])->value('open_cases');
+
+        return $count;
+
+
+    }
+
 }

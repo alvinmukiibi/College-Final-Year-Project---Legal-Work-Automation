@@ -51,11 +51,11 @@
               </div> --}}
               @if (auth()->user()->user_role === "ulc")
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
+                <div class="small-box bg-primary">
                   <div class="inner">
                     <h3>Law Firms</h3>
 
-                    <p>Manage Law Firms</p>
+                    <p>Active Law Firms <span id="noOfActiveFirms"></span> </p>
                   </div>
                   <div class="icon">
                     <i class="fa fa-legal"></i>
@@ -381,12 +381,12 @@
          </div>
          <script>
             const addTodo = document.querySelector('#addTodo');
+            if(addTodo != null){
             addTodo.addEventListener('click', (event) => {
                 event.preventDefault();
                      jQuery.ajaxSetup({
                          headers: {
                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
                          }
                      });
                      jQuery.ajax({
@@ -427,7 +427,7 @@
                          }
                      });
             });
-
+        }
 
             window.addEventListener('load', () => {
                 jQuery.ajaxSetup({
@@ -554,11 +554,17 @@
                         }
                     }
                 });
-
-
-
-
-
+                jQuery.ajax({
+                    url: "{{ url('api/ulc/count/firms/')  }}",
+                    method: "GET",
+                    success: res => {
+                        if(res.count > 0){
+                            jQuery('#noOfActiveFirms').html(res.count);
+                        }else{
+                            jQuery('#noOfActiveFirms').html(0);
+                        }
+                    }
+                });
             });
         </script>
       </section>

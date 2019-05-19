@@ -14,7 +14,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">view</li>
+                        <li class="breadcrumb-item active">Firm</li>
                     </ol>
                 </div>
             </div>
@@ -59,8 +59,7 @@
                      </li>
                   </ul>
 
-                  <a href="#" class="btn btn-primary btn-block"><b>Message</b></a>
-                </div>
+                    </div>
                 <!-- /.card-body -->
               </div>
               </div>
@@ -69,8 +68,8 @@
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Firm Info</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Correspondence</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab"><b>Firm Information</b></a></li>
+                    {{--  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Correspondence</a></li>  --}}
                    </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -95,31 +94,28 @@
                                         <p>{{$lawfirm->description}}</p>
                                       </div>
                                       <div class="callout callout-info">
-                                            <h5>Date Registered</h5>
+                                            <h5>Date of Registration</h5>
 
                                       <p>{{
-                                          date("d/m/y", strtotime($lawfirm->created_at))
-
+                                          date("d-M-Y", strtotime($lawfirm->created_at))
                                       }}</p>
                                           </div>
-
-
                                           <hr/>
                                           @if ($lawfirm->activity_flag=="active")
 
-                                                                  <a href="{{url('/firm/deactivate/'.$lawfirm->uuid)}}" class="btn btn-danger btn-block">Deactivate</a>
+                                                                  <a href="{{url('/firm/deactivate/'.$lawfirm->uuid)}}" class="btn btn-outline-danger btn-block"><b>Deactivate</b></a>
                                                               @else
                                                                 @if($lawfirm->activity_flag=="inactive" && $lawfirm->verification_flag=='verified')
-                                                                    <a href="{{url('/firm/activate/'.$lawfirm->uuid)}}" class="btn btn-success btn-block">Activate</a>
+                                                                    <a href="{{url('/firm/activate/'.$lawfirm->uuid)}}" class="btn btn-outline-success btn-block"><b>Activate</b></a>
                                                                 @endif
                                                               @endif
 
                            </div>
 
 
-                    <div class="tab-pane" id="timeline">
+                    {{--  <div class="tab-pane" id="timeline">
                       Message between Regulatory Authority and Law Firm System Administrator appear here
-                   </div>
+                   </div>  --}}
 
 
                   </div>

@@ -19,12 +19,6 @@ Date    :   6th-February-2019
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{ url('/associate/make/intake')}}" class="nav-link"><b>Client Intake</b> <i class="fa fa-plus-circle"></i>   </a>
             </li>
-
-
-
-
-
-
         @endif
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -33,20 +27,22 @@ Date    :   6th-February-2019
                         {{auth()->user()->email}}
                     </a>
                 </li>
+                @if (auth()->user()->user_role != 'ulc')
                 <li class="nav-item">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                           <i class="fa fa-comments-o"></i>
-                          <span class="badge badge-danger navbar-badge" id="noOfUnreadTopNavin">
-                          </span>
+                          <b><span class="badge badge-danger navbar-badge" id="noOfUnreadTopNavin">
+                          </span></b>
                         </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                       <i class="fa fa-tasks"></i>
-                      <span class="badge badge-warning navbar-badge" id="noOfunCompletedTopNavin">
-                      </span>
+                      <b><span class="badge badge-warning navbar-badge" id="noOfunCompletedTopNavin">
+                      </span></b>
                     </a>
             </li>
+            @endif
         <li class="nav-item">
         <a href="{{ url('/logout')}}" class="nav-link">
                 Logout <i class="fa fa-sign-out"></i>
@@ -56,8 +52,6 @@ Date    :   6th-February-2019
     </ul>
     <script>
         window.addEventListener('load', () => {
-
-
             jQuery.ajax({
                 url: "{{ url('api/user/count/unread/')  }}",
                 method: "POST",

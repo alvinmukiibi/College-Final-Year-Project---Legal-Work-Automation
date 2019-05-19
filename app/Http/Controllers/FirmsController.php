@@ -19,7 +19,7 @@ class FirmsController extends Controller
      */
     public function index()
     {
-        $firms = Firm::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->paginate(10);
+        $firms = Firm::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->get();
 
         return view('home.firms')->with("firms", $firms);
     }
@@ -81,7 +81,7 @@ class FirmsController extends Controller
         $countries = new Countries;
         $data = [
             "countries" => $countries->getListForSelect(),
-            "firms" => Firm::orderBy('created_at', 'desc')->get()
+            "firms" => Firm::orderBy('created_at', 'desc')->paginate(10)
 
         ];
 
@@ -127,5 +127,12 @@ class FirmsController extends Controller
            return redirect()->back()->with("error", "Failed to deactivate");
         }
         return redirect()->back();
+     }
+
+     public function countActiveFirms(){
+
+        $firms = Firm::where(['verification_flag' => 'verified', 'activity_flag' => 'active'])->count();
+
+        return response()->json(['count' => $firms]);
      }
 }

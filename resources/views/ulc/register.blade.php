@@ -120,7 +120,7 @@
                                 <h3 class="card-title">All Law Firms</h3>
                             </div>
                             <div class="card-body table-responsive">
-                                <table class="table table-bordered table-hover">
+                                <table class="table table-bordered table-hover" >
                                     <tr>
                                         <th>Firm Name</th>
                                         <th style="width: 5px">Status</th>
@@ -130,40 +130,30 @@
                                     <tr>
                                     <td>{{$firm->name}}</td>
                                             <td>
-
-
                                                 @if ($firm->verification_flag=='not_verified')
                                                 <span class="badge badge-warning"> <b>pending</b> </span>
                                                 @elseif($firm->verification_flag=='verified' && $firm->activity_flag=='inactive')
                                                 <span class="badge badge-danger"> <b>inactive</b> </span>
                                                 @else
                                                 <span class="badge badge-success"> <b>active</b> </span>
-                                                                                              @endif
-
+                                                @endif
                                             </td>
                                             <td>
-                                                    <div class="btn-group">
+                                            <div class="btn-group">
                                                             <button type="button" class="btn btn-success btn-sm"> <b>Action</b> </button>
                                                             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                                               <span class="caret"></span>
                                                               <span class="sr-only">Toggle Dropdown</span>
                                                             </button>
                                                             <div class="dropdown-menu" role="menu">
-
-
                                                             <a class="dropdown-item" href=" {{url('/view/firm/'.$firm->uuid)}}">View</a>
-
-
-
                                                               @if ($firm->activity_flag=="active")
-
                                                                   <a href=" {{url('/firm/deactivate/'.$firm->uuid)}}" class="dropdown-item">Deactivate</a>
                                                               @else
                                                                 @if($firm->activity_flag=="inactive" && $firm->verification_flag=='verified')
                                                             <a href=" {{url('/firm/activate/'.$firm->uuid)}}" class="dropdown-item">Activate</a>
                                                                 @endif
                                                               @endif
-
                                                             </div>
                                                           </div>
                                             </td>
@@ -171,13 +161,12 @@
                                     @endforeach
 
                                 </table>
-                            </div>
+                                {{ $firms->links() }}
 
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
-
 @endsection

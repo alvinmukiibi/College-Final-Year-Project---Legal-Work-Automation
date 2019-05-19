@@ -14,7 +14,9 @@
               <img src="{{asset('uploads/profiles/'.auth()->user()->profile_pic)}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">{{auth()->user()->fname}} {{auth()->user()->lname}}</a>
+              <a href="#" class="d-block">{{auth()->user()->fname}} {{auth()->user()->lname}} @if (auth()->user()->user_role == 'ulc')
+                  Registry Authority
+              @endif   </a>
             </div>
           </div>
           <nav class="mt-2">
@@ -38,6 +40,9 @@
                         </p>
                       </a>
                      @else
+                     @if (auth()->user()->user_role != 'ulc')
+
+
                       <a href="{{ url('/user/profile')}}" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
                         <p>
@@ -45,6 +50,8 @@
 
                         </p>
                       </a>
+
+                      @endif
                       @endif
 
 
@@ -52,24 +59,15 @@
                   </li>
 
                   @if(auth()->user()->user_role === "ulc")
-                  <li class="nav-item has-treeview">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-pie-chart"></i>
-                        <p>
-                              Law Firms
-                          <i class="right fa fa-angle-left"></i>
-                        </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                  <li class="nav-item">
                         <a href="{{ url('/register/firm')}}" class="nav-link">
-                            <i class="fa fa-circle-o nav-icon"></i>
-                            <p>Registered Firms <span class="right badge badge-danger">50</span></p>
-                          </a>
-                        </li>
+                              <i class="nav-icon fa fa-legal"></i>
+                              <p>
+                                Registered Firms
 
-                      </ul>
-                    </li>
+                              </p>
+                            </a>
+                          </li>
                   @endif
                   @if (auth()->user()->user_role === "administrator")
                   <li class="nav-item">
@@ -181,12 +179,7 @@
                           <p>Assign Task </p>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a href="{{ url('/register/firm')}}" class="nav-link">
-                            <i class="fa fa-circle-o nav-icon"></i>
-                            <p>My Tasks <span class="right badge badge-danger">50</span></p>
-                          </a>
-                        </li>
+
 
                     </ul>
                   </li>
@@ -214,12 +207,7 @@
                                     <p>Make Requisition</p>
                                   </a>
                                 </li>
-                                <li class="nav-item">
-                                  <a href="{{ url('/associate/manage/requisitions')}}" class="nav-link">
-                                      <i class="fa fa-circle-o nav-icon"></i>
-                                      <p>View Requisitions <span class="right badge badge-danger">50</span></p>
-                                    </a>
-                                  </li>
+
 
                               </ul>
                         @endif
@@ -229,7 +217,7 @@
                                 <li class="nav-item">
                                   <a href="{{ url('/finance/manage/requisitions')}}" class="nav-link">
                                       <i class="fa fa-circle-o nav-icon"></i>
-                                      <p>View Requisitions <span class="right badge badge-danger">50</span></p>
+                                      <p>View Requisitions</p>
                                     </a>
                                   </li>
 
@@ -242,7 +230,7 @@
                                 <li class="nav-item">
                                   <a href="{{ url('/partner/manage/requisitions')}}" class="nav-link">
                                       <i class="fa fa-circle-o nav-icon"></i>
-                                      <p>View Requisitions <span class="right badge badge-danger">50</span></p>
+                                      <p>View Requisitions</p>
                                     </a>
                                   </li>
 

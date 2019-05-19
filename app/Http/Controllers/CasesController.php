@@ -386,9 +386,9 @@ class CasesController extends Controller
         return response()->json(['count' => $cases]);
     }
     public function countOpenCases(Request $request){
-        $case = new LegalCase;
+        $case = new Lawyer_Case;
         $case->staff =  $request->input('id');
-        $cases = $case->getLawyerOpenCases()->count();
+        $cases = $case->countOpenCases();
         return response()->json(['count' => $cases]);
     }
     public function closeCase(Request $request){
