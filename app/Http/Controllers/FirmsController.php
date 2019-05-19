@@ -34,8 +34,6 @@ class FirmsController extends Controller
             "region"=>"required",
             "city"=>"required",
             "street_address"=>"required",
-
-
         ]);
 
         $count = Firm::where('email', $request->input('email'))->count();
@@ -54,6 +52,7 @@ class FirmsController extends Controller
         //event to tell all the app that a firm has been registered
 
         event(new FirmRegistered($firm));
+
         $user = new User;
         $user->id_token = $data['uuid'];
         $user->password = $data['otp'];
@@ -68,11 +67,14 @@ class FirmsController extends Controller
 
         }
 
-    public function show($id)
+    public function viewFirm(Request $request)
     {
-        $firm = Firm::find($id);
+        $slug = $request->segment(2);
+        $firm = Firm::where('slug', $slug)->get();
+        foreach($firm as $fir){
+            return view('home.view')->with("firm", $fir);
+        }
 
-        return view('home.view')->with("firm", $firm);
     }
 
     public function showRegister(){
@@ -102,10 +104,7 @@ class FirmsController extends Controller
             }else{
                 return redirect()->back();
             }
-
-
         }else{
-
            return redirect()->back()->with("error", "Failed to activate");
         }
         return redirect()->back();
@@ -123,15 +122,10 @@ class FirmsController extends Controller
             }else{
                 return redirect()->back();
             }
-
-
         }else{
 
            return redirect()->back()->with("error", "Failed to deactivate");
         }
         return redirect()->back();
-
      }
-
-
 }

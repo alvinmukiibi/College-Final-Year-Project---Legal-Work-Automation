@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 
 
-Route::resource('/home', "FirmsController"); //binding the controller to its resources
+Route::get('/firms', "FirmsController@index");
+Route::post('/firms', "FirmsController@store");
+Route::get('/firms/{firm}', "FirmsController@viewFirm");
 Route::get('/login', "AuthController@showLogin")->name("login");
 Route::post('/login', "AuthController@doLogin");
 
