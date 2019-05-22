@@ -19,7 +19,7 @@ class FirmsController extends Controller
      */
     public function index()
     {
-        $firms = Firm::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->get();
+        $firms = Firm::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->paginate(10);
 
         return view('home.firms')->with("firms", $firms);
     }

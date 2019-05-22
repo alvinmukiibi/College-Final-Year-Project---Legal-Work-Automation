@@ -536,7 +536,7 @@
                                             <div class="form-group row" style="display:none" id="rate">
                                                     <label for="rate" class="col-form-label col-sm-4">Rate (SHS/HR)</label>
                                                     <div class="col-sm-8">
-                                                        <input type="number" value="30000" readonly name="rate" id="billingRate" class="form-control">
+                                                        <input type="number" value="30000"  name="rate" id="billingRate" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row" style="display:none" id="total">

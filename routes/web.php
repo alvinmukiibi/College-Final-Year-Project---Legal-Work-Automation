@@ -155,6 +155,10 @@ Route::group(['middleware' => 'auth:web'], function()
     // Reports routes
     Route::get('/partner/view/reports', "AnalyticsController@viewReports");
 
+    // Settings routes
+    Route::get('/admin/manage/settings', "SettingsController@viewSetttings");
+    Route::post('/admin/set/rqa', "SettingsController@setRQA");
+    Route::post('/admin/submit/rqa', "SettingsController@changeRQA");
 
     //logout route
     Route::get('/logout', "AuthController@logout");

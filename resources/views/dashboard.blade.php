@@ -90,6 +90,7 @@
                     <a href="{{ url('/admin/departments')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
+
               {{--  <div class="col-lg-3 col-6">
                     <div class="small-box text-white" style="background-color:#fb7a24">
                       <div class="inner">
@@ -371,12 +372,7 @@
                         </div>
                     </div>
               </section>
-
-
               @endif
-
-
-
            </div>
          </div>
          <script>
@@ -403,16 +399,14 @@
                             const  today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
                             const date2 = new Date(today);
                             const date1 = new Date(res.dueBy);
-                            const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            //const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            const timeDiff =  date1.getTime() - date2.getTime();
                             const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
                             let flag = ''; let verbose = '';
-                            if(remainingTime >= 5){
+                            if(remainingTime > 2){
                                 flag = 'success';
                                 verbose = remainingTime + ' days';
-                            }else if(remainingTime >= 2 && remainingTime < 5){
-                                flag = 'info';
-                                verbose = remainingTime + ' days';
-                            }else if(remainingTime < 2 && remainingTime > 0){
+                            }else if(remainingTime <= 2 && remainingTime > 0){
                                 flag = 'warning';
                                 verbose = remainingTime + ' day';
                             }else if(remainingTime < 0){
@@ -444,19 +438,16 @@
                     success: res => {
                         res.map(obj => {
                             const date = new Date(); //.format('m-d-Y')-obj.dueBy;
-                            const  today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+                            const today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
                             const date2 = new Date(today);
                             const date1 = new Date(obj.dueBy);
-                            const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                            const timeDiff =  date1.getTime() - date2.getTime();
                             const remainingTime = Math.ceil(timeDiff / (1000 * 3600 * 24));
                             let flag = ''; let verbose = '';
-                            if(remainingTime >= 5){
+                            if(remainingTime > 2){
                                 flag = 'success';
                                 verbose = remainingTime + ' days';
-                            }else if(remainingTime >= 2 && remainingTime < 5){
-                                flag = 'info';
-                                verbose = remainingTime + ' days';
-                            }else if(remainingTime < 2 && remainingTime > 0){
+                            }else if(remainingTime <= 2 && remainingTime > 0){
                                 flag = 'warning';
                                 verbose = remainingTime + ' day';
                             }else if(remainingTime < 0){
@@ -467,7 +458,6 @@
                                 verbose = 'Today'
                             }
                             //const deleteUrl = "{{ url('api/user/delete/todo/"+7+"') }}"
-
                             return jQuery('.todo-list').append('<li><span class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></span><input type="checkbox" name="" ><span class="text">' + obj.tagline + '</span><small class=" pull-right badge badge-'+ flag + '"><i class="fa fa-clock-o"></i>' + ' ' + verbose + '  </small><div class="tools"> <i class="fa fa-trash-o"></i></div></li>');
                         })
                     }

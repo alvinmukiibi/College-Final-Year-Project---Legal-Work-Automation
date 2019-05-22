@@ -111,6 +111,14 @@
                                 </p>
                               </a>
                             </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/admin/manage/settings')}}" class="nav-link">
+                                <i class="nav-icon fa fa-gear"></i>
+                                <p>
+                                  Settings
+                                </p>
+                              </a>
+                            </li>
 
 
                   @endif

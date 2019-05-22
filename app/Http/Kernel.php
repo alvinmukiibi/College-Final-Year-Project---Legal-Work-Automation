@@ -38,8 +38,9 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        //changed the line below because the app had started to respond with an error of too many requests error code 429
         'api' => [
-            'throttle:60,1',
+            'throttle:900,1',
             'bindings',
         ],
     ];
@@ -62,7 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkMethod' =>  \App\Http\Middleware\MethodCheckMiddleware::class,
-        
+
     ];
 
     /**

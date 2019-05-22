@@ -37,9 +37,9 @@ class AuthController extends Controller
             if(Auth::user()->account_status !== "active"){
                 return redirect()->back()->with('error', 'Account Inactive, See System Adminstrator');
             }
-            if(Auth::user()->online_status !== "offline"){
-                return redirect()->back()->with('error', 'Currently active elsewhere!');
-            }
+            // if(Auth::user()->online_status !== "offline"){
+            //     return redirect()->back()->with('error', 'Currently active elsewhere!');
+            // }
             if(auth()->guard('web')->user()->firm_id !== NULL){
 
                 $user = new User;

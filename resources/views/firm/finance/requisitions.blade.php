@@ -28,7 +28,7 @@
                     <div class="col-md-12">
                         <div class="callout callout-success">
                             <h5> <i class="fa fa-info"></i> NOTE:</h5>
-                            <p>Requisitions concerning amounts greater than {{ __('SHS 50,000 require') }} approval from a Partner!!</p>
+                            <p>Requisitions concerning amounts greater than {{ __('SHS '. $rqa . ' require') }} approval from a Partner!!</p>
                         </div>
                        <div class="card card-primary">
                             <div class="card-header">
@@ -86,7 +86,7 @@
                                                             </td>
                                                             <td>
                                                                 @if($req->status == 'pending')
-                                                                    @if($req->amount <= 50000)
+                                                                    @if($req->amount <= $rqa)
                                                                         <a href="{{ url('/finance/approve/requisition', ['requisition' => $req->id]) }}" class="btn btn-sm btn-success"> <b>Approve</b> </a>
                                                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{ 'giveReason_'.$req->id }}">
                                                                             <b>Decline</b>
