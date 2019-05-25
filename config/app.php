@@ -168,7 +168,7 @@ return [
         'Webpatser\Countries\CountriesServiceProvider',
         Laravel\Passport\PassportServiceProvider::class ,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        //Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         //Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
 
         /*
