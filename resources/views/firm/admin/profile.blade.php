@@ -42,7 +42,7 @@
                                         <i class="fa fa-phone"></i><span class="float-right"> {{$user->contact}}</span>
                                        </li>
                             </ul>
-                            <button class="btn btn-primary btn-block"> <i class="fa fa-pencil"></i>Edit Profile  </button>
+                            {{--  <button class="btn btn-primary btn-block"> <i class="fa fa-pencil"></i>Edit Profile  </button>  --}}
 
                     </div>
                 </div>

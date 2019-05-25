@@ -62,6 +62,9 @@
                                         @if ($case->case_status == 'closed')
                                             <span class="badge badge-danger text-white">{{ __('CLOSED') }}</span>
                                         @endif
+                                        @if ($case->case_status == 'rejected')
+                                            <span class="badge badge-secondary text-white">{{ __('REJECTED') }}</span>
+                                        @endif
 
                                     </h5>
                                     @if ($case->case_status == 'intake')
@@ -70,8 +73,11 @@
                                         <a  style="text-decoration: none" href="{{ url('/associate/reject/case', ['case' => $case->case_number]) }}" class="btn btn-danger btn-sm pull-right"> <b>REJECT CASE</b> </a>
                                     @endif
                                     @if ($case->case_status == 'open' )
+                                        {{--  check if logged in person is either the owner or was assigned the case, then show them the close case button --}}
+                                        @if((auth()->user()->fname . ' ' . auth()->user()-> lname) == $staff_on_the_case['owner'] || (auth()->user()->fname . ' ' . auth()->user()-> lname) == $staff_on_the_case['assignee'])
                                         {{ __('Case can be flagged closed at any time. Use the button on the right to close the case') }}
-                                         <button data-toggle="modal" data-target="#closeCase"  class="btn btn-outline-danger btn-sm pull-right"> <b>CLOSE CASE</b> </button>
+                                        <button data-toggle="modal" data-target="#closeCase"  class="btn btn-outline-danger btn-sm pull-right"> <b>CLOSE CASE</b> </button>
+                                        @endif
                                     @endif
                                     @if ($case->case_status == 'closed' )
                                         <b>CLOSURE TYPE</b>:
@@ -370,7 +376,61 @@
                                             <hr/>
                                     </div>
                                 </div>
-                                <div class="card card-success collapsed-card">
+
+
+                                <div class="card card-primary collapsed-card">
+                          <div class="card-header">
+                                        <h3 class="card-title">
+                                            Notes
+                                        </h3>
+                                        <div class="card-tools">
+
+                                                <button type="button" class="btn btn-tool" data-widget="collapse">
+                                                  <i class="fa fa-minus"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                                                </button>
+                                              </div>
+                                    </div>
+                          <div class="card-body p-0 table-responsive">
+                                            <table class="table table-hover">
+                                                    <tr>
+
+                                                      <th>note</th>
+
+                                                      <th style="width: 30%">created_at</th>
+                                                      <!--<th style="width: 40px">note</th>-->
+                                                    </tr>
+                                                    @foreach ($notes as $note)
+                                                    <tr>
+                                                     <td>{{ $note->note }}</td>
+                                                     <td>{{ $note->created_at }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </table>
+
+
+                                    </div>
+                                    <div class="card-footer">
+                                            <form action="{{ url('/associate/add/note') }}" method="post">
+                                                    <div class="input-group">
+                                                        @csrf
+                                                        <input type="hidden" name="caseID" value="{{ $case->id }}">
+                                                      <input required type="text" name="note" placeholder="Make notes here" class="form-control">
+                                                      <span class="input-group-append">
+                                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Add Note</button>
+                                                      </span>
+                                                    </div>
+                                                  </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        <div class="col-8 connectedSortable">
+                                <div class="card card-success">
 
                                         <div class="card-header">
                                             <h3 class="card-title">Payments</h3>
@@ -426,59 +486,6 @@
                                         </div>
                                     </form>
                                     </div>
-
-                                <div class="card card-primary collapsed-card">
-                          <div class="card-header">
-                                        <h3 class="card-title">
-                                            Notes
-                                        </h3>
-                                        <div class="card-tools">
-
-                                                <button type="button" class="btn btn-tool" data-widget="collapse">
-                                                  <i class="fa fa-minus"></i>
-                                                </button>
-
-                                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                                                </button>
-                                              </div>
-                                    </div>
-                          <div class="card-body p-0 table-responsive">
-                                            <table class="table table-hover">
-                                                    <tr>
-
-                                                      <th>note</th>
-
-                                                      <th style="width: 30%">created_at</th>
-                                                      <!--<th style="width: 40px">note</th>-->
-                                                    </tr>
-                                                    @foreach ($notes as $note)
-                                                    <tr>
-                                                     <td>{{ $note->note }}</td>
-                                                     <td>{{ $note->created_at }}</td>
-                                                    </tr>
-                                                    @endforeach
-                                                </table>
-
-
-                                    </div>
-                                    <div class="card-footer">
-                                            <form action="{{ url('/associate/add/note') }}" method="post">
-                                                    <div class="input-group">
-                                                        @csrf
-                                                        <input type="hidden" name="caseID" value="{{ $case->id }}">
-                                                      <input required type="text" name="note" placeholder="Make notes here" class="form-control">
-                                                      <span class="input-group-append">
-                                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-plus"></i> Add Note</button>
-                                                      </span>
-                                                    </div>
-                                                  </form>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        <div class="col-8 connectedSortable">
                             <div class="card card-info collapsed-card">
                                 <div class="card-header">
                                     <h3 class="card-title">Invoices</h3>
@@ -529,7 +536,7 @@
                                             <div class="form-group row" style="display:none" id="rate">
                                                     <label for="rate" class="col-form-label col-sm-4">Rate (SHS/HR)</label>
                                                     <div class="col-sm-8">
-                                                        <input type="number" value="30000" readonly name="rate" id="billingRate" class="form-control">
+                                                        <input type="number" value="30000"  name="rate" id="billingRate" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row" style="display:none" id="total">

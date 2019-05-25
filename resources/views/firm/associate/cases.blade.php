@@ -64,6 +64,9 @@
                                                 @if ($case->case_status == 'closed')
                                                 <span class="badge badge-danger text-white"><b>{{ __('CLOSED') }}</span>
                                                 @endif
+                                                @if ($case->case_status == 'rejected')
+                                                <span class="badge badge-secondary text-white"><b>{{ __('REJECTED') }}</span>
+                                                @endif
                                         </td>
                                         <td>
                                             @if ($case->owner == auth()->user()->id && $case->assignee !== null)
@@ -79,7 +82,7 @@
                                                         </button>
                                                         <div class="dropdown-menu" role="menu">
                                                                 <a class="dropdown-item" href="{{ url('/associate/view/case', ['caseID' => $case->case_number]) }}">View</a>
-                                                            @if ($case->case_status != 'closed')
+                                                            @if ($case->case_status == 'open' || $case->case_status == 'intake')
                                                             <div class="dropdown-divider"></div>
                                                             <a class="dropdown-item" href="{{ url('/associate/share/case', ['caseID' => $case->case_number]) }}">Share Case</a>
 

@@ -55,13 +55,13 @@
                                                 <td>{{ $invoice->fname }} {{ $invoice->lname }}</td>
                                                 <td>
                                                     @if ($invoice->status == 'unpaid')
-                                                        <span class="badge badge-warning">unpaid</span>
+                                                        <span class="badge badge-warning" title="Client has not paid at all">unpaid</span>
                                                     @endif
                                                     @if ($invoice->status == 'paid')
-                                                        <span class="badge badge-success">paid</span>
+                                                        <span class="badge badge-success" title="Client has fully paid">paid</span>
                                                     @endif
                                                     @if ($invoice->status == 'invoiced')
-                                                        <span class="badge badge-primary">invoiced</span>
+                                                        <span class="badge badge-primary" title="Invoice sent To Client">invoiced</span>
                                                     @endif
 
                                                 </td>

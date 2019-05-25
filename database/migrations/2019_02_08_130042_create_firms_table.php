@@ -16,6 +16,7 @@ class CreateFirmsTable extends Migration
         Schema::create('firms', function (Blueprint $table) {
             $table->increments('id');
             $table->text('firm_id');
+            $table->text('slug')->unique();
             $table->text('name');
             $table->string('email','100')->unique();
             $table->string('contact1','100');

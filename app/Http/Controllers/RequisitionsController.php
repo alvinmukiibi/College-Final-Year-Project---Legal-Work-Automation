@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Requisition;
 use App\User;
 use App\Firm;
+use App\Setting;
 class RequisitionsController extends Controller
 {
     public function viewRequisitions(Request $request){
@@ -67,8 +68,8 @@ class RequisitionsController extends Controller
         $req->firm_id = Firm::where('firm_id', auth()->user()->firm_id)->value('id');
 
         $requisitions = $req->fetchRequisitions();
-
-        return view('firm.finance.requisitions')->with('requisitions',$requisitions);
+        $rqa = Setting::where(['firm_id' => $req->firm_id])->value('requisition_critical_amount');
+        return view('firm.finance.requisitions')->with(['requisitions' => $requisitions, 'rqa' => $rqa]);
 
     }
     public function approveRequisition(Request $request){

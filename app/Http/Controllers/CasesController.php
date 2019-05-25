@@ -19,6 +19,7 @@ use App\Department;
 use App\Meeting;
 use App\Time;
 use App\Payment;
+use App\Lawyer_Case;
 use App\Events\CaseShared;
 class CasesController extends Controller
 {
@@ -77,6 +78,21 @@ class CasesController extends Controller
            $case_staff = new LegalCase_Staff;
            $case_staff->case_id = $case_id;
            $case_staff->ownCase();
+
+           $rec = new Lawyer_Case;
+           $rec->lawyer = $staff;
+
+           $check = $rec->checkLawyerCases();
+
+           if($check !== false){
+                $newValue = $check + 1;
+                $rec->newValue = $newValue;
+                $rec->incrementValue();
+           }else{
+                $rec->addRecord();
+
+           }
+
 
            return redirect()->back()->with('success', 'New Intake Made Successfully');
         }else{
@@ -234,6 +250,10 @@ class CasesController extends Controller
         $case->case_number = $request->segment(4);
         $case->makeCase();
 
+        $rec = new Lawyer_Case;
+        $rec->lawyer = auth()->user()->id;
+        $rec->addOpenCount();
+
         return redirect()->back()->with('success', 'INTAKE '. $case->case_number. ' has been made a case!! Congratulations!!');
 
 
@@ -243,6 +263,10 @@ class CasesController extends Controller
         $case = new LegalCase;
         $case->case_number = $request->segment(4);
         $case->rejectCase();
+
+        $rec = new Lawyer_Case;
+        $rec->lawyer = auth()->user()->id;
+        $rec->countRejectedCase();
 
         return redirect()->back()->with('error', 'INTAKE '. $case->case_number. ' has been rejected');
 
@@ -362,9 +386,9 @@ class CasesController extends Controller
         return response()->json(['count' => $cases]);
     }
     public function countOpenCases(Request $request){
-        $case = new LegalCase;
+        $case = new Lawyer_Case;
         $case->staff =  $request->input('id');
-        $cases = $case->getLawyerOpenCases()->count();
+        $cases = $case->countOpenCases();
         return response()->json(['count' => $cases]);
     }
     public function closeCase(Request $request){
@@ -375,11 +399,17 @@ class CasesController extends Controller
             'caseID' => 'required',
         ]);
 
-
         $case = new LegalCase;
         $case->data = $data;
 
         $case->closeCase();
+
+        // we want to update the cases_staff table and subtract 1 from everyone who was seeing the case
+
+        $rec = new Lawyer_Case;
+        $rec->closer = auth()->user()->id;
+        $rec->case_id = LegalCase::where('case_number', $data['caseID'])->value('id');
+        $rec->decrementRecords();
 
         return redirect()->back()->with('success', 'Case has been closed!!');
 

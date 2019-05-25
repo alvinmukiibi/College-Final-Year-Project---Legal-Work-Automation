@@ -57,6 +57,8 @@ class Firm extends Model
         $this->verification_flag = "not_verified";
         $this->password = bcrypt($otp);
         $this->uuid = Uuid::uuid1()->toString();
+        $this->slug = \str_replace(' ', '_', \strtolower($this->name));
+
 
         if($this->save()){
             $data = ["otp"=> $otp, "uuid"=>$this->uuid];

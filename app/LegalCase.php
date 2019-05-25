@@ -62,7 +62,7 @@ class LegalCase extends Model
         return $make;
     }
     public function rejectCase(){
-        $reject = DB::table($this->table)->where('case_number', $this->case_number)->update(['case_status' => 'closed-rejected']);
+        $reject = DB::table($this->table)->where('case_number', $this->case_number)->update(['case_status' => 'rejected']);
         return $reject;
     }
     public function getCaseClient(){

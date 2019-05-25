@@ -49,14 +49,12 @@ class MeetingsController extends Controller
     public function notifyAccordingToAttendance(){
         $attendance = $this->data['attendee'];
         $firm = new Firm;
-        $firm->id = auth()->user()->firm_id;
+        $firm->firm_id = auth()->user()->firm_id;
         if($attendance == 'all'){
             //fetch all staff except the admins
             $allUsers = $firm->user()->where(['account_status'=>'active'])->get();
             $this->recipients = $allUsers;
             $this->sendMail();
-
-
         }else if($attendance == 'all_assoc'){
             //fetch all associates in the law firm
             $allAssocs = $firm->user()->where(['user_role'=>'Associate','account_status'=>'active'])->get();

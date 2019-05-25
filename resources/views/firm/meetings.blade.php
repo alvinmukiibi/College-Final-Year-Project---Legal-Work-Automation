@@ -31,12 +31,7 @@
                                    New Meeting <i class="fa fa-plus"></i>
                                   </button>
 
-                                <button type="button" class="btn btn-outline-warning btn-block">
-                                        UpComing Meetings
-                                </button>
-                                <button type="button" class="btn btn-outline-danger btn-block">
-                                        Past Meetings
-                                </button>
+
 
                     </div>
                     <div class="col-md-10">
@@ -156,7 +151,7 @@
                                     <div class="form-group row">
                                             <label for="agenda" class="col-sm-4 col-form-label">Agenda</label>
                                             <div class="col-sm-8">
-                                               <textarea name="agenda"  id="editor1" cols="10" rows="5" class="form-control"></textarea>
+                                               <textarea name="agenda"  cols="10" rows="5" class="form-control"></textarea>
 
 
                                             </div>
