@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 
 
-Route::resource('/home', "FirmsController"); //binding the controller to its resources
+Route::get('/firms', "FirmsController@index");
+Route::post('/firms', "FirmsController@store");
+Route::get('/firms/{firm}', "FirmsController@viewFirm");
 Route::get('/login', "AuthController@showLogin")->name("login");
 Route::post('/login', "AuthController@doLogin");
 
@@ -150,6 +152,15 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::get('/associate/print/invoice/{case}/{invoice}', "InvoicesController@printInvoice");
     Route::get('/finance/manage/invoices', "InvoicesController@manageInvoices");
     Route::get('/finance/send/invoice/{case}/{invoice}', "InvoicesController@sendInvoice");
+
+    // Reports routes
+    Route::get('/partner/view/reports', "AnalyticsController@viewReports");
+
+    // Settings routes
+    Route::get('/admin/manage/settings', "SettingsController@viewSetttings");
+    Route::post('/admin/set/rqa', "SettingsController@setRQA");
+    Route::post('/admin/submit/rqa', "SettingsController@changeRQA");
+
     //logout route
     Route::get('/logout', "AuthController@logout");
 

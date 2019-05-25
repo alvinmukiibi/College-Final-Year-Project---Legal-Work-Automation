@@ -19,6 +19,14 @@ class StaffController extends Controller
 
         return view('firm.admin.staff')->with(['staff'=>$staff, 'departments'=>$departments, 'roles'=>$roles]);
     }
+    public function countActiveStaff(Request $request){
+
+        $firm_id = $request->input('firm_id');
+        $activeStaff = User::where(['firm_id' => $firm_id, 'account_status' => 'active'])->count();
+        return response()->json(['count' => $activeStaff]);
+
+
+    }
     public function addStaff(Request $request){
 
         $data = $this->validate($request, [

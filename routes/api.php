@@ -61,5 +61,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     // Count active staff for a law firm
     Route::post('/admin/count/staff', "StaffController@countActiveStaff");
 
+    // Count active firms in system
+    Route::get('/ulc/count/firms', "FirmsController@countActiveFirms");
+
 
 

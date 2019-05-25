@@ -60,11 +60,11 @@
                                     @include('includes.messages')
                                         <div class="form-group">
                                                 <label for="name">Name</label>
-                                                <input type="text" required class="form-control" name="name"  placeholder="Department Name">
+                                                <input type="text" required class="form-control" name="name"  placeholder="Department name">
                                     </div>
                                     <div class="form-group">
                                             <label for="name">Description</label>
-                                            <textarea name="description" required placeholder="Brief Description About the Department.."  cols="10" rows="5" class="form-control"></textarea>
+                                            <textarea name="description" required placeholder="Brief description about the department.."  cols="10" rows="5" class="form-control"></textarea>
                                         </div>
                                 </div>
                                 <div class="card-footer">
@@ -87,14 +87,13 @@
                                 Our Departments
                             </h3>
                         </div>
-                        <div class="card-body table-responsive">
+                        <div class="card-body">
                             <table class="table table-striped table-bordered">
                                 <thead>
                                         <tr>
-
-                                                <th>Name</th>
+                                                <th >Name</th>
                                                 <th >Role</th>
-                                                <th></th>
+                                                <th ></th>
                                             </tr>
                                 </thead>
 

@@ -10,6 +10,7 @@ use App\Firm;
 use App\Department;
 use App\Todo;
 use App\LegalCase;
+use App\LegalCase_Staff;
 use App\Requisition;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
@@ -210,6 +211,27 @@ class User extends Authenticatable
     }
     public function fetchAllStaff(){
 
+    }
+    public function getLaywerIntakesOpenClosedCases(){
+        $dept = $this->dept;
+
+        $res = DB::table($this->table)->join('lawyer__cases', 'users.id', '=', 'lawyer__cases.lawyer')->where(['users.department' => $dept])->get();
+
+        return $res;
+
+    }
+
+    public function getLawyersForCases(){
+
+        $arr = [];
+
+        $query = DB::table('payments')->where('firm_id', $this->firm_id)->select('received_by')->get();
+        foreach($query as $que){
+            $arr[] = $que->received_by;
+        }
+
+        $lawyers = DB::table($this->table)->whereIn('id', $arr)->get();
+        return $lawyers;
     }
 
 }
