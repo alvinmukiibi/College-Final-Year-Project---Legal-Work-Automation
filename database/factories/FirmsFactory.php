@@ -7,6 +7,7 @@ $factory->define(App\Firm::class, function (Faker $faker) {
 
             'firm_id' => $faker->word,
             'name' => $faker->name,
+            'slug' => "firm",
             'email' => $faker->unique()->safeEmail,
             'contact1' => $faker->phoneNumber,
             'contact2' => $faker->phoneNumber,
