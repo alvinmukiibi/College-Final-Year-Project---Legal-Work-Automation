@@ -4,7 +4,7 @@ Hello {{$name}} <br/>
 You have been successfully registered with the <i><b>Legal Work Automation Tool</b></i><br/>
 Verify Your Email Address, Please
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/api/user/verifyEmail/'.$token, 'color' => 'success'])
+@component('mail::button', ['url' => 'http://wat-l.herokuapp.com/api/user/verifyEmail/'.$token, 'color' => 'success'])
 VERIFY EMAIL
 @endcomponent
 
