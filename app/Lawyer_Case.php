@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Lawyer_Case extends Model
 {
-    protected $table = 'lawyer__cases';
+    protected $table = 'analytics_lawyer__cases';
 
     public function checkLawyerCases(){
         $check = DB::table($this->table)->where(['lawyer' => $this->lawyer])->count();
@@ -133,7 +133,7 @@ class Lawyer_Case extends Model
 
         $dept = $this->dept;
 
-        $res = DB::table($this->table)->join('users', 'users.id', '=', 'lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('lawyer__cases.intakes');
+        $res = DB::table($this->table)->join('users', 'users.id', '=', 'analytics_lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('analytics_lawyer__cases.intakes');
 
         return $res;
 
@@ -143,7 +143,7 @@ class Lawyer_Case extends Model
 
         $dept = $this->dept;
 
-        $res = DB::table($this->table)->join('users', 'users.id', '=', 'lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('lawyer__cases.open_cases');
+        $res = DB::table($this->table)->join('users', 'users.id', '=', 'analytics_lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('analytics_lawyer__cases.open_cases');
 
         return $res;
 
@@ -153,7 +153,7 @@ class Lawyer_Case extends Model
 
         $dept = $this->dept;
 
-        $res = DB::table($this->table)->join('users', 'users.id', '=', 'lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('lawyer__cases.rejected_cases');
+        $res = DB::table($this->table)->join('users', 'users.id', '=', 'analytics_lawyer__cases.lawyer')->where(['users.department' => $dept])->sum('analytics_lawyer__cases.rejected_cases');
 
         return $res;
 
