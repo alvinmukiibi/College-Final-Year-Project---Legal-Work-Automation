@@ -101,7 +101,7 @@
                       <div class="icon">
                         <i class="fa fa-delicious"></i>
                       </div>
-                    <a href="{{ url('/admin/manage/roles')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{route('roles.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
              

@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('body_tag')
-    <body class="hold-transition sidebar-mini" style="background-color: #f7f7f7">
+    <body class="hold-transition sidebar-mini" style="background-color: #f7f7f7; font-family: Georgia">
 @endsection
 
 @section('content')
@@ -34,18 +34,18 @@
 					<a href="#">
 					<img style="float:left;height:150px;width:200px;" class="img-fluid rounded mr-3" src="img/blog/cat-widget2.jpg" alt="">
 					</a>
-				
+
 				<h2 class="card-title" style="font-size:18pt">{{$firm->name}}</h2>
 				<p >Major Practice Areas: {{$firm->practice_groups }} in {{ $firm->city }}, {{$firm->country}} </p>
 				<p style="text-transform: uppercase">{{ $firm->website  }}</p>
 				<p>{{$firm->description}} </p>
-				
-		
+
+
 				</div>
-				
+
 				<div class="col-lg-3">
 					<div class="single-sidebar-widget post-category-widget">
-                        <h4 class="category-title"><a href="{{ $firm->website}}" class="btn btn-danger" style="color:white;font-weight:bold">VISIT WEBSITE</a>
+                        <h4 class="category-title"><a href="http://{{ $firm->website}}" target="_blank" class="btn btn-danger" style="color:white;font-weight:bold">VISIT WEBSITE</a>
                         </h4>
                         <ul class="cat-list">
                             <li>
@@ -69,40 +69,31 @@
                                 </a>
                             </li>
                                 </ul>
-                    </div>	
-				     
-                
-
-						
-						
+                    </div>
 					</div>
 				</div>
 			</div>
-			
-			
-			</div>		
-
-	
-
-
+			</div>
 		@endforeach
-
 		{{$firms->links()}}
-				
-
 
     </div>
     <div class="col-lg-4 sidebar-widgets">
             <div class="widget-wrap">
                 <div class="single-sidebar-widget search-widget">
-                    <form class="search-form" action="#">
-                        <input placeholder="Search Lawyers" name="search" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'" >
+                    <form class="search-form" action="{{route('firm.search')}}" method="POST">
+                        @csrf
+                        <input placeholder="Search Law Firms" name="search" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'" >
                        
                     </form>
                 </div>
                 <div class="single-sidebar-widget user-info-widget">
-                    <img src="img/blog/user-info.png" alt="">
-                    <a href="#"><h4>Charlie Barber</h4></a>
+                    <?php
+                    $lawyer = \App\LaywerOfTheDay::where('date', date('d-m-Y'))->first();
+                    ?>
+                    <img width="50" height="50" src="{{asset('uploads/profiles/'.$lawyer->user->profile_pic)}}" alt="">
+                    <a href="#"><h4>{{$lawyer->user->fname. $lawyer->user->lname}}</h4></a>
+
                     <p>
                         Lawyer of the Day
                     </p>
@@ -115,7 +106,7 @@
                     <p>
                         Boot camps have its supporters andit sdetractors. Some people do not understand why you should have to spend money on boot camp when you can get. Boot camps have itssuppor ters andits detractors.
                     </p>
-                </div>
+                {{--</div>--}}
                     
                
                     
@@ -146,9 +137,4 @@
     
 </div>
 			</div>
-			
-
-
-
-
 @endsection

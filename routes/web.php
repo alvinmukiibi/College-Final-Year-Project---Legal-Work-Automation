@@ -15,12 +15,17 @@ Route::get('/', function () {
     return view("index");
 });
 
-Route::resource('/home', "FirmsController"); //binding the controller to its resources
+ //binding the controller to its resources
 Route::get('/login', "AuthController@showLogin")->name("login");
 Route::post('/login', "AuthController@doLogin");
 Route::get('/logout', "AuthController@logout");
+Route::resource('/home', "FirmsController");
+
+Route::post('/firm/sendmail', 'FirmsController@sendMail')->name("firm.sendmail");
+
 Route::group(['middleware' => 'auth:web'], function()
 {
+
     Route::get('/register/firm', "FirmsController@showRegister")->name("register.firm");
     Route::post('/register', "FirmsController@store");
     Route::get('/dashboard', "AuthController@dashboard")->name("dashboard");
@@ -54,6 +59,7 @@ Route::group(['middleware' => 'auth:web'], function()
     Route::post('/user/schedule/meeting', "MeetingsController@scheduleMeeting");
 
     // Messages management routes
+    Route::post('/firm/search', "FirmsController@search")->name('firm.search');
     Route::get('/user/manage/mailbox', "MessageController@showMailbox");
     Route::post('/user/send/message', "MessageController@sendMessage");
     Route::get('/user/make/chat/{msg}/{user}', "MessageController@showChat");
@@ -62,10 +68,20 @@ Route::group(['middleware' => 'auth:web'], function()
 
     // Website management routes
     Route::get('/admin/manage/website', "WebsiteController@showWebsite");
-
-});
-Route::group(['prefix' => 'api'], function () {
     Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
     Route::get('/user/verifyEmail/{token}', "StaffController@verifyEmail");
     Route::get('/user/todos/getTodos/{id}/', "TodosController@getTodos");
+//});
+
+    Route::resource('roles', "RoleController");
+    Route::resource('finance', "financeController");
+    Route::resource('client', "ClientController");
+    Route::resource('layweroftheday', 'LaywerOfTheDayController');
+
 });
+
+
+
+
+
+

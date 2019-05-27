@@ -16,7 +16,7 @@ class Firm extends Model
     protected $table = "firms";
 
     protected $fillable = [
-        'name','description'
+        'name','contact1','email','contact2','country','area','city','street_address','date_of_reg','avatar','description','password'
     ];
 
     public function user(){
@@ -124,6 +124,7 @@ class Firm extends Model
             return false;
         }
     }
+
 
 
 }

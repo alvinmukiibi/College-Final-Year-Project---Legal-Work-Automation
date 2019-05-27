@@ -90,13 +90,24 @@
                           </a>
                         </li>
                         <li class="nav-item">
-                                <a href="{{ url('/admin/manage/roles')}}" class="nav-link">
-                                    <i class="nav-icon fa fa-delicious"></i>
-                                    <p>
-                                      User Roles
-                                    </p>
-                                  </a>
-                                </li>
+                            <a href="{{ route('roles.index')}}" class="nav-link">
+                                <i class="nav-icon fa fa-delicious"></i>
+                                <p>User Roles</p>
+                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('client.index')}}" class="nav-link">
+                                <i class="nav-icon fa fa-delicious"></i>
+                                <p>Clients</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('finance.index')}}" class="nav-link">
+                                <i class="nav-icon fa fa-delicious"></i>
+                                <p>Finance</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ url('/admin/manage/staff')}}" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i>

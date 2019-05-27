@@ -3,7 +3,7 @@ What    :   Top navigation bar for website i.e. before login
 Author  :   Alvin Mukiibi
 Date    :   6th-February-2019
  --}}
- {{-- <nav class="navbar navbar-expand navbar-dark bg-primary">
+  <nav class="navbar navbar-expand navbar-dark bg-primary">
   <div class="container">
     <a href="/" class="navbar-brand">
       L-WAT
@@ -21,7 +21,7 @@ Date    :   6th-February-2019
       </ul>
     </div>
   </div>
-</nav> --}}
+</nav>
 
 <header id="header">
   <div class="container main-menu">

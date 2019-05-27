@@ -18,7 +18,7 @@ class CreateRolesTable extends Migration
             $table->string('name','50');
             $table->text('description')->nullable();
             $table->text('firm_id');
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

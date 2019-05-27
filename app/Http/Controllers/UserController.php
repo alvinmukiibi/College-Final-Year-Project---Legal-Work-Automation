@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Department;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
@@ -69,4 +70,6 @@ class UserController extends Controller
        }
 
     }
+
+
 }

@@ -109,7 +109,7 @@
                                                           <div class="form-group row">
                                                                 <label for="confirmationPassword" class="col-sm-4 col-form-label">Confirm Password</label>
                                                                 <div class="col-sm-8">
-                                                                <input type="password" name="password_confirmation" class="form-control {{$errors->has('password_confirmation')?'is-invalid':''}}" >
+                                                                  <input type="password" name="password_confirmation" class="form-control {{$errors->has('password_confirmation')?'is-invalid':''}}" >
                                                                 </div>
                                                             </div>
                                                           <button type="submit" class="btn btn-outline-primary"> <i class="fa fa-save"></i> Save</button>

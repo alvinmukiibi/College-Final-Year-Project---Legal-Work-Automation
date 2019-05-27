@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $table = "users";
 
     protected $fillable = [
-         'email', 'password',
+         'email', 'password','fname','mname','lname','profile_pic','date_of_birth','date_of_reg','gender','department','firm_id','contact'
     ];
 
     /**
@@ -39,12 +39,19 @@ class User extends Authenticatable
     public function firm(){
         return $this->belongsTo(Firm::class, 'firm_id');
     }
+
     public function dept(){
         return $this->belongsTo(Department::class);
     }
+
     public function todos(){
         return $this->hasMany(Todo::class);
     }
+
+    public function laywerofthedays(){
+        return $this->hasMany(LawyerOfTheDay::class);
+    }
+
     public function activateUsers(){
 
         $activate = DB::table($this->table)->where(['firm_id'=> $this->firm_id])->update(["account_status"=>"active"]);
@@ -78,9 +85,34 @@ class User extends Authenticatable
         }else{
             return false;
         }
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'user_roles','user_id','role_id');
+    }
 
+
+    public  function is_admin()
+    {
 
     }
+
+    public  function is_finance()
+    {
+
+    }
+
+
+    public  function is_advocate()
+    {
+
+    }
+
+    public  function is_partner()
+    {
+
+    }
+
     public function getOtp($token){
         $otp = DB::table('otps')->where(['user_id'=>$token])->pluck('otp');
         foreach($otp as $value){

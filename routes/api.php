@@ -22,6 +22,11 @@ Route::group(['middleware' => ['guest:api']], function () {
 });
 
 
+//Route::group(['prefix' => 'api'], function () {
+    Route::get('/firm/verifyEmail/{token}', "LawFirmController@verifyEmail")->middleware('checkMethod');
+    Route::get('/user/verifyEmail/{token}', "StaffController@verifyEmail");
+    Route::get('/user/todos/getTodos/{id}/', "TodosController@getTodos");
+//});
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('user', "Api\OauthController@details");
 });

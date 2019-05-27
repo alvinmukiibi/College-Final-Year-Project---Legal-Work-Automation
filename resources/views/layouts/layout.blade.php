@@ -1,8 +1,3 @@
-{{-- 
-What    :   The Main Layout file that will be extended by all pages
-Author  :   Alvin Mukiibi
-Date    :   6th-February-2019
- --}}
 
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

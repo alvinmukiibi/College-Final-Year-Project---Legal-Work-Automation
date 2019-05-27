@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Mail\FirmMail;
 use Illuminate\Http\Request;
 use App\Firm;
 use Webpatser\Countries\Countries;
@@ -9,6 +11,8 @@ use App\Practice_groups;
 use Carbon\Carbon;
 use App\User;
 use App\Events\FirmRegistered;
+use DB;
+use Illuminate\Support\Facades\Mail;
 
 class FirmsController extends Controller
 {
@@ -20,8 +24,7 @@ class FirmsController extends Controller
     public function index()
     {
         $firms = Firm::orderBy('name', 'asc')->where(['activity_flag'=>'active','verification_flag'=>'verified'])->paginate(10);
-
-        return view('home.firms')->with("firms", $firms);
+        return view('home.firms')->with(["firms"=>$firms]);
     }
 
     /**
@@ -191,6 +194,37 @@ class FirmsController extends Controller
         return redirect()->back();
 
      }
+
+
+    public function  search(Request $request)
+    {
+        $this->validate($request, [
+            "search"=>"required|max:150",
+        ]);
+        $results = \DB::table('firms')->where('name', $request->get('search'))->get();
+
+      return view ('firm.associate.lawyer',['results'=>$results]);
+    }
+
+    public function sendMail(Request $request)
+    {
+        $name = $request->get('name');
+        $sender_message = $request->get('message');
+        $email = $request->get('email');
+        $practice_areas = $request->get('practice_areas');
+        $firm_email = $request->get('firm_email');
+
+        $content = [
+          'title' => $name,
+          'body' => $sender_message,
+        ];
+
+        Mail::to($firm_email)->send(new FirmMail($content));
+
+
+        echo 'Me';
+       // return redirect()->back()->with('success', 'Mail Sent successfully');
+    }
 
 
 }
